@@ -11,7 +11,7 @@ class RecipeListCoordinator: ObservableObject, Identifiable {
 
     // MARK: Stored Properties
 
-    @Published var viewModel: RecipeListViewModel!
+    @Published var viewModel: AllRecipesViewModel!
     @Published var detailViewModel: RecipeViewModel?
     @Published var ratingViewModel: RatingViewModel?
 

@@ -11,7 +11,7 @@ struct RecipeList: View {
 
     // MARK: Stored Properties
 
-    @ObservedObject var viewModel: RecipeListViewModel
+    @ObservedObject var viewModel: AllRecipesViewModel
 
     // MARK: Views
 
@@ -29,5 +29,4 @@ struct RecipeList: View {
         }
         .navigationTitle(viewModel.title)
     }
-
 }

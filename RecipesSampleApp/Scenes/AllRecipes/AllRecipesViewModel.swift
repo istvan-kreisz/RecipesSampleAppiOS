@@ -1,5 +1,5 @@
 //
-//  RecipeListViewModel.swift
+//  AllRecipesViewModel.swift
 //  RecipesSampleApp
 //
 //  Created by István Kreisz on 1/19/23.
@@ -13,8 +13,7 @@ extension Identifiable where ID: Hashable {
     }
 }
 
-class RecipeListViewModel: ObservableObject {
-
+class AllRecipesViewModel: ObservableObject {
     // MARK: Stored Properties
 
     @Published var title: String
@@ -33,8 +32,9 @@ class RecipeListViewModel: ObservableObject {
         self.coordinator = coordinator
         self.recipeService = recipeService
 
-        recipeService.fetchRecipes {
-            self.recipes = $0.filter(filter)
+        Task {
+            let recipes = await recipeService.fetchAllRecipes()
+            self.recipes = recipes.filter(filter)
         }
     }
 
@@ -43,5 +43,4 @@ class RecipeListViewModel: ObservableObject {
     func open(_ recipe: Recipe) {
         self.coordinator.open(recipe)
     }
-
 }

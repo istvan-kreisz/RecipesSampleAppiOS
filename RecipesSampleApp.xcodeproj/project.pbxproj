@@ -23,7 +23,7 @@
 		5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6607D2979E59E0012CC8C /* SettingsView.swift */; };
 		5DC660922979E59F0012CC8C /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6607F2979E59E0012CC8C /* HomeCoordinator.swift */; };
 		5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660802979E59E0012CC8C /* HomeCoordinatorView.swift */; };
-		5DC660942979E59F0012CC8C /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660822979E59E0012CC8C /* RecipeListViewModel.swift */; };
+		5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660822979E59E0012CC8C /* AllRecipesViewModel.swift */; };
 		5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660832979E59E0012CC8C /* RecipeList.swift */; };
 		5DC660962979E59F0012CC8C /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660852979E59E0012CC8C /* RatingView.swift */; };
 		5DC660972979E59F0012CC8C /* RatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660862979E59E0012CC8C /* RatingViewModel.swift */; };
@@ -36,6 +36,8 @@
 		5DC6609E2979E59F0012CC8C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660902979E59F0012CC8C /* SignInViewModel.swift */; };
 		5DC660A12979E5C20012CC8C /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660A02979E5C20012CC8C /* AuthenticationService.swift */; };
 		5DC660A62979E7B80012CC8C /* URL+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660A52979E7B80012CC8C /* URL+Identifiable.swift */; };
+		5DC660A82979F47B0012CC8C /* RealRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660A72979F47B0012CC8C /* RealRecipeService.swift */; };
+		5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660A92979F4AB0012CC8C /* MockRecipeService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,7 +58,7 @@
 		5DC6607D2979E59E0012CC8C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5DC6607F2979E59E0012CC8C /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		5DC660802979E59E0012CC8C /* HomeCoordinatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinatorView.swift; sourceTree = "<group>"; };
-		5DC660822979E59E0012CC8C /* RecipeListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
+		5DC660822979E59E0012CC8C /* AllRecipesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllRecipesViewModel.swift; sourceTree = "<group>"; };
 		5DC660832979E59E0012CC8C /* RecipeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		5DC660852979E59E0012CC8C /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		5DC660862979E59E0012CC8C /* RatingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewModel.swift; sourceTree = "<group>"; };
@@ -69,6 +71,8 @@
 		5DC660902979E59F0012CC8C /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		5DC660A02979E5C20012CC8C /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		5DC660A52979E7B80012CC8C /* URL+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Identifiable.swift"; sourceTree = "<group>"; };
+		5DC660A72979F47B0012CC8C /* RealRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealRecipeService.swift; sourceTree = "<group>"; };
+		5DC660A92979F4AB0012CC8C /* MockRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecipeService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,8 @@
 			children = (
 				5DC660692979E5780012CC8C /* Recipe.swift */,
 				5DC6606A2979E5780012CC8C /* RecipeService.swift */,
+				5DC660A72979F47B0012CC8C /* RealRecipeService.swift */,
+				5DC660A92979F4AB0012CC8C /* MockRecipeService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,7 +163,7 @@
 			children = (
 				5DC6607C2979E59E0012CC8C /* Settings */,
 				5DC6607E2979E59E0012CC8C /* Home */,
-				5DC660812979E59E0012CC8C /* RecipeList */,
+				5DC660812979E59E0012CC8C /* AllRecipes */,
 				5DC660842979E59E0012CC8C /* Rating */,
 				5DC660872979E59E0012CC8C /* Recipe */,
 				5DC6608A2979E59E0012CC8C /* RecipeListCoordinator */,
@@ -183,13 +189,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		5DC660812979E59E0012CC8C /* RecipeList */ = {
+		5DC660812979E59E0012CC8C /* AllRecipes */ = {
 			isa = PBXGroup;
 			children = (
-				5DC660822979E59E0012CC8C /* RecipeListViewModel.swift */,
+				5DC660822979E59E0012CC8C /* AllRecipesViewModel.swift */,
 				5DC660832979E59E0012CC8C /* RecipeList.swift */,
 			);
-			path = RecipeList;
+			path = AllRecipes;
 			sourceTree = "<group>";
 		};
 		5DC660842979E59E0012CC8C /* Rating */ = {
@@ -323,8 +329,9 @@
 				5DC6609E2979E59F0012CC8C /* SignInViewModel.swift in Sources */,
 				5DC660992979E59F0012CC8C /* RecipeView.swift in Sources */,
 				5DC6609B2979E59F0012CC8C /* RecipeListCoordinator.swift in Sources */,
+				5DC660A82979F47B0012CC8C /* RealRecipeService.swift in Sources */,
 				5DC660962979E59F0012CC8C /* RatingView.swift in Sources */,
-				5DC660942979E59F0012CC8C /* RecipeListViewModel.swift in Sources */,
+				5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
 				5DC660A12979E5C20012CC8C /* AuthenticationService.swift in Sources */,
@@ -336,6 +343,7 @@
 				5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */,
 				5DC660622979E5510012CC8C /* RecipesSampleApp.xcdatamodeld in Sources */,
 				5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */,
+				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
 				5DC660A62979E7B80012CC8C /* URL+Identifiable.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct RecipesSampleAppApp: App {
     // MARK: Stored Properties
-    @StateObject var coordinator = HomeCoordinator(recipeService: RecipeService())
+    @StateObject var coordinator = HomeCoordinator(recipeService: MockRecipeService())
 
     // MARK: Scenes
     var body: some Scene {

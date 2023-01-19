@@ -8,7 +8,6 @@
 import Foundation
 
 class RatingViewModel: ObservableObject, Identifiable {
-
     // MARK: Stored Properties
 
     @Published var recipe: Recipe
@@ -26,7 +25,8 @@ class RatingViewModel: ObservableObject, Identifiable {
         self.recipe = recipe
         self.recipeService = recipeService
 
-        recipeService.fetchRatings(for: recipe) { ratings in
+        Task {
+            let ratings = await recipeService.fetchRatings(for: recipe)
             self.ratings = ratings
             self.meanRating = Double(ratings.map(\.value).reduce(0, +)) / Double(ratings.count)
         }
@@ -37,5 +37,4 @@ class RatingViewModel: ObservableObject, Identifiable {
     func close() {
         self.coordinator.closeRatings()
     }
-
 }

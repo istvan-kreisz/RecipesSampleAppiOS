@@ -19,6 +19,7 @@ class HomeCoordinator: ObservableObject {
     // MARK: Stored Properties
 
     private let authenticationService = AuthenticationService()
+    private let recipeService: RecipeService
 
     @Published var tab = HomeTab.meat
     @Published var signInViewModel: SignInViewModel?
@@ -34,8 +35,6 @@ class HomeCoordinator: ObservableObject {
     var isAuthenticated: Bool {
         user != nil
     }
-
-    private let recipeService: RecipeService
 
     // MARK: Initialization
 
