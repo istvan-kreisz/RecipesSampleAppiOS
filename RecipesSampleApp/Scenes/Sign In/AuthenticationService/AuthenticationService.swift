@@ -39,7 +39,9 @@ public actor AuthenticationService: AuthenticationServiceProtocol {
         try await logout()
     }
     
-    public init() {}
+    public init() {
+        self._user.send(User(username: "", password: ""))
+    }
 }
 
 extension AuthenticationService {

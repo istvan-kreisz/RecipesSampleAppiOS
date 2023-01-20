@@ -23,12 +23,17 @@ class HomeCoordinator: ObservableObject {
 
     @Published var tab = HomeTab.meat
     @Published var signInViewModel: SignInViewModel?
-    @Published var veggieCoordinator: RecipeListCoordinator!
-    @Published var meatCoordinator: RecipeListCoordinator!
+    @Published var allRecipesCoordinator: RecipeListCoordinator<AllRecipesViewModel>!
+    @Published var userRecipesCoordinator: RecipeListCoordinator<UserRecipesViewModel>!
 
     @Published var openedURL: URL?
 
-    @Published var user: User? = nil
+    @Published var user: User? = nil {
+        didSet {
+            guard let user = user else { return }
+            self.userRecipesCoordinator.setup(user: user)
+        }
+    }
 
     var cancellables = Set<AnyCancellable>()
 
@@ -40,16 +45,14 @@ class HomeCoordinator: ObservableObject {
 
     init(recipeService: RecipeService) {
         self.recipeService = recipeService
+        
+        self.allRecipesCoordinator = RecipeListCoordinator<AllRecipesViewModel>(title: "All Recipes", recipeService: recipeService) { [weak self] url in
+            self?.open(url)
+        }
 
-        self.veggieCoordinator = .init(title: "Veggie",
-                                       recipeService: recipeService,
-                                       parent: self,
-                                       filter: { $0.isVegetarian })
-
-        self.meatCoordinator = .init(title: "Meat",
-                                     recipeService: recipeService,
-                                     parent: self,
-                                     filter: { !$0.isVegetarian })
+        self.userRecipesCoordinator = RecipeListCoordinator<UserRecipesViewModel>(title: "Your Recipes", recipeService: recipeService) { [weak self] url in
+            self?.open(url)
+        }
 
         self.authenticationService.user
             .sink { newUser in
@@ -71,7 +74,7 @@ class HomeCoordinator: ObservableObject {
     func open(_ url: URL) {
         self.openedURL = url
     }
-    
+
     func signOut() {
         Task {
             try await authenticationService.signOut()

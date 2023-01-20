@@ -15,13 +15,12 @@ class RatingViewModel: ObservableObject, Identifiable {
     @Published var ratings = [Recipe.Rating]()
 
     private let recipeService: RecipeService
-    private unowned let coordinator: RecipeListCoordinator
+    private let closeRatings: () -> Void
 
     // MARK: Initialization
 
-    init(recipe: Recipe, recipeService: RecipeService,
-         coordinator: RecipeListCoordinator) {
-        self.coordinator = coordinator
+    init(recipe: Recipe, recipeService: RecipeService, closeRatings: @escaping () -> Void) {
+        self.closeRatings = closeRatings
         self.recipe = recipe
         self.recipeService = recipeService
 
@@ -35,6 +34,6 @@ class RatingViewModel: ObservableObject, Identifiable {
     // MARK: Methods
 
     func close() {
-        self.coordinator.closeRatings()
+        closeRatings()
     }
 }

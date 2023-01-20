@@ -62,7 +62,7 @@ struct RecipeView<RatingModifier: ViewModifier>: View {
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
             .background(Color(.systemBackground).opacity(0.75))
-            .onTapGesture { viewModel.open(source) }
+            .onTapGesture { viewModel.openURL(source) }
         }
     }
 

@@ -8,28 +8,20 @@
 import Foundation
 
 class RecipeViewModel: ObservableObject, Identifiable {
-
     // MARK: Stored Properties
 
     @Published var recipe: Recipe
 
-    private unowned let coordinator: RecipeListCoordinator
+    let openRatings: () -> Void
+    let openURL: (URL) -> Void
 
     // MARK: Initialization
 
-    init(recipe: Recipe, coordinator: RecipeListCoordinator) {
-        self.coordinator = coordinator
+    init(recipe: Recipe,
+         openRatings: @escaping () -> Void,
+         openURL: @escaping (URL) -> Void) {
         self.recipe = recipe
+        self.openRatings = openRatings
+        self.openURL = openURL
     }
-
-    // MARK: Methods
-
-    func openRatings() {
-        self.coordinator.openRatings(for: recipe)
-    }
-
-    func open(_ url: URL) {
-        self.coordinator.open(url)
-    }
-
 }

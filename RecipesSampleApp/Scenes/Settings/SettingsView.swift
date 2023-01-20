@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-
     // MARK: Stored Properties
 
     @ObservedObject var coordinator: HomeCoordinator
@@ -18,18 +17,16 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Text("QuickBird Studios GmbH").bold()
-            Text("Nymphenburger Str. 13-15")
-            Text("80335 Munich")
+            Text("Recipes Sample App")
+                .bold()
             Text("Username: \(user.user?.username ?? "")")
             Button {
                 logout()
             } label: {
                 Text("Log out")
             }
-
         }
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/, maxHeight: /*@START_MENU_TOKEN@*/ .infinity/*@END_MENU_TOKEN@*/)
         .contentShape(Rectangle())
         .onTapGesture(perform: openWebsite)
         .navigationTitle("Settings")
@@ -43,7 +40,7 @@ struct SettingsView: View {
         }
         self.coordinator.open(url)
     }
-    
+
     private func logout() {
         coordinator.signOut()
     }

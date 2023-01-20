@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct RecipeList: View {
-
+struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
     // MARK: Stored Properties
 
-    @ObservedObject var viewModel: AllRecipesViewModel
+    @ObservedObject var viewModel: ViewModel
 
     // MARK: Views
 
     var body: some View {
-        List(viewModel.recipes) { recipe in
+        List(viewModel.recipes) { (recipe: Recipe) in
             HStack {
                 AsyncImage(url: recipe.imageURL)
                     .frame(width: 40, height: 40)
@@ -25,7 +24,7 @@ struct RecipeList: View {
                     .font(.headline)
                 Spacer()
             }
-            .onNavigation { viewModel.open(recipe) }
+            .onNavigation { viewModel.open(recipe: recipe) }
         }
         .navigationTitle(viewModel.title)
     }

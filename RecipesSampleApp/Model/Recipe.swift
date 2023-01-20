@@ -19,6 +19,7 @@ struct Recipe: Identifiable {
     var steps: [String]
     var isVegetarian: Bool
     var source: URL?
+    var ratings: [Rating] = []
 }
 
 extension Recipe {

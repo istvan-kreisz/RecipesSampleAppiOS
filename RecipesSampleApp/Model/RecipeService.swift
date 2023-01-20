@@ -11,4 +11,6 @@ protocol RecipeService {
     func fetchRatings(for recipe: Recipe) async -> [Recipe.Rating]
     func fetchAllRecipes() async -> [Recipe]
     func fetchRecipes(createdBy user: User) async -> [Recipe]
+    func add(recipe: Recipe) async
+    func add(rating: Recipe.Rating, to recipe: Recipe) async
 }

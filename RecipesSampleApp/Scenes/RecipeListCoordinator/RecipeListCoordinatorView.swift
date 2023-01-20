@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct RecipeListCoordinatorView: View {
+struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: RecipesViewModel {
 
     // MARK: Stored Properties
 
-    @ObservedObject var coordinator: RecipeListCoordinator
+    @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     // MARK: Views
 

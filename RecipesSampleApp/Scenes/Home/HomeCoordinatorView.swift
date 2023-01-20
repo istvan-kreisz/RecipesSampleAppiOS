@@ -21,12 +21,12 @@ struct HomeCoordinatorView: View {
         } else {
             if coordinator.isAuthenticated {
                 TabView(selection: $coordinator.tab) {
-                    RecipeListCoordinatorView(coordinator: coordinator.meatCoordinator)
-                        .tabItem { Label("Meat", systemImage: "hare.fill") }
+                    RecipeListCoordinatorView(coordinator: coordinator.allRecipesCoordinator)
+                        .tabItem { Label("All Recipes", systemImage: "square.stack") }
                         .tag(HomeTab.meat)
 
-                    RecipeListCoordinatorView(coordinator: coordinator.veggieCoordinator)
-                        .tabItem { Label("Veggie", systemImage: "leaf.fill") }
+                    RecipeListCoordinatorView(coordinator: coordinator.userRecipesCoordinator)
+                        .tabItem { Label("Your Recipes", systemImage: "heart") }
                         .tag(HomeTab.veggie)
 
                     NavigationView {
