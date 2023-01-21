@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Recipe: Identifiable {
+struct Recipe: Identifiable, Equatable {
 
     // MARK: Stored Properties
 
@@ -24,15 +24,13 @@ struct Recipe: Identifiable {
 
 extension Recipe {
 
-    struct Rating: Identifiable {
+    struct Rating: Identifiable, Equatable {
 
         // MARK: Stored Properties
 
         var id = UUID()
         var author: String
-        var value: Double
+        var authorId: String
         var comment: String
-
     }
-
 }

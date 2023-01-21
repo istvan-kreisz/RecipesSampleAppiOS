@@ -29,7 +29,7 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     }
 
     // MARK: Methods
-    
+
     func setup(user: User) {
         (self.viewModel as? UserRecipesViewModel)?.setup(user: user)
     }
@@ -44,7 +44,9 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     }
 
     func openRatings(for recipe: Recipe) {
-        self.ratingViewModel = .init(recipe: recipe, recipeService: recipeService, closeRatings: closeRatings)
+        Task { @MainActor in
+            self.ratingViewModel = .init(recipe: recipe, recipeService: recipeService, closeRatings: closeRatings)
+        }
     }
 
     func closeRatings() {

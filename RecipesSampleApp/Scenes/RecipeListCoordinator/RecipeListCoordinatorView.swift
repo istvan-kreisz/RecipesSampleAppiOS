@@ -11,6 +11,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
 
     // MARK: Stored Properties
 
+    @EnvironmentObject var user: UserWrapper
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     // MARK: Views
@@ -21,8 +22,10 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
                 .navigation(item: $coordinator.detailViewModel) { viewModel in
                     if UIDevice.current.userInterfaceIdiom == .phone {
                         phoneRecipeView(viewModel)
+                            .environmentObject(user)
                     } else {
                         padRecipeView(viewModel)
+                            .environmentObject(user)
                     }
                 }
         }
@@ -35,6 +38,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
             ratingModifier: SheetModifier(item: $coordinator.ratingViewModel) { viewModel in
                 NavigationView {
                     RatingView(viewModel: viewModel)
+                        .withUser()
                 }
             }
         )
@@ -46,6 +50,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
             viewModel: viewModel,
             ratingModifier: PopoverModifier(item: $coordinator.ratingViewModel) {
                 RatingView(viewModel: $0)
+                    .withUser()
                     .frame(width: 500, height: 500)
             }
         )

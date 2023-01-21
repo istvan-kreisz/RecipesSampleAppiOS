@@ -8,59 +8,39 @@
 import Foundation
 import SwiftUI
 
-struct RatingView: View {
-
-    // MARK: Nested Types
-
-    struct Cell: View {
-
-        let author: String
-        let rating: Double
-        let comment: String?
-
-        var body: some View {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Text(author)
-                    Spacer()
-                    RatingStars(rating: rating)
-                }
-
-                if let comment = comment {
-                    Text(comment)
-                        .font(.body)
-                }
-            }
-            .padding(.vertical, 8)
-        }
-
-    }
-
+struct RatingView: ViewWithUser {
     // MARK: Stored Properties
 
+    @State var comment = ""
+    @State var showAddRatingModal = false
     @ObservedObject var viewModel: RatingViewModel
 
     // MARK: Views
 
     var body: some View {
         List {
-            HStack {
-                Spacer()
-                RatingStars(rating: viewModel.meanRating)
-                Spacer()
-            }
-            .padding(.vertical, 8)
-
-            ForEach(viewModel.ratings) { rating in
-                Cell(author: rating.author,
-                     rating: rating.value,
-                     comment: rating.comment)
+            ForEach(viewModel.recipe.ratings) { rating in
+                RatingCell(author: rating.author, comment: rating.comment)
             }
         }
         .font(.headline)
         .navigationTitle(viewModel.recipe.title)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: Button("Close", action: viewModel.close))
+        .navigationBarItems(leading: Button("Close", action: {
+            viewModel.close()
+        }), trailing: viewModel.canAddRating ? Button(action: {
+            comment = ""
+            showAddRatingModal = true
+        }, label: {
+            Image(systemName: "plus")
+        }) : nil)
+        .alert("Add a rating", isPresented: $showAddRatingModal) {
+            TextField("Add a comment", text: $comment)
+            Button {
+                viewModel.addRating(comment: comment)
+            } label: {
+                Text("Add a rating")
+            }
+        }
     }
-
 }

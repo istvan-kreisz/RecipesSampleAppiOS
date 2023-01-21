@@ -58,7 +58,14 @@ public class UserWrapper: ObservableObject {
     }
 }
 
+extension UserWrapper: Equatable {
+    public static func == (lhs: UserWrapper, rhs: UserWrapper) -> Bool {
+        lhs.user == rhs.user
+    }
+}
+
 public struct User: Equatable {
+    public let id = UUID().uuidString
     public let username: String
     public let password: String
 

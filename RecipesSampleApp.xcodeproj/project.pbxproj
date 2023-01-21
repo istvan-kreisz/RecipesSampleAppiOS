@@ -41,6 +41,7 @@
 		5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660AB297A0FC70012CC8C /* RecipesViewModel.swift */; };
 		5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660AE297ACA7E0012CC8C /* UserRecipesViewModel.swift */; };
 		5DC660B1297ACB1E0012CC8C /* Identifiable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */; };
+		5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B2297AFCDC0012CC8C /* RatingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		5DC660AB297A0FC70012CC8C /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		5DC660AE297ACA7E0012CC8C /* UserRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipesViewModel.swift; sourceTree = "<group>"; };
 		5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identifiable+Extensions.swift"; sourceTree = "<group>"; };
+		5DC660B2297AFCDC0012CC8C /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 		5DC660842979E59E0012CC8C /* Rating */ = {
 			isa = PBXGroup;
 			children = (
+				5DC660B2297AFCDC0012CC8C /* RatingCell.swift */,
 				5DC660852979E59E0012CC8C /* RatingView.swift */,
 				5DC660862979E59E0012CC8C /* RatingViewModel.swift */,
 			);
@@ -363,6 +366,7 @@
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
 				5DC660622979E5510012CC8C /* RecipesSampleApp.xcdatamodeld in Sources */,
 				5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */,
+				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,

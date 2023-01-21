@@ -12,15 +12,15 @@ class MockRecipeService: RecipeService {
     // MARK: Stored Properties
 
     private let badRating = Recipe.Rating(author: "Jupiter Jones",
-                                          value: .random(in: 0 ... 0.3),
+                                          authorId: "1",
                                           comment: "One word: Disgusting.")
 
     private let averageRating = Recipe.Rating(author: "Peter Crenshaw",
-                                              value: .random(in: 0.3 ... 0.7),
+                                              authorId: "2",
                                               comment: "Well, it was alright...")
 
     private let goodRating = Recipe.Rating(author: "Robert Andrews",
-                                           value: .random(in: 0.7 ... 1),
+                                           authorId: "3",
                                            comment: "Best. Dish. Ever.")
 
     private lazy var recipes =
@@ -45,7 +45,8 @@ class MockRecipeService: RecipeService {
                 steps: ["Wash mushrooms; remove stems, and peel caps, and cut in pieces; melt butter and cook until tender; sprinkle with salt and pepper; dredge with flour and add cream.",
                         "Let cook until heated thoroughly, then pour on pieces of toast and garnish with toast points."],
                 isVegetarian: true,
-                source: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/"), ratings: [self.averageRating, self.goodRating, self.badRating]),
+                source: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/"),
+                ratings: [self.averageRating, self.goodRating, self.badRating]),
          Recipe(imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/Roasted%20Wild%20Duck_hu004b736d43b2db0e2f8c86e13334b46b_78997_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roasted Wild Duck",
                 ingredients: ["duck",
@@ -85,7 +86,11 @@ class MockRecipeService: RecipeService {
     // MARK: Methods
 
     func fetchRatings(for recipe: Recipe) async -> [Recipe.Rating] {
-        recipe.ratings
+        if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
+            return recipes[index].ratings
+        } else {
+            return []
+        }
     }
 
     func fetchAllRecipes() async -> [Recipe] {
@@ -100,5 +105,11 @@ class MockRecipeService: RecipeService {
         recipes.append(recipe)
     }
 
-    func add(rating: Recipe.Rating, to recipe: Recipe) {}
+    func add(rating: Recipe.Rating, to recipe: Recipe) {
+        if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
+            var newRecipe = recipe
+            newRecipe.ratings.append(rating)
+            recipes[index] = newRecipe
+        }
+    }
 }
