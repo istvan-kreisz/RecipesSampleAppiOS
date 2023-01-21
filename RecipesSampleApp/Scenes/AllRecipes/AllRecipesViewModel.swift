@@ -19,20 +19,21 @@ class AllRecipesViewModel: RecipesViewModel {
 
     // MARK: Initialization
 
-    required init(title: String,
-                  recipeService: RecipeService,
-                  openRecipe: @escaping (Recipe) -> Void) {
+    required init(title: String, recipeService: RecipeService, openRecipe: @escaping (Recipe) -> Void) {
         self.title = title
         self.openRecipe = openRecipe
         self.recipeService = recipeService
+        refresh()
+    }
 
+    // MARK: Methods
+    
+    func refresh() {
         Task { [weak self] in
             guard self != nil else { return }
             recipes = await recipeService.fetchAllRecipes()
         }
     }
-
-    // MARK: Methods
 
     func open(recipe: Recipe) {
         self.openRecipe(recipe)

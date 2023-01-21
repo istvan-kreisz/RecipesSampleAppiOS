@@ -36,6 +36,7 @@ struct AddRecipeView: ViewWithUser {
 
             Section(header: Text("Image")) {
                 if let imageURL = viewModel.recipe.imageURL {
+                    #warning("fix error state")
                     AsyncImage(url: imageURL) { image in
                         image
                             .resizable()

@@ -49,8 +49,11 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     func openAddRecipe() {
         Task { @MainActor in
             self.addRecipeViewModel = .init(recipeService: recipeService,
-                                            closeAddRecipe: { [weak self] in
+                                            closeAddRecipe: { [weak self] newRecipe in
                                                 self?.addRecipeViewModel = nil
+                                                if newRecipe != nil {
+                                                    self?.viewModel.refresh()
+                                                }
                                             },
                                             openURL: { [weak self] in
                                                 self?.openURL($0)

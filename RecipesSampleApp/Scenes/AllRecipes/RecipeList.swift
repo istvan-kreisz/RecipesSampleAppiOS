@@ -32,6 +32,9 @@ struct RecipeList<ViewModel>: ViewWithUser where ViewModel: RecipesViewModel {
             }
             .onNavigation { viewModel.open(recipe: recipe) }
         }
+        .refreshable {
+            viewModel.refresh()
+        }
         .navigationTitle(viewModel.title)
     }
 }

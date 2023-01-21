@@ -21,7 +21,7 @@ class AddRecipeViewModel: ViewModelWithUser, Identifiable {
     // MARK: Stored Properties
 
     private let recipeService: RecipeService
-    private let closeAddRecipe: () -> Void
+    private let closeAddRecipe: (_ newRecipe: Recipe?) -> Void
     let openURL: (URL) -> Void
 
     @Published var inputErrors = InputErrors()
@@ -48,7 +48,7 @@ class AddRecipeViewModel: ViewModelWithUser, Identifiable {
 
     // MARK: Initialization
 
-    init(recipeService: RecipeService, closeAddRecipe: @escaping () -> Void, openURL: @escaping (URL) -> Void) {
+    init(recipeService: RecipeService, closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
         self.recipe = Recipe(authorId: "", imageURL: nil, title: "", ingredients: [], steps: [], isVegetarian: false, source: nil, ratings: [])
         self.closeAddRecipe = closeAddRecipe
@@ -84,10 +84,15 @@ class AddRecipeViewModel: ViewModelWithUser, Identifiable {
             inputErrors.stepsMissing = true
         }
         guard !inputErrors.hasErrors else { return }
-        
+
         Task {
-            await recipeService.add(recipe: recipe)
-            closeAddRecipe()
+            do {
+                try await recipeService.add(recipe: recipe)
+                closeAddRecipe(recipe)
+            } catch {
+                print(error)
+                closeAddRecipe(nil)
+            }
         }
     }
 }

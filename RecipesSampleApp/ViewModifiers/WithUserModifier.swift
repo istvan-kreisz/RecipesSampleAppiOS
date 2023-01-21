@@ -11,7 +11,7 @@ struct WithUser: ViewModifier {
     @EnvironmentObject var user: UserWrapper
 
     let userUpdated: (User?) -> Void
-
+    
     func body(content: Content) -> some View {
         content
             .onAppear { userUpdated(user.user) }
@@ -38,6 +38,7 @@ extension ViewWithUser {
         self
             .withUser(userUpdated: { user in
                 Task { @MainActor in
+                    guard user != self.viewModel.user else { return }
                     self.viewModel.user = user
                 }
             })

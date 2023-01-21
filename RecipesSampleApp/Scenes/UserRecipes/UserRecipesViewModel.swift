@@ -14,11 +14,7 @@ class UserRecipesViewModel: RecipesViewModel {
     @Published var recipes = [Recipe]()
     var user: User? {
         didSet {
-            guard let user = user else { return }
-            Task {
-                let recipes = await recipeService.fetchRecipes(createdBy: user)
-                self.recipes = recipes
-            }
+            refresh()
         }
     }
 
@@ -36,6 +32,14 @@ class UserRecipesViewModel: RecipesViewModel {
     }
 
     // MARK: Methods
+    
+    func refresh() {
+        guard let user = user else { return }
+        Task {
+            let recipes = await recipeService.fetchRecipes(createdBy: user)
+            self.recipes = recipes
+        }
+    }
     
     func open(recipe: Recipe) {
         self.openRecipe(recipe)
