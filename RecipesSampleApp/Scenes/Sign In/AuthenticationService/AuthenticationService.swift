@@ -40,7 +40,7 @@ public actor AuthenticationService: AuthenticationServiceProtocol {
     }
     
     public init() {
-        self._user.send(User(username: "", password: ""))
+        self._user.send(User(id: "istvan", username: "", password: ""))
     }
 }
 
@@ -65,7 +65,7 @@ extension UserWrapper: Equatable {
 }
 
 public struct User: Equatable {
-    public let id = UUID().uuidString
+    public var id = UUID().uuidString
     public let username: String
     public let password: String
 

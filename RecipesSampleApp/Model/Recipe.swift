@@ -13,6 +13,7 @@ struct Recipe: Identifiable, Equatable {
     // MARK: Stored Properties
 
     var id = UUID()
+    var authorId: String
     var imageURL: URL?
     var title: String
     var ingredients: [String]

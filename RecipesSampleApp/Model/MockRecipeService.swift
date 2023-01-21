@@ -24,7 +24,8 @@ class MockRecipeService: RecipeService {
                                            comment: "Best. Dish. Ever.")
 
     private lazy var recipes =
-        [Recipe(imageURL: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/Orange%20Marmalade_hu0aa2f9bacaf3459fa40fd69ec9d06da6_94464_350x350_fill_q75_box_smart1.jpg"),
+        [Recipe(authorId: "istvan",
+                imageURL: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/Orange%20Marmalade_hu0aa2f9bacaf3459fa40fd69ec9d06da6_94464_350x350_fill_q75_box_smart1.jpg"),
                 title: "Orange Marmalade",
                 ingredients: ["12 oranges", "6 lemons", "1 gallon water", "10 pound sugar"],
                 steps: ["Clean fruit with stiff brush and wipe dry; cut crosswise in very thin slices, reject the ends, pick out the seeds.",
@@ -33,7 +34,8 @@ class MockRecipeService: RecipeService {
                         "Then add sugar and cook 1 hour or until the mixture jellies."],
                 isVegetarian: true,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/"), ratings: [self.averageRating, self.badRating]),
-         Recipe(imageURL: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/Mushrooms%20in%20Cream_hu46031e1ef57493efe9e56c814b513ee6_41786_350x350_fill_q75_box_smart1.jpg"),
+         Recipe(authorId: "istvan",
+                imageURL: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/Mushrooms%20in%20Cream_hu46031e1ef57493efe9e56c814b513ee6_41786_350x350_fill_q75_box_smart1.jpg"),
                 title: "Mushrooms in Cream",
                 ingredients: ["1/2 pound mushrooms",
                               "3 tablespoon butter",
@@ -47,7 +49,8 @@ class MockRecipeService: RecipeService {
                 isVegetarian: true,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/"),
                 ratings: [self.averageRating, self.goodRating, self.badRating]),
-         Recipe(imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/Roasted%20Wild%20Duck_hu004b736d43b2db0e2f8c86e13334b46b_78997_350x350_fill_q75_box_smart1.jpg"),
+         Recipe(authorId: "",
+                imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/Roasted%20Wild%20Duck_hu004b736d43b2db0e2f8c86e13334b46b_78997_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roasted Wild Duck",
                 ingredients: ["duck",
                               "alcohol",
@@ -62,7 +65,8 @@ class MockRecipeService: RecipeService {
                         "Roast under the flame until tender, turning and basting frequently with the tried out fat."],
                 isVegetarian: false,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/"), ratings: [self.averageRating, self.goodRating]),
-         Recipe(imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/Roast%20Lamb%20with%20Banana%20Croquettes_hu877c9bedf9d18b9a490347620c64b440_55965_350x350_fill_q75_box_smart1.jpg"),
+         Recipe(authorId: "",
+                imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/Roast%20Lamb%20with%20Banana%20Croquettes_hu877c9bedf9d18b9a490347620c64b440_55965_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roast Lamb with Banana Croquettes",
                 ingredients: ["lamb",
                               "salt",
@@ -98,7 +102,9 @@ class MockRecipeService: RecipeService {
     }
 
     func fetchRecipes(createdBy user: User) async -> [Recipe] {
-        Array(recipes.prefix(2))
+        recipes.filter { recipe in
+            recipe.authorId == user.id
+        }
     }
 
     func add(recipe: Recipe) {
