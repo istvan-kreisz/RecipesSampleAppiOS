@@ -12,6 +12,7 @@ class AllRecipesViewModel: RecipesViewModel {
 
     @Published var title: String
     @Published var recipes = [Recipe]()
+    var user: User?
 
     private let recipeService: RecipeService
     private let openRecipe: (Recipe) -> Void

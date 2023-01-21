@@ -42,6 +42,10 @@
 		5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660AE297ACA7E0012CC8C /* UserRecipesViewModel.swift */; };
 		5DC660B1297ACB1E0012CC8C /* Identifiable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */; };
 		5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B2297AFCDC0012CC8C /* RatingCell.swift */; };
+		5DC660B9297B75AE0012CC8C /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B8297B75AE0012CC8C /* AddRecipeViewModel.swift */; };
+		5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */; };
+		5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BD297C33290012CC8C /* WithUserModifier.swift */; };
+		5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BF297C496F0012CC8C /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +85,10 @@
 		5DC660AE297ACA7E0012CC8C /* UserRecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipesViewModel.swift; sourceTree = "<group>"; };
 		5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identifiable+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660B2297AFCDC0012CC8C /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
+		5DC660B8297B75AE0012CC8C /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
+		5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
+		5DC660BD297C33290012CC8C /* WithUserModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUserModifier.swift; sourceTree = "<group>"; };
+		5DC660BF297C496F0012CC8C /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +160,7 @@
 				5DC6606E2979E5890012CC8C /* SheetModifier.swift */,
 				5DC6606F2979E5890012CC8C /* PopoverModifier.swift */,
 				5DC660702979E5890012CC8C /* View+Navigation.swift */,
+				5DC660BD297C33290012CC8C /* WithUserModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -169,6 +178,7 @@
 		5DC6607B2979E59E0012CC8C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5DC660BA297B75C80012CC8C /* AddRecipe */,
 				5DC660AD297A123E0012CC8C /* UserRecipes */,
 				5DC6607C2979E59E0012CC8C /* Settings */,
 				5DC6607E2979E59E0012CC8C /* Home */,
@@ -260,6 +270,7 @@
 			children = (
 				5DC660A52979E7B80012CC8C /* URL+Extensions.swift */,
 				5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */,
+				5DC660BF297C496F0012CC8C /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,6 +281,15 @@
 				5DC660AE297ACA7E0012CC8C /* UserRecipesViewModel.swift */,
 			);
 			path = UserRecipes;
+			sourceTree = "<group>";
+		};
+		5DC660BA297B75C80012CC8C /* AddRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				5DC660B8297B75AE0012CC8C /* AddRecipeViewModel.swift */,
+				5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */,
+			);
+			path = AddRecipe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +365,7 @@
 				5DC6605F2979E5510012CC8C /* Persistence.swift in Sources */,
 				5DC6609A2979E59F0012CC8C /* RecipeListCoordinatorView.swift in Sources */,
 				5DC6606C2979E5780012CC8C /* RecipeService.swift in Sources */,
+				5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */,
 				5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */,
 				5DC6609E2979E59F0012CC8C /* SignInViewModel.swift in Sources */,
 				5DC660992979E59F0012CC8C /* RecipeView.swift in Sources */,
@@ -356,6 +377,7 @@
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
 				5DC660A12979E5C20012CC8C /* AuthenticationService.swift in Sources */,
 				5DC6607A2979E5920012CC8C /* AsyncImage.swift in Sources */,
+				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,
 				5DC660982979E59F0012CC8C /* RecipeViewModel.swift in Sources */,
 				5DC660922979E59F0012CC8C /* HomeCoordinator.swift in Sources */,
 				5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */,
@@ -366,8 +388,10 @@
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
 				5DC660622979E5510012CC8C /* RecipesSampleApp.xcdatamodeld in Sources */,
 				5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */,
+				5DC660B9297B75AE0012CC8C /* AddRecipeViewModel.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
+				5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */,
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
 				5DC660A62979E7B80012CC8C /* URL+Extensions.swift in Sources */,

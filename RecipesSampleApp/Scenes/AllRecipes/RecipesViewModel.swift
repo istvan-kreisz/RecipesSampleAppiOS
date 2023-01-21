@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RecipesViewModel: ObservableObject {
+protocol RecipesViewModel: ViewModelWithUser {
     var title: String { get }
     var recipes: [Recipe] { get }
     

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+
     // MARK: Stored Properties
 
     @ObservedObject var coordinator: HomeCoordinator

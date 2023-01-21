@@ -12,6 +12,15 @@ class UserRecipesViewModel: RecipesViewModel {
 
     @Published var title: String
     @Published var recipes = [Recipe]()
+    var user: User? {
+        didSet {
+            guard let user = user else { return }
+            Task {
+                let recipes = await recipeService.fetchRecipes(createdBy: user)
+                self.recipes = recipes
+            }
+        }
+    }
 
     private let recipeService: RecipeService
     private let openRecipe: (Recipe) -> Void
@@ -28,13 +37,6 @@ class UserRecipesViewModel: RecipesViewModel {
 
     // MARK: Methods
     
-    func setup(user: User) {
-        Task {
-            let recipes = await recipeService.fetchRecipes(createdBy: user)
-            self.recipes = recipes
-        }
-    }
-
     func open(recipe: Recipe) {
         self.openRecipe(recipe)
     }

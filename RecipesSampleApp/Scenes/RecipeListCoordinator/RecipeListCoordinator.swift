@@ -13,6 +13,7 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     @Published private(set) var viewModel: ListViewModel!
     @Published var detailViewModel: RecipeViewModel?
     @Published var ratingViewModel: RatingViewModel?
+    @Published var addRecipeViewModel: AddRecipeViewModel?
 
     private let recipeService: RecipeService
     private let openURL: (URL) -> Void
@@ -30,10 +31,6 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
 
     // MARK: Methods
 
-    func setup(user: User) {
-        (self.viewModel as? UserRecipesViewModel)?.setup(user: user)
-    }
-
     func open(_ recipe: Recipe) {
         self.detailViewModel = .init(recipe: recipe,
                                      openRatings: { [weak self] in
@@ -48,6 +45,20 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
             self.ratingViewModel = .init(recipe: recipe, recipeService: recipeService, closeRatings: closeRatings)
         }
     }
+
+    func openAddRecipe() {
+        Task { @MainActor in
+            self.addRecipeViewModel = .init(recipeService: recipeService,
+                                            closeAddRecipe: { [weak self] in
+                                                self?.addRecipeViewModel = nil
+                                            },
+                                            openURL: { [weak self] in
+                                                self?.openURL($0)
+                                            })
+        }
+    }
+
+    func add(recipe: Recipe) {}
 
     func closeRatings() {
         self.ratingViewModel = nil

@@ -28,13 +28,8 @@ class HomeCoordinator: ObservableObject {
 
     @Published var openedURL: URL?
 
-    @Published var user: User? = nil {
-        didSet {
-            guard let user = user else { return }
-            self.userRecipesCoordinator.setup(user: user)
-        }
-    }
-
+    @Published var user: User? = nil
+    
     var cancellables = Set<AnyCancellable>()
 
     var isAuthenticated: Bool {

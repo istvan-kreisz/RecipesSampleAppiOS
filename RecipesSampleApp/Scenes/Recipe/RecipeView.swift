@@ -45,7 +45,7 @@ struct RecipeView<RatingModifier: ViewModifier>: View {
     @ViewBuilder
     private var ratingsButton: some View {
         Button(action: viewModel.openRatings) {
-            Image(systemName: "person.3.fill")
+            Image(systemName: "rectangle.and.pencil.and.ellipsis")
         }
         .modifier(ratingModifier)
     }

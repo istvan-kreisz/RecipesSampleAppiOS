@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
+struct RecipeList<ViewModel>: ViewWithUser where ViewModel: RecipesViewModel {
     // MARK: Stored Properties
 
     @ObservedObject var viewModel: ViewModel
