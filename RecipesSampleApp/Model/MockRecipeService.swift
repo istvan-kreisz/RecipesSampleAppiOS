@@ -97,13 +97,15 @@ class MockRecipeService: RecipeService {
         }
     }
 
-    func fetchAllRecipes() async -> [Recipe] {
-        recipes
+    func fetchAllRecipes(searchText: String) async -> [Recipe] {
+        recipes.filter { recipe in
+            recipe.isMatching(searchText)
+        }
     }
 
-    func fetchRecipes(createdBy user: User) async -> [Recipe] {
+    func fetchRecipes(createdBy user: User, searchText: String) async -> [Recipe] {
         recipes.filter { recipe in
-            recipe.authorId == user.id
+            recipe.authorId == user.id && recipe.isMatching(searchText)
         }
     }
 

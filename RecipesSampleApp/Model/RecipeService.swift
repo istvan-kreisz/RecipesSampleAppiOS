@@ -9,8 +9,8 @@ import Foundation
 
 protocol RecipeService {
     func fetchRatings(for recipe: Recipe) async -> [Recipe.Rating]
-    func fetchAllRecipes() async -> [Recipe]
-    func fetchRecipes(createdBy user: User) async -> [Recipe]
+    func fetchAllRecipes(searchText: String) async -> [Recipe]
+    func fetchRecipes(createdBy user: User, searchText: String) async -> [Recipe]
     func add(recipe: Recipe) async throws
     func add(rating: Recipe.Rating, to recipe: Recipe) async
 }

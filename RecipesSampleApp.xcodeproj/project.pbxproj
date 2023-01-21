@@ -45,6 +45,7 @@
 		5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */; };
 		5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BD297C33290012CC8C /* WithUserModifier.swift */; };
 		5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BF297C496F0012CC8C /* View+Extensions.swift */; };
+		5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C1297C80D10012CC8C /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		5DC660BD297C33290012CC8C /* WithUserModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUserModifier.swift; sourceTree = "<group>"; };
 		5DC660BF297C496F0012CC8C /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		5DC660C1297C80D10012CC8C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +270,7 @@
 				5DC660A52979E7B80012CC8C /* URL+Extensions.swift */,
 				5DC660B0297ACB1E0012CC8C /* Identifiable+Extensions.swift */,
 				5DC660BF297C496F0012CC8C /* View+Extensions.swift */,
+				5DC660C1297C80D10012CC8C /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				5DC660962979E59F0012CC8C /* RatingView.swift in Sources */,
 				5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
+				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
 				5DC660A12979E5C20012CC8C /* AuthenticationService.swift in Sources */,
 				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,

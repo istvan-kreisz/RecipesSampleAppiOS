@@ -33,10 +33,10 @@ class UserRecipesViewModel: RecipesViewModel {
 
     // MARK: Methods
     
-    func refresh() {
+    func refresh(searchText: String) {
         guard let user = user else { return }
         Task {
-            let recipes = await recipeService.fetchRecipes(createdBy: user)
+            let recipes = await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
             self.recipes = recipes
         }
     }

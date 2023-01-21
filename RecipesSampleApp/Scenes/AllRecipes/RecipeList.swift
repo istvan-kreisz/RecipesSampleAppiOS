@@ -11,6 +11,7 @@ struct RecipeList<ViewModel>: ViewWithUser where ViewModel: RecipesViewModel {
     // MARK: Stored Properties
 
     @ObservedObject var viewModel: ViewModel
+    @State var searchText = ""
 
     // MARK: Views
 
@@ -34,6 +35,10 @@ struct RecipeList<ViewModel>: ViewWithUser where ViewModel: RecipesViewModel {
         }
         .refreshable {
             viewModel.refresh()
+        }
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { text in
+            viewModel.refresh(searchText: text)
         }
         .navigationTitle(viewModel.title)
     }

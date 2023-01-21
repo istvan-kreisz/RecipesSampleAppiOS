@@ -13,5 +13,11 @@ protocol RecipesViewModel: ViewModelWithUser {
     
     init(title: String, recipeService: RecipeService, openRecipe: @escaping (Recipe) -> Void)
     func open(recipe: Recipe)
-    func refresh()
+    func refresh(searchText: String)
+}
+
+extension RecipesViewModel {
+    func refresh() {
+        refresh(searchText: "")
+    }
 }

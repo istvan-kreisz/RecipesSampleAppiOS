@@ -21,6 +21,10 @@ struct Recipe: Identifiable, Equatable {
     var isVegetarian: Bool
     var source: URL?
     var ratings: [Rating] = []
+    
+    func isMatching(_ searchText: String) -> Bool {
+        searchText.isEmpty ? true : title.lowercased().fuzzyMatch(searchText.lowercased())
+    }
 }
 
 extension Recipe {
