@@ -35,19 +35,24 @@ struct AddRecipeView: ViewWithUser {
             }
 
             Section(header: Text("Image")) {
-                if viewModel.recipe.imageURL == nil {
+                if let imageURL = viewModel.recipe.imageURL {
+                    AsyncImage(url: imageURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxHeight: UIScreen.main.bounds.height / 3)
+                            .clipped()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .listRowInsets(.init())
+                } else {
                     Button {
                         imageLink = ""
                         showAddImageLinkAlert = true
                     } label: {
                         Label("Add image link", systemImage: "plus.circle.fill")
                     }
-                } else {
-                    AsyncImage(url: viewModel.recipe.imageURL)
-                        .frame(maxHeight: UIScreen.main.bounds.height / 3)
-                        .clipped()
-                        .listRowInsets(.init())
-                        .overlay(sourceOverlay, alignment: .bottom)
                 }
             }
 
@@ -154,22 +159,6 @@ struct AddRecipeView: ViewWithUser {
             } label: {
                 Text("Add link")
             }
-        }
-    }
-
-    @ViewBuilder
-    private var sourceOverlay: some View {
-        if let source = viewModel.recipe.source {
-            HStack {
-                Image(systemName: "safari")
-                Text("Source")
-                Spacer()
-            }
-            .font(.headline)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 8)
-            .background(Color(.systemBackground).opacity(0.75))
-            .onTapGesture { viewModel.openURL(source) }
         }
     }
 }

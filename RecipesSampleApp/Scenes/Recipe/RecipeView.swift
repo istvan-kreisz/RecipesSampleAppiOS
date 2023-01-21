@@ -18,12 +18,18 @@ struct RecipeView<RatingModifier: ViewModifier>: View {
 
     var body: some View {
         List {
-            if viewModel.recipe.imageURL != nil {
-                AsyncImage(url: viewModel.recipe.imageURL)
-                    .frame(maxHeight: UIScreen.main.bounds.height / 3)
-                    .clipped()
-                    .listRowInsets(.init())
-                    .overlay(sourceOverlay, alignment: .bottom)
+            if let imageURL = viewModel.recipe.imageURL {
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxHeight: UIScreen.main.bounds.height / 2)
+                        .clipped()
+                        .overlay(sourceOverlay, alignment: .bottom)
+                } placeholder: {
+                    ProgressView()
+                }
+                .listRowInsets(.init())
             }
 
             Section(header: Text("Ingredients")) {
