@@ -46,6 +46,8 @@
 		5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BD297C33290012CC8C /* WithUserModifier.swift */; };
 		5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BF297C496F0012CC8C /* View+Extensions.swift */; };
 		5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C1297C80D10012CC8C /* String+Extensions.swift */; };
+		5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C4297C869F0012CC8C /* CoreDataStack.swift */; };
+		5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +91,8 @@
 		5DC660BD297C33290012CC8C /* WithUserModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUserModifier.swift; sourceTree = "<group>"; };
 		5DC660BF297C496F0012CC8C /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660C1297C80D10012CC8C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		5DC660C4297C869F0012CC8C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		5DC660542979E54E0012CC8C /* RecipesSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				5DC660C3297C868A0012CC8C /* Persistence */,
 				5DC660A42979E7B80012CC8C /* Extensions */,
 				5DC6607B2979E59E0012CC8C /* Scenes */,
 				5DC660742979E5920012CC8C /* Views */,
@@ -292,6 +297,15 @@
 			path = AddRecipe;
 			sourceTree = "<group>";
 		};
+		5DC660C3297C868A0012CC8C /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				5DC660C4297C869F0012CC8C /* CoreDataStack.swift */,
+				5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -380,6 +394,7 @@
 				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,
 				5DC660982979E59F0012CC8C /* RecipeViewModel.swift in Sources */,
 				5DC660922979E59F0012CC8C /* HomeCoordinator.swift in Sources */,
+				5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */,
 				5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */,
 				5DC660782979E5920012CC8C /* SafariView.swift in Sources */,
 				5DC660792979E5920012CC8C /* RatingStars.swift in Sources */,
@@ -389,6 +404,7 @@
 				5DC660622979E5510012CC8C /* RecipesSampleApp.xcdatamodeld in Sources */,
 				5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */,
 				5DC660B9297B75AE0012CC8C /* AddRecipeViewModel.swift in Sources */,
+				5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
 				5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */,
