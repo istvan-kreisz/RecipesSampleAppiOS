@@ -19,12 +19,7 @@ class RealRecipeDBRepository: RecipeDBRepository {
         let fetchRequest = RatingObject.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RatingObject.dateAdded, ascending: false)]
         fetchRequest.predicate = NSPredicate(format: "recipe.id == %@", recipe.id as CVarArg)
-        let result = try await persistentStore.fetch(fetchRequest) { recipeObject in
-            if recipeObject.recipe != nil {
-                print("recipes yoooo: ")
-            }
-            return Recipe.Rating(from: recipeObject)
-        }
+        let result = try await persistentStore.fetch(fetchRequest) { Recipe.Rating(from: $0) }
         return result
     }
 
@@ -34,7 +29,6 @@ class RealRecipeDBRepository: RecipeDBRepository {
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RecipeObject.dateAdded, ascending: false)]
         fetchRequest.predicate = searchTextPredicate(searchText: searchText)
         let result = try await persistentStore.fetch(fetchRequest) { Recipe(from: $0) }
-        print("ratingss yoooo: ", result.contains { !$0.ratings.isEmpty })
         return result
     }
 
