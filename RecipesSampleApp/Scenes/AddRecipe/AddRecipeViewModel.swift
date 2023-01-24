@@ -50,7 +50,15 @@ class AddRecipeViewModel: ViewModelWithUser, Identifiable {
 
     init(recipeService: RecipeService, closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
-        self.recipe = Recipe(authorId: "", imageURL: nil, title: "", ingredients: [], steps: [], isVegetarian: false, source: nil, ratings: [])
+        self.recipe = Recipe(authorId: "",
+                             imageURL: nil,
+                             title: "",
+                             ingredients: [],
+                             steps: [],
+                             isVegetarian: false,
+                             source: nil,
+                             dateAdded: Date(),
+                             ratings: [])
         self.closeAddRecipe = closeAddRecipe
         self.openURL = openURL
     }

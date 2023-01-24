@@ -36,8 +36,12 @@ class UserRecipesViewModel: RecipesViewModel {
     func refresh(searchText: String) {
         guard let user = user else { return }
         Task {
-            let recipes = await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
-            self.recipes = recipes
+            do {
+                let recipes = try await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
+                self.recipes = recipes
+            } catch {
+                // todo: show error
+            }
         }
     }
     

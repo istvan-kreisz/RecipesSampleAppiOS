@@ -9,6 +9,7 @@ import Foundation
 
 @MainActor
 class MockRecipeService: RecipeService {
+    
     // MARK: Stored Properties
 
     private let badRating = Recipe.Rating(author: "Jupiter Jones",
@@ -33,7 +34,8 @@ class MockRecipeService: RecipeService {
                         "Then put in preserving kettle and let cook slowly 2 hours.",
                         "Then add sugar and cook 1 hour or until the mixture jellies."],
                 isVegetarian: true,
-                source: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/"), ratings: [self.averageRating, self.badRating]),
+                source: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/"), dateAdded: Date(timeIntervalSinceNow: -100),
+                ratings: [self.averageRating, self.badRating]),
          Recipe(authorId: "istvan",
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/Mushrooms%20in%20Cream_hu46031e1ef57493efe9e56c814b513ee6_41786_350x350_fill_q75_box_smart1.jpg"),
                 title: "Mushrooms in Cream",
@@ -48,6 +50,7 @@ class MockRecipeService: RecipeService {
                         "Let cook until heated thoroughly, then pour on pieces of toast and garnish with toast points."],
                 isVegetarian: true,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/"),
+                dateAdded: Date(timeIntervalSinceNow: -80),
                 ratings: [self.averageRating, self.goodRating, self.badRating]),
          Recipe(authorId: "",
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/Roasted%20Wild%20Duck_hu004b736d43b2db0e2f8c86e13334b46b_78997_350x350_fill_q75_box_smart1.jpg"),
@@ -64,7 +67,8 @@ class MockRecipeService: RecipeService {
                 steps: ["Take a plump, young duck; rub all over with alcohol and then hold over the burner to singe; wash thoroughly with soda water; then boil in soda water or water in which there is a little onion for 10 minutes before stuffing; then rinse in clear water and wipe dry; stuff with dressing, to which has been added a little onion, sage, celery salt or bacon chopped fine; sprinkle with pepper and salt and dredge with flour; place pieces of bacon over it.",
                         "Roast under the flame until tender, turning and basting frequently with the tried out fat."],
                 isVegetarian: false,
-                source: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/"), ratings: [self.averageRating, self.goodRating]),
+                source: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/"), dateAdded: Date(timeIntervalSinceNow: -90),
+                ratings: [self.averageRating, self.goodRating]),
          Recipe(authorId: "",
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/Roast%20Lamb%20with%20Banana%20Croquettes_hu877c9bedf9d18b9a490347620c64b440_55965_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roast Lamb with Banana Croquettes",
@@ -85,7 +89,9 @@ class MockRecipeService: RecipeService {
                         "Remove to a serving dish; slip a paper frill over the bone, and garnish with parsley and banana croquettes.",
                         "Remove the skin and coarse threads from the bananas and trim the pulp of each to a cylinder-shape croquette; coat each with lemon juice to keep from discoloring; then roll in egg and then in sifted bread crumbs; fry in deep fat, and dust with powdered sugar."],
                 isVegetarian: false,
-                source: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/"), ratings: [self.averageRating])]
+                source: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/"),
+                dateAdded: Date(timeIntervalSinceNow: -100),
+                ratings: [self.averageRating])]
 
     // MARK: Methods
 

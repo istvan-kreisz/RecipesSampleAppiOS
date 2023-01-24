@@ -31,7 +31,11 @@ class AllRecipesViewModel: RecipesViewModel {
     func refresh(searchText: String) {
         Task { [weak self] in
             guard self != nil else { return }
-            recipes = await recipeService.fetchAllRecipes(searchText: searchText)
+            do {
+                recipes = try await recipeService.fetchAllRecipes(searchText: searchText)
+            } catch {
+                // todo: show error
+            }
         }
     }
 

@@ -37,17 +37,25 @@ class RatingViewModel: ViewModelWithUser, Identifiable {
     }
 
     // MARK: Methods
-    
+
     private func fetchRatings() async {
-        let ratings = await recipeService.fetchRatings(for: recipe)
-        self.recipe.ratings = ratings
+        do {
+            let ratings = try await recipeService.fetchRatings(for: recipe)
+            self.recipe.ratings = ratings
+        } catch {
+            // todo: show error
+        }
     }
-    
+
     private func addRating(rating: Recipe.Rating) async {
-        await recipeService.add(rating: rating, to: recipe)
-        await fetchRatings()
+        do {
+            try await recipeService.add(rating: rating, to: recipe)
+            await fetchRatings()
+        } catch {
+            // todo: show error
+        }
     }
-    
+
     func addRating(comment: String) {
         guard let user = user else { return }
         let newRating = Recipe.Rating(author: user.username, authorId: user.id, comment: comment)

@@ -19,6 +19,7 @@ struct Recipe: Identifiable, Equatable {
     var steps: [String]
     var isVegetarian: Bool
     var source: URL?
+    var dateAdded: Date
     var ratings: [Rating] = []
 
     func isMatching(_ searchText: String) -> Bool {
@@ -31,8 +32,9 @@ extension Recipe {
         guard let id = recipeObject.id,
               let authorId = recipeObject.authorId,
               let title = recipeObject.title,
-              let ingredients = recipeObject.ingredients?.compactMap({ $0 as? String }),
-              let steps = recipeObject.steps?.compactMap({ $0 as? String }),
+              let dateAdded = recipeObject.dateAdded,
+              let ingredients = recipeObject.ingredients,
+              let steps = recipeObject.steps,
               let ratings = recipeObject.ratings?.compactMap({ $0 as? Rating })
         else { return nil }
         self.id = id
@@ -43,6 +45,7 @@ extension Recipe {
         self.steps = steps
         self.isVegetarian = recipeObject.isVegetarian
         self.source = recipeObject.source
+        self.dateAdded = dateAdded
         self.ratings = ratings
     }
 }

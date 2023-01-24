@@ -13,7 +13,7 @@ protocol PersistentStore {
 
     func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V]
-    func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result
+    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result
 }
 
 private enum CoreDataError: Error {
@@ -61,12 +61,15 @@ class CoreDataStack: PersistentStore {
         }
     }
 
+    @MainActor
     func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int {
+        assert(Thread.isMainThread)
         try await onStoreIsReady()
         let count = try container.viewContext.count(for: fetchRequest)
         return count
     }
 
+    @MainActor
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V] {
         assert(Thread.isMainThread)
         try await onStoreIsReady()
@@ -78,7 +81,7 @@ class CoreDataStack: PersistentStore {
         return result.compactMap { try? map($0) }
     }
 
-    func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result {
+    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result {
         try await onStoreIsReady()
 
         let context = container.newBackgroundContext()
