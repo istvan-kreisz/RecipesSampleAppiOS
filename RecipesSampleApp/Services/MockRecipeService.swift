@@ -9,20 +9,22 @@ import Foundation
 
 @MainActor
 class MockRecipeService: RecipeService {
-    
     // MARK: Stored Properties
 
     private let badRating = Recipe.Rating(author: "Jupiter Jones",
                                           authorId: "1",
-                                          comment: "One word: Disgusting.")
+                                          comment: "One word: Disgusting.",
+                                          dateAdded: Date(timeIntervalSinceNow: -100))
 
     private let averageRating = Recipe.Rating(author: "Peter Crenshaw",
                                               authorId: "2",
-                                              comment: "Well, it was alright...")
+                                              comment: "Well, it was alright...",
+                                              dateAdded: Date(timeIntervalSinceNow: -80))
 
     private let goodRating = Recipe.Rating(author: "Robert Andrews",
                                            authorId: "3",
-                                           comment: "Best. Dish. Ever.")
+                                           comment: "Best. Dish. Ever.",
+                                           dateAdded: Date(timeIntervalSinceNow: -60))
 
     private lazy var recipes =
         [Recipe(authorId: "istvan",

@@ -9,54 +9,43 @@
 import Foundation
 import CoreData
 
-public extension RecipeObject {
-    @nonobjc class func fetchRequest() -> NSFetchRequest<RecipeObject> {
+
+extension RecipeObject {
+
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<RecipeObject> {
         return NSFetchRequest<RecipeObject>(entityName: "RecipeObject")
     }
 
-    @NSManaged var id: UUID?
-    @NSManaged var authorId: String?
-    @NSManaged var imageURL: URL?
-    @NSManaged var title: String?
-    @NSManaged var isVegetarian: Bool
-    @NSManaged var source: URL?
-    @NSManaged var dateAdded: Date?
-    @NSManaged var steps: [String]?
-    @NSManaged var ingredients: [String]?
-    @NSManaged var ratings: NSSet?
+    @NSManaged public var id: UUID?
+    @NSManaged public var authorId: String?
+    @NSManaged public var imageURL: URL?
+    @NSManaged public var title: String?
+    @NSManaged public var isVegetarian: Bool
+    @NSManaged public var source: URL?
+    @NSManaged public var dateAdded: Date?
+    @NSManaged public var steps: [String]?
+    @NSManaged public var ingredients: [String]?
+    @NSManaged public var ratings: NSSet?
+
 }
 
 // MARK: Generated accessors for ratings
+extension RecipeObject {
 
-public extension RecipeObject {
     @objc(addRatingsObject:)
-    @NSManaged func addToRatings(_ value: RatingObject)
+    @NSManaged public func addToRatings(_ value: RatingObject)
 
     @objc(removeRatingsObject:)
-    @NSManaged func removeFromRatings(_ value: RatingObject)
+    @NSManaged public func removeFromRatings(_ value: RatingObject)
 
     @objc(addRatings:)
-    @NSManaged func addToRatings(_ values: NSSet)
+    @NSManaged public func addToRatings(_ values: NSSet)
 
     @objc(removeRatings:)
-    @NSManaged func removeFromRatings(_ values: NSSet)
+    @NSManaged public func removeFromRatings(_ values: NSSet)
+
 }
 
-extension RecipeObject: Identifiable {}
+extension RecipeObject : Identifiable {
 
-extension RecipeObject {
-    static func initFrom(recipe: Recipe, context: NSManagedObjectContext) -> RecipeObject {
-        let recipeObject = RecipeObject(entity: RecipeObject.entity(), insertInto: context)
-        recipeObject.id = recipe.id
-        recipeObject.authorId = recipe.authorId
-        recipeObject.imageURL = recipe.imageURL
-        recipeObject.title = recipe.title
-        recipeObject.isVegetarian = recipe.isVegetarian
-        recipeObject.source = recipe.source
-        recipeObject.dateAdded = recipe.dateAdded
-        recipeObject.steps = recipe.steps
-        recipeObject.ingredients = recipe.ingredients
-        recipeObject.ratings = []
-        return recipeObject
-    }
 }

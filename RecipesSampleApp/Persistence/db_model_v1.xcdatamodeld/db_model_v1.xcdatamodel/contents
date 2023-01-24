@@ -4,18 +4,20 @@
         <attribute name="author" attributeType="String"/>
         <attribute name="authorId" attributeType="String"/>
         <attribute name="comment" attributeType="String"/>
+        <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeObject" inverseName="ratings" inverseEntity="RecipeObject"/>
     </entity>
     <entity name="RecipeObject" representedClassName="RecipeObject" syncable="YES">
         <attribute name="authorId" attributeType="String"/>
         <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
-        <attribute name="ingredients" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="ingredients" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="isVegetarian" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="source" optional="YES" attributeType="URI"/>
-        <attribute name="steps" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="[String]"/>
+        <attribute name="steps" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RatingObject"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RatingObject" inverseName="recipe" inverseEntity="RatingObject"/>
     </entity>
 </model>

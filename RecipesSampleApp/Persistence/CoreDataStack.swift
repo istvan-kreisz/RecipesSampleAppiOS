@@ -10,19 +10,31 @@ import Combine
 
 protocol PersistentStore {
     typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
+    var container: NSPersistentContainer { get }
 
     func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int
-    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V]
+    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
+                     context: NSManagedObjectContext,
+                     map: @escaping (T) throws -> V?) async throws -> [V]
     @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result
 }
 
-private enum CoreDataError: Error {
+extension PersistentStore {
+    @MainActor
+    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V] {
+        assert(Thread.isMainThread)
+        return try await fetch(fetchRequest, context: container.viewContext, map: map)
+    }
+}
+
+enum CoreDataError: Error {
     case storeNotLoaded
+    case notFound
 }
 
 class CoreDataStack: PersistentStore {
     private var continuations: [CheckedContinuation<Bool, Error>] = []
-    private let container: NSPersistentContainer
+    let container: NSPersistentContainer
     private var isStoreLoaded: Result<Bool, Error> = .success(false) {
         didSet {
             continuations.forEach { continuation in
@@ -69,13 +81,13 @@ class CoreDataStack: PersistentStore {
         return count
     }
 
-    @MainActor
-    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V] {
-        assert(Thread.isMainThread)
+    func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
+                     context: NSManagedObjectContext,
+                     map: @escaping (T) throws -> V?) async throws -> [V] {
         try await onStoreIsReady()
 
-        let result = try container.viewContext.performAndWait { [weak container] () -> [T] in
-            guard let managedObjects = try container?.viewContext.fetch(fetchRequest) else { return [] }
+        let result = try context.performAndWait { [weak context] () -> [T] in
+            guard let managedObjects = try context?.fetch(fetchRequest) else { return [] }
             return managedObjects
         }
         return result.compactMap { try? map($0) }
@@ -102,6 +114,7 @@ class CoreDataStack: PersistentStore {
         return result
     }
 
+    #warning("should only be accessed from one serial thread")
     private func onStoreIsReady() async throws {
         switch isStoreLoaded {
         case let .success(value):
