@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class RealRecipeDBRepository: RecipeDBRepository {
     let persistentStore: PersistentStore
@@ -56,29 +57,32 @@ class RealRecipeDBRepository: RecipeDBRepository {
     }
 
     func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
-    
-//        try await persistentStore.update { context in
-//            let recipeObject = try await fetch(recipe: recipe, context: context)
-//            let ratingObject = RatingObject.initFrom(rating: rating, context: context)
-//            recipeObject.addToRatings(ratingObject)
-//            ratingObject.recipe = recipeObject
-//        }
+        let recipeObject = try await fetch(recipe: recipe, context: persistentStore.backgroundContext)
+        try await persistentStore.update { context in
+            let ratingObject = RatingObject.initFrom(rating: rating, context: context)
+            recipeObject.addToRatings(ratingObject)
+            ratingObject.recipe = recipeObject
+        }
     }
-    
-    private func fetch(recipe: Recipe) async throws -> RecipeObject {
+
+    private func fetch(recipe: Recipe, context: NSManagedObjectContext?) async throws -> RecipeObject {
         let fetchRequest = RecipeObject.fetchRequest()
         fetchRequest.includesSubentities = false
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "id == %@", recipe.id as CVarArg)
-        let resultArray = try await persistentStore.fetch(fetchRequest) { $0 }
+        let resultArray: [RecipeObject]
+        if let context = context {
+            resultArray = try await persistentStore.fetch(fetchRequest, context: context) { $0 }
+        } else {
+            resultArray = try await persistentStore.fetch(fetchRequest) { $0 }
+        }
         if let result = resultArray.first {
             return result
         } else {
             throw CoreDataError.notFound
         }
-
     }
-    
+
     private func searchTextPredicate(searchText: String) -> NSPredicate? {
         guard !searchText.isEmpty else { return nil }
         let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText.lowercased())

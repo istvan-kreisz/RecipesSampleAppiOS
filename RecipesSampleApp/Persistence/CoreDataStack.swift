@@ -8,33 +8,52 @@
 import CoreData
 import Combine
 
+@MainActor
 protocol PersistentStore {
     typealias DBOperation<Result> = (NSManagedObjectContext) throws -> Result
     var container: NSPersistentContainer { get }
+    var backgroundContext: NSManagedObjectContext { get }
 
-    func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int
+    func count<T>(_ fetchRequest: NSFetchRequest<T>,
+                  context: NSManagedObjectContext) async throws -> Int
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>,
                      context: NSManagedObjectContext,
                      map: @escaping (T) throws -> V?) async throws -> [V]
-    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result
+    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>,
+                                           context: NSManagedObjectContext) async throws -> Result
 }
 
 extension PersistentStore {
-    @MainActor
     func fetch<T, V>(_ fetchRequest: NSFetchRequest<T>, map: @escaping (T) throws -> V?) async throws -> [V] {
         assert(Thread.isMainThread)
         return try await fetch(fetchRequest, context: container.viewContext, map: map)
+    }
+    
+    func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int {
+        assert(Thread.isMainThread)
+        return try await count(fetchRequest, context: container.viewContext)
+    }
+    
+    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result {
+        try await update(operation, context: backgroundContext)
     }
 }
 
 enum CoreDataError: Error {
     case storeNotLoaded
     case notFound
+    case contextNotFound
 }
 
 class CoreDataStack: PersistentStore {
     private var continuations: [CheckedContinuation<Bool, Error>] = []
     let container: NSPersistentContainer
+    lazy var backgroundContext = {
+        let context = container.newBackgroundContext()
+        context.configureAsUpdateContext()
+        return context
+    }()
+    
     private var isStoreLoaded: Result<Bool, Error> = .success(false) {
         didSet {
             continuations.forEach { continuation in
@@ -64,20 +83,20 @@ class CoreDataStack: PersistentStore {
         }
 
         container.loadPersistentStores { [weak self] storeDescription, error in
-            if let error = error {
-                self?.isStoreLoaded = .failure(error)
-            } else {
-                self?.container.viewContext.configureAsReadOnlyContext()
-                self?.isStoreLoaded = .success(true)
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.isStoreLoaded = .failure(error)
+                } else {
+                    self?.container.viewContext.configureAsReadOnlyContext()
+                    self?.isStoreLoaded = .success(true)
+                }
             }
         }
     }
 
-    @MainActor
-    func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int {
-        assert(Thread.isMainThread)
+    func count<T>(_ fetchRequest: NSFetchRequest<T>, context: NSManagedObjectContext) async throws -> Int {
         try await onStoreIsReady()
-        let count = try container.viewContext.count(for: fetchRequest)
+        let count = try context.count(for: fetchRequest)
         return count
     }
 
@@ -87,18 +106,18 @@ class CoreDataStack: PersistentStore {
         try await onStoreIsReady()
 
         let result = try context.performAndWait { [weak context] () -> [T] in
-            guard let managedObjects = try context?.fetch(fetchRequest) else { return [] }
+            guard let context = context else { throw CoreDataError.contextNotFound }
+            let managedObjects = try context.fetch(fetchRequest)
             return managedObjects
         }
         return result.compactMap { try? map($0) }
     }
 
-    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result {
+    @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>, context: NSManagedObjectContext) async throws -> Result {
         try await onStoreIsReady()
 
-        let context = container.newBackgroundContext()
-        context.configureAsUpdateContext()
-        let result = try context.performAndWait {
+        let result = try context.performAndWait { [weak context] in
+            guard let context = context else { throw CoreDataError.contextNotFound }
             do {
                 let result = try operation(context)
                 if context.hasChanges {
@@ -114,7 +133,6 @@ class CoreDataStack: PersistentStore {
         return result
     }
 
-    #warning("should only be accessed from one serial thread")
     private func onStoreIsReady() async throws {
         switch isStoreLoaded {
         case let .success(value):
