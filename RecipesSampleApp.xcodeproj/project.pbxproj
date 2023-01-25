@@ -23,6 +23,7 @@
 		5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */; };
 		5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612C2981DCC10053AD5C /* WebRepository.swift */; };
 		5D6B612F2981DD090053AD5C /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612E2981DD090053AD5C /* APICall.swift */; };
+		5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61302981E6780053AD5C /* AppEnvironment.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -78,6 +79,7 @@
 		5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealRecipeWebRepository.swift; sourceTree = "<group>"; };
 		5D6B612C2981DCC10053AD5C /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
 		5D6B612E2981DD090053AD5C /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
+		5D6B61302981E6780053AD5C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				5DC660682979E5780012CC8C /* Model */,
 				5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */,
 				5D50811A2980A38D00B6247B /* UIApplicationDelegate.swift */,
+				5D6B61302981E6780053AD5C /* AppEnvironment.swift */,
 				5DC660592979E5510012CC8C /* Assets.xcassets */,
 				5D5081112980A19600B6247B /* GoogleService-Info.plist */,
 				5DC6605B2979E5510012CC8C /* Preview Content */,
@@ -493,6 +496,7 @@
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
 				5DC660A62979E7B80012CC8C /* URL+Extensions.swift in Sources */,
 				5DC660732979E5890012CC8C /* View+Navigation.swift in Sources */,
+				5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */,
 				5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */,
 				5DC6609C2979E59F0012CC8C /* CardView.swift in Sources */,
 				5DC660972979E59F0012CC8C /* RatingViewModel.swift in Sources */,

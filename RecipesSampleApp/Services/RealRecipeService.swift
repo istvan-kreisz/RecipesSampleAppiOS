@@ -11,9 +11,11 @@ class RealRecipeService: RecipeService {
     // MARK: Methods
 
     let recipeDBRepository: RecipeDBRepository
+    let recipeWebRepository: RecipeWebRepository
 
-    init(recipeDBRepository: RecipeDBRepository) {
+    init(recipeDBRepository: RecipeDBRepository, recipeWebRepository: RecipeWebRepository) {
         self.recipeDBRepository = recipeDBRepository
+        self.recipeWebRepository = recipeWebRepository
     }
 
     func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
