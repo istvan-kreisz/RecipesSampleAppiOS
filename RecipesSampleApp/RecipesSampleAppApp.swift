@@ -11,6 +11,7 @@ import SwiftUI
 struct RecipesSampleAppApp: App {
     // MARK: Stored Properties
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var coordinator =
         HomeCoordinator(recipeService: RealRecipeService(recipeDBRepository: RealRecipeDBRepository(persistentStore: CoreDataStack(version: CoreDataStack
                 .Version.actual))))

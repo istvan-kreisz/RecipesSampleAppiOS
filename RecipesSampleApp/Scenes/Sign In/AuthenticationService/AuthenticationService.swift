@@ -64,7 +64,7 @@ extension UserWrapper: Equatable {
     }
 }
 
-public struct User: Equatable {
+public struct User: Equatable, Codable {
     public var id = UUID().uuidString
     public let username: String
     public let password: String

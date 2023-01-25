@@ -14,6 +14,15 @@
 		5D50810E298084E900B6247B /* RatingObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50810A298084E900B6247B /* RatingObject+CoreDataProperties.swift */; };
 		5D50810F298084E900B6247B /* RecipeObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50810B298084E900B6247B /* RecipeObject+CoreDataClass.swift */; };
 		5D508110298084E900B6247B /* RecipeObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50810C298084E900B6247B /* RecipeObject+CoreDataProperties.swift */; };
+		5D5081122980A19700B6247B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D5081112980A19600B6247B /* GoogleService-Info.plist */; };
+		5D5081152980A34400B6247B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5D5081142980A34400B6247B /* FirebaseAnalytics */; };
+		5D5081172980A34400B6247B /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5D5081162980A34400B6247B /* FirebaseAnalyticsSwift */; };
+		5D5081192980A34400B6247B /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5D5081182980A34400B6247B /* FirebaseCrashlytics */; };
+		5D50811B2980A38D00B6247B /* UIApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50811A2980A38D00B6247B /* UIApplicationDelegate.swift */; };
+		5D6B61282981DB3A0053AD5C /* RecipeWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61272981DB3A0053AD5C /* RecipeWebRepository.swift */; };
+		5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */; };
+		5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612C2981DCC10053AD5C /* WebRepository.swift */; };
+		5D6B612F2981DD090053AD5C /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612E2981DD090053AD5C /* APICall.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -63,6 +72,12 @@
 		5D50810A298084E900B6247B /* RatingObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatingObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5D50810B298084E900B6247B /* RecipeObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5D50810C298084E900B6247B /* RecipeObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5D5081112980A19600B6247B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5D50811A2980A38D00B6247B /* UIApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationDelegate.swift; sourceTree = "<group>"; };
+		5D6B61272981DB3A0053AD5C /* RecipeWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeWebRepository.swift; sourceTree = "<group>"; };
+		5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealRecipeWebRepository.swift; sourceTree = "<group>"; };
+		5D6B612C2981DCC10053AD5C /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
+		5D6B612E2981DD090053AD5C /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +125,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D5081192980A34400B6247B /* FirebaseCrashlytics in Frameworks */,
+				5D5081172980A34400B6247B /* FirebaseAnalyticsSwift in Frameworks */,
+				5D5081152980A34400B6247B /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +139,8 @@
 			children = (
 				5D5081042980225100B6247B /* RecipeDBRepository.swift */,
 				5D5081062980227C00B6247B /* RealRecipeDBRepository.swift */,
+				5D6B61272981DB3A0053AD5C /* RecipeWebRepository.swift */,
+				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -133,6 +153,15 @@
 				5DC660A92979F4AB0012CC8C /* MockRecipeService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5D6B612B2981DCAF0053AD5C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5D6B612C2981DCC10053AD5C /* WebRepository.swift */,
+				5D6B612E2981DD090053AD5C /* APICall.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		5DC660492979E54E0012CC8C = {
@@ -154,6 +183,7 @@
 		5DC660542979E54E0012CC8C /* RecipesSampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				5D6B612B2981DCAF0053AD5C /* Networking */,
 				5D508108298022E100B6247B /* Services */,
 				5D5081032980220200B6247B /* Repositories */,
 				5DC660C3297C868A0012CC8C /* Persistence */,
@@ -163,7 +193,9 @@
 				5DC6606D2979E5890012CC8C /* ViewModifiers */,
 				5DC660682979E5780012CC8C /* Model */,
 				5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */,
+				5D50811A2980A38D00B6247B /* UIApplicationDelegate.swift */,
 				5DC660592979E5510012CC8C /* Assets.xcassets */,
+				5D5081112980A19600B6247B /* GoogleService-Info.plist */,
 				5DC6605B2979E5510012CC8C /* Preview Content */,
 			);
 			path = RecipesSampleApp;
@@ -353,6 +385,11 @@
 			dependencies = (
 			);
 			name = RecipesSampleApp;
+			packageProductDependencies = (
+				5D5081142980A34400B6247B /* FirebaseAnalytics */,
+				5D5081162980A34400B6247B /* FirebaseAnalyticsSwift */,
+				5D5081182980A34400B6247B /* FirebaseCrashlytics */,
+			);
 			productName = RecipesSampleApp;
 			productReference = 5DC660522979E54E0012CC8C /* RecipesSampleApp.app */;
 			productType = "com.apple.product-type.application";
@@ -381,6 +418,9 @@
 				Base,
 			);
 			mainGroup = 5DC660492979E54E0012CC8C;
+			packageReferences = (
+				5D5081132980A34400B6247B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 5DC660532979E54E0012CC8C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -397,6 +437,7 @@
 			files = (
 				5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */,
 				5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */,
+				5D5081122980A19700B6247B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +453,7 @@
 				5DC6606C2979E5780012CC8C /* RecipeService.swift in Sources */,
 				5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */,
 				5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */,
+				5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */,
 				5DC6609E2979E59F0012CC8C /* SignInViewModel.swift in Sources */,
 				5DC660992979E59F0012CC8C /* RecipeView.swift in Sources */,
 				5DC6609B2979E59F0012CC8C /* RecipeListCoordinator.swift in Sources */,
@@ -421,6 +463,7 @@
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
+				5D50811B2980A38D00B6247B /* UIApplicationDelegate.swift in Sources */,
 				5DC660A12979E5C20012CC8C /* AuthenticationService.swift in Sources */,
 				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,
 				5DC660982979E59F0012CC8C /* RecipeViewModel.swift in Sources */,
@@ -431,9 +474,12 @@
 				5D5080C6297F2C3000B6247B /* db_model_v1.xcdatamodeld in Sources */,
 				5DC660782979E5920012CC8C /* SafariView.swift in Sources */,
 				5DC660792979E5920012CC8C /* RatingStars.swift in Sources */,
+				5D6B612F2981DD090053AD5C /* APICall.swift in Sources */,
 				5DC660B1297ACB1E0012CC8C /* Identifiable+Extensions.swift in Sources */,
 				5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */,
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
+				5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */,
+				5D6B61282981DB3A0053AD5C /* RecipeWebRepository.swift in Sources */,
 				5D50810F298084E900B6247B /* RecipeObject+CoreDataClass.swift in Sources */,
 				5D50810E298084E900B6247B /* RatingObject+CoreDataProperties.swift in Sources */,
 				5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */,
@@ -651,6 +697,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5D5081132980A34400B6247B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5D5081142980A34400B6247B /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D5081132980A34400B6247B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		5D5081162980A34400B6247B /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D5081132980A34400B6247B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		5D5081182980A34400B6247B /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5D5081132980A34400B6247B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5D5080C4297F2C3000B6247B /* db_model_v1.xcdatamodeld */ = {
