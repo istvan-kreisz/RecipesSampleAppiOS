@@ -19,22 +19,27 @@ class RealRecipeService: RecipeService {
     }
 
     func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
-        try await recipeDBRepository.fetchRatings(for: recipe)
+        try await recipeWebRepository.fetchRatings(for: recipe)
+//        try await recipeDBRepository.fetchRatings(for: recipe)
     }
 
     func fetchAllRecipes(searchText: String) async throws -> [Recipe] {
-        try await recipeDBRepository.fetchAllRecipes(searchText: searchText)
+        try await recipeWebRepository.fetchAllRecipes(searchText: searchText)
+//        try await recipeDBRepository.fetchAllRecipes(searchText: searchText)
     }
 
     func fetchRecipes(createdBy user: User, searchText: String) async throws -> [Recipe] {
-        try await recipeDBRepository.fetchRecipes(createdBy: user, searchText: searchText)
+        try await recipeWebRepository.fetchRecipes(createdBy: user, searchText: searchText)
+//        try await recipeDBRepository.fetchRecipes(createdBy: user, searchText: searchText)
     }
 
     func add(recipe: Recipe) async throws {
-        try await recipeDBRepository.add(recipe: recipe)
+        try await recipeWebRepository.add(recipe: recipe)
+//        try await recipeDBRepository.add(recipe: recipe)
     }
 
     func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
-        try await recipeDBRepository.add(rating: rating, to: recipe)
+        try await recipeWebRepository.add(rating: rating, to: recipe)
+//        try await recipeDBRepository.add(rating: rating, to: recipe)
     }
 }

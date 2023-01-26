@@ -29,7 +29,10 @@ class AppEnvironment {
     
     private init() {
         self.recipeDBRepository = RealRecipeDBRepository(persistentStore: CoreDataStack(version: CoreDataStack.Version.actual))
-        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: "https://europe-west1-recipessampleapp-d5a1f.cloudfunctions.net")
+//        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: "https://europe-west1-recipessampleapp-d5a1f.cloudfunctions.net")
+        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: "http://127.0.0.1:5001/recipessampleapp-d5a1f/europe-west1")
         self.recipeService = RealRecipeService(recipeDBRepository: recipeDBRepository, recipeWebRepository: recipeWebRepository)
     }
 }
+
+

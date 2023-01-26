@@ -20,7 +20,7 @@ struct SettingsView: View {
         VStack(spacing: 8) {
             Text("Recipes Sample App")
                 .bold()
-            Text("Username: \(user.user?.username ?? "")")
+            Text("Username: \(user.user?.name ?? "")")
             Button {
                 logout()
             } label: {

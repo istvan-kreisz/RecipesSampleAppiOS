@@ -58,7 +58,7 @@ class RatingViewModel: ViewModelWithUser, Identifiable {
 
     func addRating(comment: String) {
         guard let user = user else { return }
-        let newRating = Recipe.Rating(author: user.username, authorId: user.id, comment: comment, dateAdded: Date())
+        let newRating = Recipe.Rating(author: user.name, authorId: user.id, comment: comment, dateAdded: Date())
         Task {
             await addRating(rating: newRating)
         }

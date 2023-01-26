@@ -71,7 +71,7 @@ extension RealRecipeWebRepository.API: APICall {
     }
     
     var headers: [String: String]? {
-        ["Accept": "application/json"]
+        ["Accept": "application/json", "Content-Type": "application/json"]
     }
     
     func body() throws -> Data? {

@@ -19,8 +19,12 @@ struct Recipe: Identifiable, Equatable, Codable {
     var steps: [String]
     var isVegetarian: Bool
     var source: URL?
-    var dateAdded: Date
+    var dateAdded: Date = Date()
     var ratings: [Rating] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case id, authorId, imageURL, title, ingredients, steps, isVegetarian, source, dateAdded
+    }
 
     func isMatching(_ searchText: String) -> Bool {
         searchText.isEmpty ? true : title.lowercased().fuzzyMatch(searchText.lowercased())

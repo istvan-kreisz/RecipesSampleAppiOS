@@ -21,11 +21,11 @@ public actor AuthenticationService: AuthenticationServiceProtocol {
     public nonisolated var user: AnyPublisher<User?, Never> { self._user.eraseToAnyPublisher() }
 
     public func login(username: String, password: String) async throws -> User {
-        let user = User(username: username, password: password)
+        let user = User(id: "istvan", name: "istvan", email: "istvan", dateAdded: Date())
         self._user.send(user)
         return user
     }
-    
+
     public func logout() async throws {
         self._user.send(nil)
     }
@@ -38,9 +38,9 @@ public actor AuthenticationService: AuthenticationServiceProtocol {
     public func signOut() async throws {
         try await logout()
     }
-    
+
     public init() {
-        self._user.send(User(id: "istvan", username: "", password: ""))
+        self._user.send(User(id: "istvan", name: "istvan", email: "istvan", dateAdded: Date()))
     }
 }
 
@@ -52,7 +52,7 @@ extension AuthenticationService {
 
 public class UserWrapper: ObservableObject {
     @Published public var user: User?
-    
+
     public init(user: User?) {
         self.user = user
     }
@@ -65,12 +65,15 @@ extension UserWrapper: Equatable {
 }
 
 public struct User: Equatable, Codable {
-    public var id = UUID().uuidString
-    public let username: String
-    public let password: String
+    var id = UUID().uuidString
+    let name: String
+    let email: String
+    let dateAdded: Date
 
     public static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.username == rhs.username
-            && lhs.password == rhs.password
+        return lhs.id == rhs.id
+            && lhs.name == rhs.name
+            && lhs.email == rhs.email
+            && lhs.dateAdded == rhs.dateAdded
     }
 }
