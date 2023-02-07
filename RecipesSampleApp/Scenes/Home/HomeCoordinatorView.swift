@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeCoordinatorView: View {
     // MARK: Stored Properties
 
-    @StateObject var user = UserWrapper(user: nil)
+    @StateObject var user = GlobalState(user: nil)
     @ObservedObject var coordinator: HomeCoordinator
 
     // MARK: Views

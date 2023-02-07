@@ -10,6 +10,7 @@ import Foundation
 @MainActor
 class AppEnvironment {
     
+    let authService: AuthService
     let recipeDBRepository: RecipeDBRepository
     let recipeWebRepository: RecipeWebRepository
     let recipeService: RecipeService
@@ -28,6 +29,7 @@ class AppEnvironment {
     }()
     
     private init() {
+        self.authService = RealAuthService()
         self.recipeDBRepository = RealRecipeDBRepository(persistentStore: CoreDataStack(version: CoreDataStack.Version.actual))
 //        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: "https://europe-west1-recipessampleapp-d5a1f.cloudfunctions.net")
         self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: "http://127.0.0.1:5001/recipessampleapp-d5a1f/europe-west1")

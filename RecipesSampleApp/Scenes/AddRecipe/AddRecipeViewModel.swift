@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AddRecipeViewModel: ViewModelWithUser, Identifiable {
+class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
     struct InputErrors {
         var titleMissing = false
         var ingredientsMissing = false

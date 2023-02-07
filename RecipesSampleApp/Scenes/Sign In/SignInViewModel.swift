@@ -14,7 +14,7 @@ protocol SignInViewModelDelegate: AnyObject {
 
 protocol SignInViewModelType: ObservableObject & AnyObject {
     var signInError: Error? { get }
-    var username: String { get set }
+    var email: String { get set }
     var password: String { get set }
     var signInDisabled: Bool { get }
     
@@ -23,21 +23,21 @@ protocol SignInViewModelType: ObservableObject & AnyObject {
 }
 
 class SignInViewModel: SignInViewModelType {
-    private let authenticationService: AuthenticationServiceProtocol
+    private let authService: AuthService
 
     private weak var delegate: SignInViewModelDelegate?
 
     @Published var signInError: Error?
 
-    @Published var username: String = ""
+    @Published var email: String = ""
     @Published var password: String = ""
 
     var signInDisabled: Bool {
-        password.isEmpty || username.isEmpty
+        password.isEmpty || email.isEmpty
     }
 
-    init(authenticationService: AuthenticationServiceProtocol) {
-        self.authenticationService = authenticationService
+    init(authService: AuthService) {
+        self.authService = authService
     }
 
     func setup(delegate: SignInViewModelDelegate) {
@@ -47,9 +47,10 @@ class SignInViewModel: SignInViewModelType {
     func signIn() async {
         do {
             self.signInError = nil
-            _ = try await authenticationService.signIn(username: username, password: password)
+            _ = try await authService.signInWith(email: email, password: password)
             delegate?.signInViewModelDidSignIn()
         } catch let error {
+            #warning("display error")
             self.signInError = error
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RecipesViewModel: ViewModelWithUser {
+protocol RecipesViewModel: ViewModelWithGlobalState {
     var title: String { get }
     var recipes: [Recipe] { get }
     

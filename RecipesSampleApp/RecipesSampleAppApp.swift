@@ -12,8 +12,8 @@ struct RecipesSampleAppApp: App {
     // MARK: Stored Properties
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    #warning("refactor")
-    @StateObject var coordinator = HomeCoordinator(recipeService: AppEnvironment.shared.recipeService)
+    @StateObject var coordinator = HomeCoordinator(recipeService: AppEnvironment.shared.recipeService,
+                                                   authService: AppEnvironment.shared.authService)
 
     // MARK: Scenes
 

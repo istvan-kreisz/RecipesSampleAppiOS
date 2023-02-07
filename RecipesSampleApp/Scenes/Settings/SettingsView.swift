@@ -12,9 +12,9 @@ struct SettingsView: View {
     // MARK: Stored Properties
 
     @ObservedObject var coordinator: HomeCoordinator
-    @EnvironmentObject var user: UserWrapper
+    @EnvironmentObject var user: GlobalState
 
-    // MARK: Views
+    // : Views
 
     var body: some View {
         VStack(spacing: 8) {

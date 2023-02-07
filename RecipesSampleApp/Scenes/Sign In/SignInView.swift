@@ -19,13 +19,13 @@ struct SignInView<Model>: View where Model: SignInViewModelType {
                 CardView(color: Color.clear, cornerRadius: .large) {
                     VStack {
                         VStack(alignment: .leading) {
-                            Text("User Name")
+                            Text("Email")
                                 .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
-                            TextField("User Name", text: self.$viewModel.username, prompt: nil)
+                            TextField("Email", text: $viewModel.email, prompt: nil)
                                 .padding()
                             Text("Password").padding(.top)
                                 .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
-                            SecureField("Password", text: self.$viewModel.password, prompt: nil)
+                            SecureField("Password", text: $viewModel.password, prompt: nil)
                                 .padding()
                         }
                         .padding(16.0)

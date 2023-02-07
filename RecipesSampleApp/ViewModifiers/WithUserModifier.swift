@@ -7,36 +7,36 @@
 
 import SwiftUI
 
-struct WithUser: ViewModifier {
-    @EnvironmentObject var user: UserWrapper
+struct WithGlobalState: ViewModifier {
+    @EnvironmentObject var globalState: GlobalState
 
     let userUpdated: (User?) -> Void
     
     func body(content: Content) -> some View {
         content
-            .onAppear { userUpdated(user.user) }
-            .onChange(of: user.user) { newValue in
+            .onAppear { userUpdated(globalState.user) }
+            .onChange(of: globalState.user) { newValue in
                 userUpdated(newValue)
             }
     }
 }
 
 extension View {
-    func withUser(userUpdated: @escaping (User?) -> Void) -> some View {
+    func withGlobalState(userUpdated: @escaping (User?) -> Void) -> some View {
         self
-            .modifier(WithUser(userUpdated: userUpdated))
+            .modifier(WithGlobalState(userUpdated: userUpdated))
     }
 }
 
-protocol ViewWithUser: View {
-    associatedtype ViewModelType: ViewModelWithUser
+protocol ViewWithGlobalState: View {
+    associatedtype ViewModelType: ViewModelWithGlobalState
     var viewModel: ViewModelType { get }
 }
 
-extension ViewWithUser {
-    func withUser() -> some View {
+extension ViewWithGlobalState {
+    func withGlobalState() -> some View {
         self
-            .withUser(userUpdated: { user in
+            .withGlobalState(userUpdated: { user in
                 Task { @MainActor in
                     guard user != self.viewModel.user else { return }
                     self.viewModel.user = user
@@ -46,6 +46,6 @@ extension ViewWithUser {
 }
 
 @MainActor
-protocol ViewModelWithUser: ObservableObject {
+protocol ViewModelWithGlobalState: ObservableObject {
     var user: User? { get set }
 }

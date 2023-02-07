@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddRecipeView: ViewWithUser {
+struct AddRecipeView: ViewWithGlobalState {
     @ObservedObject var viewModel: AddRecipeViewModel
     @State var ingredient = ""
     @State var step = ""

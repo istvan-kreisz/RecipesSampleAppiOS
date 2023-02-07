@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: RecipesViewModel {
     // MARK: Stored Properties
 
-    @EnvironmentObject var user: UserWrapper
+    @EnvironmentObject var globalState: GlobalState
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     // MARK: Views
@@ -19,14 +19,14 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
         NavigationView {
             ZStack {
                 RecipeList(viewModel: coordinator.viewModel)
-                    .withUser()
+                    .withGlobalState()
                     .navigation(item: $coordinator.detailViewModel) { viewModel in
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             phoneRecipeView(viewModel)
-                                .environmentObject(user)
+                                .environmentObject(globalState)
                         } else {
                             padRecipeView(viewModel)
-                                .environmentObject(user)
+                                .environmentObject(globalState)
                         }
                     }
                 VStack(alignment: .center) {
@@ -43,7 +43,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
             .modifier(SheetModifier(item: $coordinator.addRecipeViewModel, content: { viewModel in
                 NavigationView {
                     AddRecipeView(viewModel: viewModel)
-                        .withUser()
+                        .withGlobalState()
                 }
             }))
         }
@@ -54,7 +54,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
         RecipeView(viewModel: viewModel, ratingModifier: SheetModifier(item: $coordinator.ratingViewModel) { viewModel in
             NavigationView {
                 RatingView(viewModel: viewModel)
-                    .withUser()
+                    .withGlobalState()
             }
         })
     }
@@ -64,7 +64,7 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
         RecipeView(viewModel: viewModel,
                    ratingModifier: PopoverModifier(item: $coordinator.ratingViewModel) {
                        RatingView(viewModel: $0)
-                           .withUser()
+                           .withGlobalState()
                            .frame(width: 500, height: 500)
                    })
     }

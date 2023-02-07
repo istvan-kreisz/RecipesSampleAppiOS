@@ -15,11 +15,12 @@ enum HomeTab {
     case settings
 }
 
+@MainActor
 class HomeCoordinator: ObservableObject {
     // MARK: Stored Properties
 
-    private let authenticationService = AuthenticationService()
     private let recipeService: RecipeService
+    private let authService: AuthService
 
     @Published var tab = HomeTab.meat
     @Published var signInViewModel: SignInViewModel?
@@ -38,8 +39,9 @@ class HomeCoordinator: ObservableObject {
 
     // MARK: Initialization
 
-    init(recipeService: RecipeService) {
+    init(recipeService: RecipeService, authService: AuthService) {
         self.recipeService = recipeService
+        self.authService = authService
         
         self.allRecipesCoordinator = RecipeListCoordinator<AllRecipesViewModel>(title: "All Recipes", recipeService: recipeService) { [weak self] url in
             self?.open(url)
@@ -49,14 +51,13 @@ class HomeCoordinator: ObservableObject {
             self?.open(url)
         }
 
-        self.authenticationService.user
+        self.authService.user
             .sink { newUser in
                 Task { @MainActor [weak self] in
                     guard let self = self else { return }
                     self.user = newUser
                     if newUser == nil {
-                        self.signInViewModel = SignInViewModel(authenticationService: self.authenticationService)
-
+                        self.signInViewModel = SignInViewModel(authService: self.authService)
                     } else {
                         self.signInViewModel = nil
                     }
@@ -72,7 +73,7 @@ class HomeCoordinator: ObservableObject {
 
     func signOut() {
         Task {
-            try await authenticationService.signOut()
+            try await authService.signOut()
         }
     }
 }

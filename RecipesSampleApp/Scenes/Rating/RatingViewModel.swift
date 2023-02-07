@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @MainActor
-class RatingViewModel: ViewModelWithUser, Identifiable {
+class RatingViewModel: ViewModelWithGlobalState, Identifiable {
     // MARK: Stored Properties
 
     @Published var recipe: Recipe

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct RatingView: ViewWithUser {
+struct RatingView: ViewWithGlobalState {
     // MARK: Stored Properties
 
     @State var comment = ""
