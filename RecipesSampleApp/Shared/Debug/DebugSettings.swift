@@ -64,4 +64,12 @@ struct DebugSettings {
     var clearUserDefaults: Bool {
         bool(for: "clearUserDefaults")
     }
+    
+    var ipAddress: String {
+        string(for: "ipAddress") ?? ""
+    }
+    
+    var clearCoreData: Bool {
+        bool(for: "clearCoreData")
+    }
 }

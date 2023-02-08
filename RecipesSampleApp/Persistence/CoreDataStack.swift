@@ -28,12 +28,12 @@ extension PersistentStore {
         assert(Thread.isMainThread)
         return try await fetch(fetchRequest, context: container.viewContext, map: map)
     }
-    
+
     func count<T>(_ fetchRequest: NSFetchRequest<T>) async throws -> Int {
         assert(Thread.isMainThread)
         return try await count(fetchRequest, context: container.viewContext)
     }
-    
+
     @discardableResult func update<Result>(_ operation: @escaping DBOperation<Result>) async throws -> Result {
         try await update(operation, context: backgroundContext)
     }
@@ -47,13 +47,13 @@ enum CoreDataError: Error {
 
 class CoreDataStack: PersistentStore {
     private var continuations: [CheckedContinuation<Bool, Error>] = []
-    let container: NSPersistentContainer
+    var container: NSPersistentContainer
     lazy var backgroundContext = {
         let context = container.newBackgroundContext()
         context.configureAsUpdateContext()
         return context
     }()
-    
+
     private var isStoreLoaded: Result<Bool, Error> = .success(false) {
         didSet {
             continuations.forEach { continuation in
@@ -75,6 +75,7 @@ class CoreDataStack: PersistentStore {
     init(directory: FileManager.SearchPathDirectory = .documentDirectory,
          domainMask: FileManager.SearchPathDomainMask = .userDomainMask,
          version vNumber: UInt) {
+
         let version = Version(vNumber)
         container = NSPersistentContainer(name: version.modelName)
         if let url = version.dbFileURL(directory, domainMask) {
@@ -82,6 +83,26 @@ class CoreDataStack: PersistentStore {
             container.persistentStoreDescriptions = [store]
         }
 
+        if DebugSettings.shared.clearCoreData {
+            container.loadPersistentStores { [weak self] storeDescription, error in
+                do {
+                    try self?.container.persistentStoreCoordinator.destroyPersistentStore(at: storeDescription.url!, ofType: storeDescription.type)
+                    self?.container = NSPersistentContainer(name: version.modelName)
+                    if let url = version.dbFileURL(directory, domainMask) {
+                        let store = NSPersistentStoreDescription(url: url)
+                        self?.container.persistentStoreDescriptions = [store]
+                    }
+                    self?.loadStores()
+                } catch {
+                    log(error.localizedDescription, logLevel: .error, logType: .database)
+                }
+            }
+        } else {
+            loadStores()
+        }
+    }
+    
+    private func loadStores() {
         container.loadPersistentStores { [weak self] storeDescription, error in
             DispatchQueue.main.async {
                 if let error = error {
