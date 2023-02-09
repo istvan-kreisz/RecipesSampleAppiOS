@@ -63,17 +63,12 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "ipAddress"
-            value = "192.168.28.78"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
             key = "password"
             value = ""
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "useFunctionsEmulator"
+            key = "useEmulators"
             value = "true"
             isEnabled = "YES">
          </EnvironmentVariable>

@@ -10,7 +10,7 @@ import Foundation
 class RealRecipeWebRepository: RecipeWebRepository {
     let session: URLSession
     let baseURL: String
-    
+
     init(session: URLSession, baseURL: String) {
         self.session = session
         self.baseURL = baseURL
@@ -19,19 +19,19 @@ class RealRecipeWebRepository: RecipeWebRepository {
     func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
         try await call(endpoint: API.fetchRatings(recipe: recipe))
     }
-    
+
     func fetchAllRecipes(searchText: String) async throws -> [Recipe] {
         try await call(endpoint: API.fetchAllRecipes(searchText: searchText))
     }
-    
+
     func fetchRecipes(createdBy user: User, searchText: String) async throws -> [Recipe] {
         try await call(endpoint: API.fetchRecipesByUser(user: user, searchText: searchText))
     }
-    
+
     func add(recipe: Recipe) async throws {
         try await call(endpoint: API.addRecipe(recipe: recipe))
     }
-    
+
     func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
         try await call(endpoint: API.addRating(recipe: recipe, rating: rating))
     }
@@ -62,15 +62,18 @@ extension RealRecipeWebRepository.API: APICall {
             return "fetchRecipesByUser"
         }
     }
-    
+
     var method: String {
         "POST"
     }
-    
+
+    #warning("todo")
     var headers: [String: String]? {
-        ["Accept": "application/json", "Content-Type": "application/json"]
+        ["Accept": "application/json",
+         "Content-Type": "application/json",
+         "Authorization": ""]
     }
-    
+
     func body() throws -> Data? {
         switch self {
         case let .addRating(recipe, rating):
@@ -103,4 +106,3 @@ extension RealRecipeWebRepository.API: APICall {
         }
     }
 }
-

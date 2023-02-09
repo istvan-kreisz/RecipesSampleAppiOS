@@ -15,8 +15,8 @@ class AppEnvironment {
     let recipeService: RecipeService
 
     private let baseURL: String = {
-        !DebugSettings.shared.ipAddress.isEmpty ?
-            "http://\(DebugSettings.shared.ipAddress):5001/recipessampleapp-d5a1f/europe-west1" :
+        DebugSettings.shared.useEmulators ?
+            "http://localhost:5001/recipessampleapp-d5a1f/europe-west1" :
             "https://europe-west1-recipessampleapp-d5a1f.cloudfunctions.net"
     }()
 

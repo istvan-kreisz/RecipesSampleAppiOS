@@ -25,12 +25,14 @@ struct SignInView<Model>: View where Model: SignInViewModelType {
                     .focused($focusedField, equals: .email)
                     .textContentType(.emailAddress)
                     .submitLabel(.next)
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
 
                 SecureField("Password", text: $viewModel.passwordSignIn, prompt: nil)
                     .padding()
                     .focused($focusedField, equals: .password)
                     .textContentType(.password)
                     .submitLabel(.done)
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
             }
             .onSubmit {
                 switch focusedField {
@@ -50,26 +52,37 @@ struct SignInView<Model>: View where Model: SignInViewModelType {
 
             VStack(spacing: 10) {
                 Button {
-                    viewModel.navigateToSignUp?()
-                } label: {
-                    Text("Sign Up")
-                        .font(.system(size: 18.0))
-                        .bold()
-                        .frame(maxWidth: .infinity, minHeight: 48.0, idealHeight: 48.0, maxHeight: 48.0)
-                        .contentShape(Rectangle())
-                }
-
-                Button {
                     Task {
                         await viewModel.signIn()
                     }
                 } label: {
                     Text("Sign In")
+                        .frame(width: 200)
                         .font(.system(size: 18.0))
-                        .frame(maxWidth: .infinity, minHeight: 48.0, idealHeight: 48.0, maxHeight: 48.0)
-                        .contentShape(Rectangle())
                 }
+                .buttonStyle(.borderedProminent)
                 .disabled(viewModel.signInDisabled)
+
+                Text("Don't have an account?")
+                    .font(.system(size: 12.0))
+                    .padding(.top, 5)
+                Button {
+                    viewModel.navigateToSignUp?()
+                } label: {
+                    Text("Create Account")
+                        .frame(width: 200)
+                        .font(.system(size: 18.0))
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.orange)
+                
+                Button {
+                    viewModel.navigateToPasswordReset?()
+                } label: {
+                    Text("Forgot password?")
+                        .font(.system(size: 12.0, weight: .semibold))
+                        .underline()
+                }
             }
             .padding(.bottom)
         }

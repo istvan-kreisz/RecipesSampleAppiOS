@@ -14,6 +14,7 @@ protocol SignInViewModelType: ObservableObject & AnyObject {
     var passwordSignIn: String { get set }
     var signInDisabled: Bool { get }
     var navigateToSignUp: (() -> Void)? { get }
+    var navigateToPasswordReset: (() -> Void)? { get }
     
     func signIn() async
     func signInWithApple() async
@@ -28,6 +29,7 @@ class SignInViewModel: SignInViewModelType {
     @Published var passwordSignIn: String = ""
     
     var navigateToSignUp: (() -> Void)?
+    var navigateToPasswordReset: (() -> Void)?
 
     var signInDisabled: Bool {
         passwordSignIn.isEmpty || emailSignIn.isEmpty

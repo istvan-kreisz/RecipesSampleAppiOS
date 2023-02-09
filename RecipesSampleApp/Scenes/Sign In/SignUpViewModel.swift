@@ -7,11 +7,14 @@
 
 import Foundation
 
+@MainActor
 protocol SignUpViewModelType: ObservableObject & AnyObject {
     var signUpError: Error? { get }
     var emailSignUp: String { get set }
     var passwordSignUp: String { get set }
     var signUpDisabled: Bool { get }
+    var navigateToSignIn: (() -> Void)? { get }
+    var navigateToPasswordReset: (() -> Void)? { get }
         
     func signUp() async
     func signUpWithGoogle() async
@@ -24,6 +27,9 @@ class SignUpViewModel: SignUpViewModelType {
     @Published var signUpError: Error?
     @Published var emailSignUp: String = ""
     @Published var passwordSignUp: String = ""
+    
+    var navigateToSignIn: (() -> Void)?
+    var navigateToPasswordReset: (() -> Void)?
     
     var signUpDisabled: Bool {
         passwordSignUp.isEmpty || emailSignUp.isEmpty

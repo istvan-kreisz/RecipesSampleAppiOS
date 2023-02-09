@@ -49,10 +49,6 @@ struct DebugSettings {
         return Double(value)
     }
     
-    var useFunctionsEmulator: Bool {
-        bool(for: "useFunctionsEmulator")
-    }
-
     var logLevel: LogLevel {
         if let string = string(for: "logLevel") {
             return LogLevel(rawValue: string) ?? .error
@@ -65,8 +61,8 @@ struct DebugSettings {
         bool(for: "clearUserDefaults")
     }
     
-    var ipAddress: String {
-        string(for: "ipAddress") ?? ""
+    var useEmulators: Bool {
+        bool(for: "useEmulators")
     }
     
     var clearCoreData: Bool {

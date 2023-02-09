@@ -33,17 +33,53 @@ enum AuthError: LocalizedError {
 class RealAuthService: NSObject, AuthService {
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
-    private let _user = PassthroughSubject<User?, Never>()
+    private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
+    private let _user = CurrentValueSubject<User?, Never>(nil)
     var user: AnyPublisher<User?, Never> { self._user.eraseToAnyPublisher() }
 
     private let auth = Auth.auth()
 
     fileprivate var currentNonce: String?
-    
+
     override init() {
         super.init()
+
+        if DebugSettings.shared.useEmulators {
+            auth.useEmulator(withHost: "localhost", port: 9100)
+        }
+        authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
+            guard let user else {
+                self?._user.send(nil)
+                return
+            }
+            if user.uid != self?._user.value?.id.uuidString {
+                Task { [weak self] in
+                    guard let self else { return }
+                    do {
+                        let userObject = try await self.getUser(with: user.uid)
+                        let token = try await user.getIDToken()
+                    } catch {
+                        
+                    }
+                }
+                // fetch user
+                // get token
+            } else {
+                // get token
+                user.getIDToken { token, error in
+                    
+                }
+            }
+        }
+
         Task {
             await restoreState()
+        }
+    }
+
+    deinit {
+        if let authStateListenerHandle {
+            Auth.auth().removeStateDidChangeListener(authStateListenerHandle)
         }
     }
 
@@ -68,7 +104,7 @@ class RealAuthService: NSObject, AuthService {
                 try await self.signOut()
             }
         } catch {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error.localizedDescription, logLevel: .debug, logType: .auth)
         }
     }
 
@@ -205,7 +241,7 @@ extension RealAuthService: ASAuthorizationControllerDelegate, ASAuthorizationCon
             self.appleSignInContinuation?.resume(throwing: error)
             self.appleSignInContinuation = nil
         }
-        
+
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 throwError(message: "Invalid state: A login callback was received, but no login request was sent.")

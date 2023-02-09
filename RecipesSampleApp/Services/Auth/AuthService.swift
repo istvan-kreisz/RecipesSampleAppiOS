@@ -10,7 +10,7 @@ import Combine
 import FirebaseAuth
 
 @MainActor
-protocol AuthService {
+protocol AuthService: AnyObject {
     var user: AnyPublisher<User?, Never> { get }
 
     func signUpWith(email: String, password: String) async throws

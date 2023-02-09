@@ -7,25 +7,22 @@
 
 import Foundation
 
-protocol ResetPasswordViewModelDelegate: AnyObject {
-    func didResetPassword()
-}
-
 protocol ResetPasswordViewModelType: ObservableObject & AnyObject {
     var passwordResetError: Error? { get }
     var emailPasswordReset: String { get set }
     var passwordResetDisabled: Bool { get }
+    var navigateBack: (() -> Void)? { get }
     
     func resetPassword() async
 }
 
-class ResetPasswordViewModel: ResetPasswordViewModelType {
+class ResetPasswordViewModel: ResetPasswordViewModelType, Identifiable {
     private let authService: AuthService
-
-    private weak var delegate: ResetPasswordViewModelDelegate?
 
     @Published var passwordResetError: Error?
     @Published var emailPasswordReset: String = ""
+    
+    var navigateBack: (() -> Void)?
     
     var passwordResetDisabled: Bool {
         emailPasswordReset.isEmpty
@@ -35,15 +32,10 @@ class ResetPasswordViewModel: ResetPasswordViewModelType {
         self.authService = authService
     }
 
-    func setup(delegate: ResetPasswordViewModelDelegate) {
-        self.delegate = delegate
-    }
-    
     func resetPassword() async {
         do {
             passwordResetError = nil
             _ = try await authService.resetPassword(email: emailPasswordReset)
-            delegate?.didResetPassword()
         } catch let error {
             log(error.localizedDescription, logLevel: .error, logType: .auth)
             self.passwordResetError = error
