@@ -9,25 +9,31 @@ import Foundation
 
 @MainActor
 class MockRecipeService: RecipeService {
-    // MARK: Stored Properties
+    static let authorId1 = UUID(uuidString: "122d6856-a7ac-11ed-afa1-0242ac120002")!
+    static let authorId2 = UUID(uuidString: "122d6b8a-a7ac-11ed-afa1-0242ac120002")!
+    static let authorId3 = UUID(uuidString: "122d71f2-a7ac-11ed-afa1-0242ac120002")!
 
-    private let badRating = Recipe.Rating(author: "Jupiter Jones",
-                                          authorId: "1",
-                                          comment: "One word: Disgusting.",
-                                          dateAdded: Date(timeIntervalSinceNow: -100))
+    private let badRating: Recipe.Rating
+    private let averageRating: Recipe.Rating
+    private let goodRating: Recipe.Rating
 
-    private let averageRating = Recipe.Rating(author: "Peter Crenshaw",
-                                              authorId: "2",
-                                              comment: "Well, it was alright...",
-                                              dateAdded: Date(timeIntervalSinceNow: -80))
-
-    private let goodRating = Recipe.Rating(author: "Robert Andrews",
-                                           authorId: "3",
-                                           comment: "Best. Dish. Ever.",
-                                           dateAdded: Date(timeIntervalSinceNow: -60))
+    init() {
+        self.badRating = Recipe.Rating(author: "Jupiter Jones",
+                                       authorId: Self.authorId1,
+                                       comment: "One word: Disgusting.",
+                                       dateAdded: Date(timeIntervalSinceNow: -100))
+        self.averageRating = Recipe.Rating(author: "Peter Crenshaw",
+                                           authorId: Self.authorId2,
+                                           comment: "Well, it was alright...",
+                                           dateAdded: Date(timeIntervalSinceNow: -80))
+        self.goodRating = Recipe.Rating(author: "Robert Andrews",
+                                        authorId: Self.authorId3,
+                                        comment: "Best. Dish. Ever.",
+                                        dateAdded: Date(timeIntervalSinceNow: -60))
+    }
 
     private lazy var recipes =
-        [Recipe(authorId: "istvan",
+        [Recipe(authorId: Self.authorId1,
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/Orange%20Marmalade_hu0aa2f9bacaf3459fa40fd69ec9d06da6_94464_350x350_fill_q75_box_smart1.jpg"),
                 title: "Orange Marmalade",
                 ingredients: ["12 oranges", "6 lemons", "1 gallon water", "10 pound sugar"],
@@ -38,7 +44,7 @@ class MockRecipeService: RecipeService {
                 isVegetarian: true,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/orange-marmalade/"), dateAdded: Date(timeIntervalSinceNow: -100),
                 ratings: [self.averageRating, self.badRating]),
-         Recipe(authorId: "istvan",
+         Recipe(authorId: Self.authorId1,
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/Mushrooms%20in%20Cream_hu46031e1ef57493efe9e56c814b513ee6_41786_350x350_fill_q75_box_smart1.jpg"),
                 title: "Mushrooms in Cream",
                 ingredients: ["1/2 pound mushrooms",
@@ -54,7 +60,7 @@ class MockRecipeService: RecipeService {
                 source: URL(string: "https://publicdomainrecipes.org/recipes/mushrooms-in-cream/"),
                 dateAdded: Date(timeIntervalSinceNow: -80),
                 ratings: [self.averageRating, self.goodRating, self.badRating]),
-         Recipe(authorId: "",
+         Recipe(authorId: Self.authorId2,
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/Roasted%20Wild%20Duck_hu004b736d43b2db0e2f8c86e13334b46b_78997_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roasted Wild Duck",
                 ingredients: ["duck",
@@ -71,7 +77,7 @@ class MockRecipeService: RecipeService {
                 isVegetarian: false,
                 source: URL(string: "https://publicdomainrecipes.org/recipes/roasted-wild-duck/"), dateAdded: Date(timeIntervalSinceNow: -90),
                 ratings: [self.averageRating, self.goodRating]),
-         Recipe(authorId: "",
+         Recipe(authorId: Self.authorId3,
                 imageURL: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/Roast%20Lamb%20with%20Banana%20Croquettes_hu877c9bedf9d18b9a490347620c64b440_55965_350x350_fill_q75_box_smart1.jpg"),
                 title: "Roast Lamb with Banana Croquettes",
                 ingredients: ["lamb",
@@ -94,8 +100,6 @@ class MockRecipeService: RecipeService {
                 source: URL(string: "https://publicdomainrecipes.org/recipes/roast-lamb-with-banana-croquettes/"),
                 dateAdded: Date(timeIntervalSinceNow: -100),
                 ratings: [self.averageRating])]
-
-    // MARK: Methods
 
     func fetchRatings(for recipe: Recipe) async -> [Recipe.Rating] {
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {

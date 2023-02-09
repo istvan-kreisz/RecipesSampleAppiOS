@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct RatingStars: View {
-
-    // MARK: Stored Properties
-
     let rating: Int
-
-    // MARK: Views
 
     var body: some View {
         HStack(spacing: 0) {

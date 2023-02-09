@@ -10,8 +10,6 @@ import SwiftUI
 
 @MainActor
 class RatingViewModel: ViewModelWithGlobalState, Identifiable {
-    // MARK: Stored Properties
-
     @Published var recipe: Recipe
     @Published var user: User?
 
@@ -24,8 +22,6 @@ class RatingViewModel: ViewModelWithGlobalState, Identifiable {
         }
     }
 
-    // MARK: Initialization
-
     init(recipe: Recipe, recipeService: RecipeService, closeRatings: @escaping () -> Void) {
         self.closeRatings = closeRatings
         self.recipe = recipe
@@ -35,8 +31,6 @@ class RatingViewModel: ViewModelWithGlobalState, Identifiable {
             await fetchRatings()
         }
     }
-
-    // MARK: Methods
 
     private func fetchRatings() async {
         do {

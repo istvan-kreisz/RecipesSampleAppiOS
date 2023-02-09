@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: RecipesViewModel {
-    // MARK: Stored Properties
-
     @EnvironmentObject var globalState: GlobalState
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
-
-    // MARK: Views
 
     var body: some View {
         NavigationView {

@@ -17,8 +17,6 @@ struct AddRecipeView: ViewWithGlobalState {
     @State var imageLink = ""
     @State var sourceLink = ""
 
-    // MARK: Views
-
     var body: some View {
         List {
             Section {

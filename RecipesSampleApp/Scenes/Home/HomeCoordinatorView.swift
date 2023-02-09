@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct HomeCoordinatorView: View {
-    // MARK: Stored Properties
-
     @StateObject var user = GlobalState(user: nil)
     @ObservedObject var coordinator: HomeCoordinator
 
-    // MARK: Views
-
     var body: some View {
-        if let signInViewModel = coordinator.signInViewModel {
-            SignInView<SignInViewModel>(viewModel: signInViewModel)
+        if let authCoordinator = coordinator.authCoordinator {
+            AuthCoordinatorView(coordinator: authCoordinator)
         } else {
             if coordinator.isAuthenticated {
                 TabView(selection: $coordinator.tab) {

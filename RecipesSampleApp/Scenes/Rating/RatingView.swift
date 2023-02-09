@@ -9,13 +9,9 @@ import Foundation
 import SwiftUI
 
 struct RatingView: ViewWithGlobalState {
-    // MARK: Stored Properties
-
     @State var comment = ""
     @State var showAddRatingModal = false
     @ObservedObject var viewModel: RatingViewModel
-
-    // MARK: Views
 
     var body: some View {
         List {

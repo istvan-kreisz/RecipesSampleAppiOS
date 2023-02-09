@@ -8,14 +8,10 @@
 import Foundation
 
 class RecipeViewModel: ObservableObject, Identifiable {
-    // MARK: Stored Properties
-
     @Published var recipe: Recipe
 
     let openRatings: () -> Void
     let openURL: (URL) -> Void
-
-    // MARK: Initialization
 
     init(recipe: Recipe,
          openRatings: @escaping () -> Void,

@@ -8,8 +8,6 @@
 import CoreData
 import Combine
 
-// MARK: - ManagedEntity
-
 protocol ManagedEntity: NSFetchRequestResult { }
 
 extension ManagedEntity where Self: NSManagedObject {
@@ -30,8 +28,6 @@ extension ManagedEntity where Self: NSManagedObject {
     }
 }
 
-// MARK: - NSManagedObjectContext
-
 extension NSManagedObjectContext {
     
     func configureAsReadOnlyContext() {
@@ -46,8 +42,6 @@ extension NSManagedObjectContext {
         undoManager = nil
     }
 }
-
-// MARK: - Misc
 
 extension NSSet {
     func toArray<T>(of type: T.Type) -> [T] {

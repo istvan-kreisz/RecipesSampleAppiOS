@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct RecipeList<ViewModel>: ViewWithGlobalState where ViewModel: RecipesViewModel {
-    // MARK: Stored Properties
-
     @ObservedObject var viewModel: ViewModel
     @State var searchText = ""
-
-    // MARK: Views
 
     var body: some View {
         List(viewModel.recipes) { (recipe: Recipe) in

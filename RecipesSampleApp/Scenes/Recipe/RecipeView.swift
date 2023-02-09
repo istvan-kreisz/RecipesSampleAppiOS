@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct RecipeView<RatingModifier: ViewModifier>: View {
-
-    // MARK: Stored Properties
-
     @ObservedObject var viewModel: RecipeViewModel
     let ratingModifier: RatingModifier
-
-    // MARK: Views
 
     var body: some View {
         List {

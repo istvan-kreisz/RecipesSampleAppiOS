@@ -7,55 +7,61 @@
 
 import Foundation
 
-protocol SignInViewModelDelegate: AnyObject {
-    func signInViewModelDidCancel()
-    func signInViewModelDidSignIn()
-}
-
+@MainActor
 protocol SignInViewModelType: ObservableObject & AnyObject {
     var signInError: Error? { get }
-    var email: String { get set }
-    var password: String { get set }
+    var emailSignIn: String { get set }
+    var passwordSignIn: String { get set }
     var signInDisabled: Bool { get }
+    var navigateToSignUp: (() -> Void)? { get }
     
-    func cancel()
     func signIn() async
+    func signInWithApple() async
+    func signInWithGoogle() async
 }
 
 class SignInViewModel: SignInViewModelType {
     private let authService: AuthService
 
-    private weak var delegate: SignInViewModelDelegate?
-
     @Published var signInError: Error?
-
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var emailSignIn: String = ""
+    @Published var passwordSignIn: String = ""
+    
+    var navigateToSignUp: (() -> Void)?
 
     var signInDisabled: Bool {
-        password.isEmpty || email.isEmpty
+        passwordSignIn.isEmpty || emailSignIn.isEmpty
     }
 
     init(authService: AuthService) {
         self.authService = authService
     }
-
-    func setup(delegate: SignInViewModelDelegate) {
-        self.delegate = delegate
-    }
-
-    func signIn() async {
+    
+    private func signIn(signInBlock: () async throws -> Void) async {
         do {
-            self.signInError = nil
-            _ = try await authService.signInWith(email: email, password: password)
-            delegate?.signInViewModelDidSignIn()
+            signInError = nil
+            try await signInBlock()
         } catch let error {
-            #warning("display error")
+            log(error.localizedDescription, logLevel: .error, logType: .auth)
             self.signInError = error
         }
     }
+
+    func signIn() async {
+        await signIn {
+            _ = try await authService.signInWith(email: emailSignIn, password: passwordSignIn)
+        }
+    }
     
-    func cancel() {
-        delegate?.signInViewModelDidCancel()
+    func signInWithGoogle() async {
+        await signIn {
+            _ = try await authService.signInWithGoogle()
+        }
+    }
+    
+    func signInWithApple() async {
+        await signIn {
+            _ = try await authService.signInWithApple()
+        }
     }
 }

@@ -8,8 +8,6 @@
 import Foundation
 
 class RealRecipeService: RecipeService {
-    // MARK: Methods
-
     let recipeDBRepository: RecipeDBRepository
     let recipeWebRepository: RecipeWebRepository
 

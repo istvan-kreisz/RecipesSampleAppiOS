@@ -21,12 +21,12 @@ func log(_ value: Any, logLevel: LogLevel, logType: LogType? = nil) {
     else { return }
     
     let logLevelEmojis: [LogLevel: String] = [.debug: "🐞", .warning: "⚠️", .error: "⛔️"]
-    let logTypeEmojis: [LogType: String] = [.database: "💾", .cache: "💿", .auth: "👤"]
+    let logTypeEmojis: [LogType: String] = [.database: "Database 💾", .cache: "Cache 💿", .auth: "Auth 👤"]
     
     let logLevelEmoji = logLevelEmojis[logLevel] ?? ""
     let logTypeEmoji = logType.map { logTypeEmojis[$0] ?? "" } ?? "🖨️"
     
-    print("---> \(logTypeEmoji) LOG - \(logLevelEmoji)")
+    print("---> \(logLevelEmoji) \(logTypeEmoji)")
     print(value)
     print("*****************************************")
 }

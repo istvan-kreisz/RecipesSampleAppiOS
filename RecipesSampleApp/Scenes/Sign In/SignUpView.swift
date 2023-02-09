@@ -1,13 +1,13 @@
 //
-//  SignInView.swift
+//  SignUpView.swift
 //  RecipesSampleApp
 //
-//  Created by István Kreisz on 1/19/23.
+//  Created by István Kreisz on 2/9/23.
 //
 
 import SwiftUI
 
-struct SignInView<Model>: View where Model: SignInViewModelType {
+struct SignUpView<Model>: View where Model: SignUpViewModelType {
     enum Field {
         case email
         case password
@@ -18,39 +18,30 @@ struct SignInView<Model>: View where Model: SignInViewModelType {
 
     var body: some View {
         VStack(spacing: 10) {
-            VStack {
-                TextField("Email", text: $viewModel.emailSignIn, prompt: nil)
+            Form {
+                Label("Email", image: "envelope.fill")
+                    .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
+                TextField("Email", text: $viewModel.emailSignUp, prompt: nil)
                     .keyboardType(.emailAddress)
                     .padding()
                     .focused($focusedField, equals: .email)
                     .textContentType(.emailAddress)
                     .submitLabel(.next)
 
-                SecureField("Password", text: $viewModel.passwordSignIn, prompt: nil)
+                Label("Password", image: "lock.fill")
+                    .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
+                    .padding(.top)
+                SecureField("Password", text: $viewModel.passwordSignUp, prompt: nil)
                     .padding()
                     .focused($focusedField, equals: .password)
                     .textContentType(.password)
                     .submitLabel(.done)
             }
-            .onSubmit {
-                switch focusedField {
-                case .email:
-                    focusedField = .password
-                case .password:
-                    if !viewModel.signInDisabled {
-                        Task {
-                            await viewModel.signIn()
-                        }
-                    }
-                case .none:
-                    break
-                }
-            }
             .padding(16.0)
 
             VStack(spacing: 10) {
                 Button {
-                    viewModel.navigateToSignUp?()
+                    //
                 } label: {
                     Text("Sign Up")
                         .font(.system(size: 18.0))
@@ -61,18 +52,19 @@ struct SignInView<Model>: View where Model: SignInViewModelType {
 
                 Button {
                     Task {
-                        await viewModel.signIn()
+                        await viewModel.signUp()
                     }
                 } label: {
-                    Text("Sign In")
+                    Text("Sign Up")
                         .font(.system(size: 18.0))
                         .frame(maxWidth: .infinity, minHeight: 48.0, idealHeight: 48.0, maxHeight: 48.0)
                         .contentShape(Rectangle())
                 }
-                .disabled(viewModel.signInDisabled)
+                .disabled(viewModel.signUpDisabled)
             }
             .padding(.bottom)
         }
         .centeredVertically()
     }
 }
+

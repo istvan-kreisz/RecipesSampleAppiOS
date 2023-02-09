@@ -8,7 +8,6 @@
 import Foundation
 
 class RealRecipeWebRepository: RecipeWebRepository {
-    
     let session: URLSession
     let baseURL: String
     
@@ -37,8 +36,6 @@ class RealRecipeWebRepository: RecipeWebRepository {
         try await call(endpoint: API.addRating(recipe: recipe, rating: rating))
     }
 }
-
-// MARK: - Endpoints
 
 extension RealRecipeWebRepository {
     enum API {

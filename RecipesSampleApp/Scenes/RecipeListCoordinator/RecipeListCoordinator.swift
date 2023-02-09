@@ -8,8 +8,6 @@
 import SwiftUI
 
 class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where ListViewModel: RecipesViewModel {
-    // MARK: Stored Properties
-
     @Published private(set) var viewModel: ListViewModel!
     @Published var detailViewModel: RecipeViewModel?
     @Published var ratingViewModel: RatingViewModel?
@@ -17,8 +15,6 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
 
     private let recipeService: RecipeService
     private let openURL: (URL) -> Void
-
-    // MARK: Initialization
 
     init(title: String, recipeService: RecipeService, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
@@ -28,8 +24,6 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
             self?.open(recipe)
         }
     }
-
-    // MARK: Methods
 
     func open(_ recipe: Recipe) {
         self.detailViewModel = .init(recipe: recipe,

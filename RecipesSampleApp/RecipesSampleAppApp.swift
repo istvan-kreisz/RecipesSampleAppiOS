@@ -9,13 +9,9 @@ import SwiftUI
 
 @main
 struct RecipesSampleAppApp: App {
-    // MARK: Stored Properties
-
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var coordinator = HomeCoordinator(recipeService: AppEnvironment.shared.recipeService,
                                                    authService: AppEnvironment.shared.authService)
-
-    // MARK: Scenes
 
     var body: some Scene {
         WindowGroup {

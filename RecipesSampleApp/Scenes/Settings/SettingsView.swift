@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-
-    // MARK: Stored Properties
-
     @ObservedObject var coordinator: HomeCoordinator
     @EnvironmentObject var user: GlobalState
-
-    // : Views
 
     var body: some View {
         VStack(spacing: 8) {
@@ -32,8 +27,6 @@ struct SettingsView: View {
         .onTapGesture(perform: openWebsite)
         .navigationTitle("Settings")
     }
-
-    // MARK: Methods
 
     private func openWebsite() {
         guard let url = URL(string: "https://quickbirdstudios.com/") else {

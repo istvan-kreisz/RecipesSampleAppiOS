@@ -48,7 +48,7 @@ class RealAuthService: NSObject, AuthService {
     }
 
     private func getUser(with uuid: String) async throws -> User {
-        User(id: "istvan", name: "istvan", email: "istvan", dateAdded: Date())
+        User(id: MockRecipeService.authorId1, name: "Jupiter Jones", email: "foo@foo.com", dateAdded: Date())
     }
 
     private func restoreState() async {

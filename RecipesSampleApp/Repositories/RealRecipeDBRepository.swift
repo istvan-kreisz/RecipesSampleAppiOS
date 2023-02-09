@@ -36,7 +36,7 @@ class RealRecipeDBRepository: RecipeDBRepository {
         let fetchRequest = RecipeObject.fetchRequest()
         fetchRequest.includesSubentities = false
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RecipeObject.dateAdded, ascending: false)]
-        let authorIdMatchPredicate = NSPredicate(format: "authorId == %@", user.id)
+        let authorIdMatchPredicate = NSPredicate(format: "authorId == %@", user.id as CVarArg)
         let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [authorIdMatchPredicate, searchTextPredicate(searchText: searchText)]
             .compactMap { $0 })
         fetchRequest.predicate = compoundPredicate

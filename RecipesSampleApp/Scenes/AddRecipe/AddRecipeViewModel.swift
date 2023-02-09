@@ -18,8 +18,6 @@ class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
         }
     }
 
-    // MARK: Stored Properties
-
     private let recipeService: RecipeService
     private let closeAddRecipe: (_ newRecipe: Recipe?) -> Void
     let openURL: (URL) -> Void
@@ -46,11 +44,9 @@ class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
         }
     }
 
-    // MARK: Initialization
-
     init(recipeService: RecipeService, closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
-        self.recipe = Recipe(authorId: "",
+        self.recipe = Recipe(authorId: UUID(),
                              imageURL: nil,
                              title: "",
                              ingredients: [],

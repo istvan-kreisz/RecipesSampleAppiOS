@@ -21,6 +21,13 @@
 		5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612C2981DCC10053AD5C /* WebRepository.swift */; };
 		5D6B612F2981DD090053AD5C /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612E2981DD090053AD5C /* APICall.swift */; };
 		5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61302981E6780053AD5C /* AppEnvironment.swift */; };
+		5DAA80CB2993C92B001A7D50 /* UserObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */; };
+		5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */; };
+		5DAA80CE29950FE5001A7D50 /* SignInCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CD29950FE5001A7D50 /* SignInCoordinator.swift */; };
+		5DAA80D029951034001A7D50 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CF29951034001A7D50 /* SignUpViewModel.swift */; };
+		5DAA80D2299512F9001A7D50 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D1299512F9001A7D50 /* ResetPasswordViewModel.swift */; };
+		5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */; };
+		5DAA80D62995234A001A7D50 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D52995234A001A7D50 /* SignUpView.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -59,6 +66,8 @@
 		5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C1297C80D10012CC8C /* String+Extensions.swift */; };
 		5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C4297C869F0012CC8C /* CoreDataStack.swift */; };
 		5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */; };
+		5DD54F242993C0BD006E0E32 /* UserDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */; };
+		5DD54F262993C0CD006E0E32 /* RealUserDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */; };
 		5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE152991AF4900A7BCC2 /* AuthService.swift */; };
 		5DECDE1B2991B06400A7BCC2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1A2991B06400A7BCC2 /* FirebaseAnalytics */; };
 		5DECDE1D2991B06400A7BCC2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1C2991B06400A7BCC2 /* FirebaseAnalyticsSwift */; };
@@ -89,6 +98,13 @@
 		5D6B612C2981DCC10053AD5C /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
 		5D6B612E2981DD090053AD5C /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		5D6B61302981E6780053AD5C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5DAA80CD29950FE5001A7D50 /* SignInCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCoordinator.swift; sourceTree = "<group>"; };
+		5DAA80CF29951034001A7D50 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		5DAA80D1299512F9001A7D50 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorView.swift; sourceTree = "<group>"; };
+		5DAA80D52995234A001A7D50 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +144,8 @@
 		5DC660C1297C80D10012CC8C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660C4297C869F0012CC8C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
+		5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBRepository.swift; sourceTree = "<group>"; };
+		5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealUserDBRepository.swift; sourceTree = "<group>"; };
 		5DECDE152991AF4900A7BCC2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5DECDE242991B0EB00A7BCC2 /* RealAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealAuthService.swift; sourceTree = "<group>"; };
 		5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -161,6 +179,8 @@
 				5D5081062980227C00B6247B /* RealRecipeDBRepository.swift */,
 				5D6B61272981DB3A0053AD5C /* RecipeWebRepository.swift */,
 				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
+				5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */,
+				5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -336,6 +356,11 @@
 				5DC6608E2979E59F0012CC8C /* CardView.swift */,
 				5DC6608F2979E59F0012CC8C /* SignInView.swift */,
 				5DC660902979E59F0012CC8C /* SignInViewModel.swift */,
+				5DAA80CD29950FE5001A7D50 /* SignInCoordinator.swift */,
+				5DAA80CF29951034001A7D50 /* SignUpViewModel.swift */,
+				5DAA80D1299512F9001A7D50 /* ResetPasswordViewModel.swift */,
+				5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */,
+				5DAA80D52995234A001A7D50 /* SignUpView.swift */,
 			);
 			path = "Sign In";
 			sourceTree = "<group>";
@@ -378,6 +403,8 @@
 				5D50810A298084E900B6247B /* RatingObject+CoreDataProperties.swift */,
 				5D50810B298084E900B6247B /* RecipeObject+CoreDataClass.swift */,
 				5D50810C298084E900B6247B /* RecipeObject+CoreDataProperties.swift */,
+				5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */,
+				5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */,
 				5D5080C4297F2C3000B6247B /* db_model_v1.xcdatamodeld */,
 			);
 			path = Persistence;
@@ -518,6 +545,8 @@
 				5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */,
 				5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */,
 				5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */,
+				5DAA80CE29950FE5001A7D50 /* SignInCoordinator.swift in Sources */,
+				5DAA80D029951034001A7D50 /* SignUpViewModel.swift in Sources */,
 				5DC6609E2979E59F0012CC8C /* SignInViewModel.swift in Sources */,
 				5DC660992979E59F0012CC8C /* RecipeView.swift in Sources */,
 				5DC6609B2979E59F0012CC8C /* RecipeListCoordinator.swift in Sources */,
@@ -529,6 +558,8 @@
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
 				5D50811B2980A38D00B6247B /* UIApplicationDelegate.swift in Sources */,
 				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,
+				5DAA80D2299512F9001A7D50 /* ResetPasswordViewModel.swift in Sources */,
+				5DAA80D62995234A001A7D50 /* SignUpView.swift in Sources */,
 				5DC660982979E59F0012CC8C /* RecipeViewModel.swift in Sources */,
 				5D5081052980225100B6247B /* RecipeDBRepository.swift in Sources */,
 				5DC660922979E59F0012CC8C /* HomeCoordinator.swift in Sources */,
@@ -536,6 +567,7 @@
 				5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */,
 				5DECDE252991B0EB00A7BCC2 /* RealAuthService.swift in Sources */,
 				5D5080C6297F2C3000B6247B /* db_model_v1.xcdatamodeld in Sources */,
+				5DAA80CB2993C92B001A7D50 /* UserObject+CoreDataClass.swift in Sources */,
 				5DC660782979E5920012CC8C /* SafariView.swift in Sources */,
 				5DC660792979E5920012CC8C /* RatingStars.swift in Sources */,
 				5D6B612F2981DD090053AD5C /* APICall.swift in Sources */,
@@ -544,6 +576,7 @@
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
 				5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */,
 				5DECDE2C2992491B00A7BCC2 /* User.swift in Sources */,
+				5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */,
 				5D6B61282981DB3A0053AD5C /* RecipeWebRepository.swift in Sources */,
 				5D50810F298084E900B6247B /* RecipeObject+CoreDataClass.swift in Sources */,
 				5D50810E298084E900B6247B /* RatingObject+CoreDataProperties.swift in Sources */,
@@ -553,6 +586,7 @@
 				5DECDE3329924CB800A7BCC2 /* Logger.swift in Sources */,
 				5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */,
 				5DECDE3029924A2900A7BCC2 /* DebugSettings.swift in Sources */,
+				5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
 				5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */,
@@ -565,6 +599,8 @@
 				5DC6609C2979E59F0012CC8C /* CardView.swift in Sources */,
 				5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */,
 				5DC660972979E59F0012CC8C /* RatingViewModel.swift in Sources */,
+				5DD54F262993C0CD006E0E32 /* RealUserDBRepository.swift in Sources */,
+				5DD54F242993C0BD006E0E32 /* UserDBRepository.swift in Sources */,
 				5D50810D298084E900B6247B /* RatingObject+CoreDataClass.swift in Sources */,
 				5DECDE2A299247CF00A7BCC2 /* UIApplication+Extensions.swift in Sources */,
 			);

@@ -17,7 +17,7 @@ extension RecipeObject {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var authorId: String?
+    @NSManaged public var authorId: UUID?
     @NSManaged public var imageURL: URL?
     @NSManaged public var title: String?
     @NSManaged public var isVegetarian: Bool
