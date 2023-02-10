@@ -76,32 +76,32 @@ extension RealRecipeWebRepository.API: APICall {
     func body() throws -> Data? {
         switch self {
         case let .addRating(recipe, rating):
-            struct BodyType: Encodable {
+            struct Payload: Encodable {
                 let recipe: Recipe
                 let rating: Recipe.Rating
             }
-            return try data(body: BodyType(recipe: recipe, rating: rating))
+            return try data(body: Payload(recipe: recipe, rating: rating))
         case let .addRecipe(recipe):
-            struct BodyType: Encodable {
+            struct Payload: Encodable {
                 let recipe: Recipe
             }
-            return try data(body: BodyType(recipe: recipe))
+            return try data(body: Payload(recipe: recipe))
         case let .fetchAllRecipes(searchText):
-            struct BodyType: Encodable {
+            struct Payload: Encodable {
                 let searchText: String
             }
-            return try data(body: BodyType(searchText: searchText))
+            return try data(body: Payload(searchText: searchText))
         case let .fetchRatings(recipe):
-            struct BodyType: Encodable {
+            struct Payload: Encodable {
                 let recipe: Recipe
             }
-            return try data(body: BodyType(recipe: recipe))
+            return try data(body: Payload(recipe: recipe))
         case let .fetchRecipesByUser(user, searchText):
-            struct BodyType: Encodable {
+            struct Payload: Encodable {
                 let user: User
                 let searchText: String
             }
-            return try data(body: BodyType(user: user, searchText: searchText))
+            return try data(body: Payload(user: user, searchText: searchText))
         }
     }
 }

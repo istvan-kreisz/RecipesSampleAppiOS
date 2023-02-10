@@ -21,6 +21,7 @@ protocol SignUpViewModelType: ObservableObject & AnyObject {
     func signUpWithApple() async
 }
 
+@MainActor
 class SignUpViewModel: SignUpViewModelType {
     private let authService: AuthService
 
@@ -44,7 +45,7 @@ class SignUpViewModel: SignUpViewModelType {
             signUpError = nil
             try await signUpBlock()
         } catch let error {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             self.signUpError = error
         }
     }

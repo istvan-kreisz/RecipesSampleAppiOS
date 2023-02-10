@@ -16,9 +16,9 @@ extension RatingObject {
         return NSFetchRequest<RatingObject>(entityName: "RatingObject")
     }
 
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: String?
     @NSManaged public var author: String?
-    @NSManaged public var authorId: UUID?
+    @NSManaged public var authorId: String?
     @NSManaged public var comment: String?
     @NSManaged public var dateAdded: Date?
     @NSManaged public var recipe: RecipeObject?

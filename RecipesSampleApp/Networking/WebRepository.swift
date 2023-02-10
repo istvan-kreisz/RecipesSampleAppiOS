@@ -24,8 +24,7 @@ extension WebRepository {
 
             return data
         } catch {
-            print("---NETWORK ERROR---")
-            print(error)
+            log(error, logLevel: .error, logType: .network)
             throw error
         }
     }

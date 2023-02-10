@@ -94,7 +94,7 @@ class CoreDataStack: PersistentStore {
                     }
                     self?.loadStores()
                 } catch {
-                    log(error.localizedDescription, logLevel: .error, logType: .database)
+                    log(error, logLevel: .error, logType: .database)
                 }
             }
         } else {

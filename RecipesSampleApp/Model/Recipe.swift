@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct Recipe: Identifiable, Equatable, Codable {
-    var id = UUID()
-    var authorId: UUID
+    var id = UUID().uuidString
+    var authorId: String
     var imageURL: URL?
     var title: String
     var ingredients: [String]
@@ -54,9 +54,9 @@ extension Recipe {
 
 extension Recipe {
     struct Rating: Identifiable, Equatable, Codable {
-        var id = UUID()
+        var id = UUID().uuidString
         var author: String
-        var authorId: UUID
+        var authorId: String
         var comment: String
         var dateAdded: Date
     }

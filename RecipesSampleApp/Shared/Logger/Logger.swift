@@ -12,7 +12,7 @@ enum LogLevel: String, CaseIterable {
 }
 
 enum LogType: String {
-    case database, cache, auth
+    case database, cache, auth, network
 }
 
 func log(_ value: Any, logLevel: LogLevel, logType: LogType? = nil) {
@@ -21,7 +21,7 @@ func log(_ value: Any, logLevel: LogLevel, logType: LogType? = nil) {
     else { return }
     
     let logLevelEmojis: [LogLevel: String] = [.debug: "🐞", .warning: "⚠️", .error: "⛔️"]
-    let logTypeEmojis: [LogType: String] = [.database: "Database 💾", .cache: "Cache 💿", .auth: "Auth 👤"]
+    let logTypeEmojis: [LogType: String] = [.database: "Database 💾", .cache: "Cache 💿", .auth: "Auth 👤", .network: "Network 🌐"]
     
     let logLevelEmoji = logLevelEmojis[logLevel] ?? ""
     let logTypeEmoji = logType.map { logTypeEmojis[$0] ?? "" } ?? "🖨️"

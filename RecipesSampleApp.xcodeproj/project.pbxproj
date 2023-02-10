@@ -29,6 +29,8 @@
 		5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */; };
 		5DAA80D62995234A001A7D50 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D52995234A001A7D50 /* SignUpView.swift */; };
 		5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */; };
+		5DAA80DC299694A1001A7D50 /* UserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */; };
+		5DAA80DE29969695001A7D50 /* RealUserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -104,6 +106,8 @@
 		5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorView.swift; sourceTree = "<group>"; };
 		5DAA80D52995234A001A7D50 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebRepository.swift; sourceTree = "<group>"; };
+		5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealUserWebRepository.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
 				5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */,
 				5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */,
+				5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */,
+				5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -545,6 +551,7 @@
 				5DC660A82979F47B0012CC8C /* RealRecipeService.swift in Sources */,
 				5DC660962979E59F0012CC8C /* RatingView.swift in Sources */,
 				5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */,
+				5DAA80DE29969695001A7D50 /* RealUserWebRepository.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
@@ -579,6 +586,7 @@
 				5DECDE3329924CB800A7BCC2 /* Logger.swift in Sources */,
 				5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */,
 				5DECDE3029924A2900A7BCC2 /* DebugSettings.swift in Sources */,
+				5DAA80DC299694A1001A7D50 /* UserWebRepository.swift in Sources */,
 				5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,

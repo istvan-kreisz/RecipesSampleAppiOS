@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class UserRecipesViewModel: RecipesViewModel, UserListener {
     @Published var title: String
     @Published var recipes = [Recipe]()

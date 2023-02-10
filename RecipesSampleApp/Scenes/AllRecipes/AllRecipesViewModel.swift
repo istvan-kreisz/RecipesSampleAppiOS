@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class AllRecipesViewModel: RecipesViewModel {
     @Published var title: String
     @Published var recipes = [Recipe]()

@@ -31,6 +31,8 @@ enum AuthError: LocalizedError {
 }
 
 class RealAuthService: NSObject, AuthService {
+    private let userWebRepository: UserWebRepository
+
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
     private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
@@ -57,7 +59,8 @@ class RealAuthService: NSObject, AuthService {
 
     fileprivate var currentNonce: String?
 
-    override init() {
+    init(userWebRepository: UserWebRepository) {
+        self.userWebRepository = userWebRepository
         super.init()
 
         if DebugSettings.shared.useEmulators {
@@ -69,16 +72,17 @@ class RealAuthService: NSObject, AuthService {
                 self?.user = nil
                 return
             }
-            let userChanged = user.uid != self?.user?.id.uuidString
+            let userChanged = user.uid != self?.user?.id
             Task { [weak self] in
                 guard let self else { return }
                 do {
+                    let token = try await user.getIDToken()
+                    self.idToken = token
+                    
                     if userChanged {
                         let newUser = try await self.getUser(with: user.uid)
                         self.user = newUser
                     }
-                    let token = try await user.getIDToken()
-                    self.idToken = token
                 } catch {
                     try? await self.signOut()
                     self.user = nil
@@ -99,7 +103,7 @@ class RealAuthService: NSObject, AuthService {
     }
 
     private func getUser(with uuid: String) async throws -> User {
-        User(id: MockRecipeService.authorId1, name: "Jupiter Jones", email: "foo@foo.com", dateAdded: Date())
+        try await userWebRepository.fetchUser(userId: uuid)
     }
 
     #warning("refactor")
@@ -128,7 +132,7 @@ class RealAuthService: NSObject, AuthService {
         do {
             _ = try await auth.createUser(withEmail: email, password: password)
         } catch {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             throw error
         }
     }
@@ -137,7 +141,7 @@ class RealAuthService: NSObject, AuthService {
         do {
             _ = try await auth.signIn(withEmail: email, password: password)
         } catch {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             throw error
         }
     }
@@ -150,7 +154,7 @@ class RealAuthService: NSObject, AuthService {
                 GIDSignIn.sharedInstance.signOut()
             }
         } catch {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             throw error
         }
     }
@@ -173,7 +177,7 @@ extension RealAuthService {
                 throw AuthError.userNotFound
             }
         } catch {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             throw error
         }
     }
@@ -273,7 +277,7 @@ extension RealAuthService: ASAuthorizationControllerDelegate, ASAuthorizationCon
                     self.appleSignInContinuation?.resume()
                     self.appleSignInContinuation = nil
                 } catch {
-                    log(error.localizedDescription, logLevel: .error, logType: .auth)
+                    log(error, logLevel: .error, logType: .auth)
                     self.appleSignInContinuation?.resume(throwing: error)
                     self.appleSignInContinuation = nil
                 }

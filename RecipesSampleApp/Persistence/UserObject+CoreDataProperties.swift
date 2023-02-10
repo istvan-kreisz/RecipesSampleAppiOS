@@ -18,7 +18,7 @@ extension UserObject {
 
     @NSManaged public var dateAdded: Date?
     @NSManaged public var email: String?
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: String?
     @NSManaged public var name: String?
 
 }

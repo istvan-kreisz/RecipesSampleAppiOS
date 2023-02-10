@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol ResetPasswordViewModelType: ObservableObject & AnyObject {
     var passwordResetError: Error? { get }
     var emailPasswordReset: String { get set }
@@ -37,7 +38,7 @@ class ResetPasswordViewModel: ResetPasswordViewModelType, Identifiable {
             passwordResetError = nil
             _ = try await authService.resetPassword(email: emailPasswordReset)
         } catch let error {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             self.passwordResetError = error
         }
     }

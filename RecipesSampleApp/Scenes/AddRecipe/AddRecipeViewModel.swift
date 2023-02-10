@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
     struct InputErrors {
         var titleMissing = false
@@ -49,7 +50,7 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
 
     init(recipeService: RecipeService, closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
-        self.recipe = Recipe(authorId: UUID(),
+        self.recipe = Recipe(authorId: UUID().uuidString,
                              imageURL: nil,
                              title: "",
                              ingredients: [],
@@ -101,7 +102,7 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
                 try await recipeService.add(recipe: recipe)
                 closeAddRecipe(recipe)
             } catch {
-                print(error)
+                log(error, logLevel: .error)
                 closeAddRecipe(nil)
             }
         }

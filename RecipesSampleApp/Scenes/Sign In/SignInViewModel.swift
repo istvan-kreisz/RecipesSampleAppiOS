@@ -21,6 +21,7 @@ protocol SignInViewModelType: ObservableObject & AnyObject {
     func signInWithGoogle() async
 }
 
+@MainActor
 class SignInViewModel: SignInViewModelType {
     private let authService: AuthService
 
@@ -44,7 +45,7 @@ class SignInViewModel: SignInViewModelType {
             signInError = nil
             try await signInBlock()
         } catch let error {
-            log(error.localizedDescription, logLevel: .error, logType: .auth)
+            log(error, logLevel: .error, logType: .auth)
             self.signInError = error
         }
     }

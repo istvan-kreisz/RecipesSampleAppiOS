@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 class MockRecipeService: RecipeService {
-    static let authorId1 = UUID(uuidString: "122d6856-a7ac-11ed-afa1-0242ac120002")!
-    static let authorId2 = UUID(uuidString: "122d6b8a-a7ac-11ed-afa1-0242ac120002")!
-    static let authorId3 = UUID(uuidString: "122d71f2-a7ac-11ed-afa1-0242ac120002")!
+    static let authorId1 = UUID(uuidString: "122d6856-a7ac-11ed-afa1-0242ac120002")!.uuidString
+    static let authorId2 = UUID(uuidString: "122d6b8a-a7ac-11ed-afa1-0242ac120002")!.uuidString
+    static let authorId3 = UUID(uuidString: "122d71f2-a7ac-11ed-afa1-0242ac120002")!.uuidString
 
     private let badRating: Recipe.Rating
     private let averageRating: Recipe.Rating

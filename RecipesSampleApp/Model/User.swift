@@ -8,7 +8,7 @@
 import Foundation
 
 struct User: Equatable {
-    var id = UUID()
+    var id = UUID().uuidString
     let name: String
     let email: String
     let dateAdded: Date
@@ -43,7 +43,7 @@ extension User: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(UUID.self, forKey: .id)
+        id = try container.decode(String.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         email = try container.decode(String.self, forKey: .email)
         dateAdded = try container.decode(Date.self, forKey: .dateAdded)
