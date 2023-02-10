@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecipeList<ViewModel>: ViewWithGlobalState where ViewModel: RecipesViewModel {
+struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
     @ObservedObject var viewModel: ViewModel
     @State var searchText = ""
 

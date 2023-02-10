@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct RatingView: ViewWithGlobalState {
+struct RatingView: View {
     @State var comment = ""
     @State var showAddRatingModal = false
     @ObservedObject var viewModel: RatingViewModel

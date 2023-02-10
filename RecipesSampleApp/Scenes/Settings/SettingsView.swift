@@ -9,13 +9,14 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var coordinator: HomeCoordinator
-    @EnvironmentObject var user: GlobalState
+    @AppStorage("user") var user: User?
+
 
     var body: some View {
         VStack(spacing: 8) {
             Text("Recipes Sample App")
                 .bold()
-            Text("Username: \(user.user?.name ?? "")")
+            Text("Username: \(user?.name ?? "")")
             Button {
                 logout()
             } label: {

@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
-class UserRecipesViewModel: RecipesViewModel {
+class UserRecipesViewModel: RecipesViewModel, UserListener {
     @Published var title: String
     @Published var recipes = [Recipe]()
+
     var user: User? {
         didSet {
             refresh()
@@ -19,14 +21,20 @@ class UserRecipesViewModel: RecipesViewModel {
     private let recipeService: RecipeService
     private let openRecipe: (Recipe) -> Void
 
+    var cancellable: AnyCancellable?
+
     required init(title: String,
                   recipeService: RecipeService,
                   openRecipe: @escaping (Recipe) -> Void) {
         self.title = title
         self.openRecipe = openRecipe
         self.recipeService = recipeService
+
+        cancellable = listenToUserUpdates(updateStrategy: .userChanged) { [weak self] newValue in
+            self?.user = newValue
+        }
     }
-    
+
     func refresh(searchText: String) {
         guard let user = user else { return }
         Task {
@@ -38,7 +46,7 @@ class UserRecipesViewModel: RecipesViewModel {
             }
         }
     }
-    
+
     func open(recipe: Recipe) {
         self.openRecipe(recipe)
     }

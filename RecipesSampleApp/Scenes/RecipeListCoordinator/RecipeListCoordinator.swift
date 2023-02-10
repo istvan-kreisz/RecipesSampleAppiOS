@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where ListViewModel: RecipesViewModel {
     @Published private(set) var viewModel: ListViewModel!
     @Published var detailViewModel: RecipeViewModel?
@@ -36,7 +37,9 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
 
     func openRatings(for recipe: Recipe) {
         Task { @MainActor in
-            self.ratingViewModel = .init(recipe: recipe, recipeService: recipeService, closeRatings: closeRatings)
+            self.ratingViewModel = .init(recipe: recipe, recipeService: recipeService, closeRatings: { [weak self] in
+                self?.closeRatings()
+            })
         }
     }
 

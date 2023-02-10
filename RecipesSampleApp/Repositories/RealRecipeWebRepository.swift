@@ -67,11 +67,10 @@ extension RealRecipeWebRepository.API: APICall {
         "POST"
     }
 
-    #warning("todo")
     var headers: [String: String]? {
         ["Accept": "application/json",
          "Content-Type": "application/json",
-         "Authorization": ""]
+         "Authorization": "Bearer \(UserDefaults.standard.idToken ?? "")"]
     }
 
     func body() throws -> Data? {

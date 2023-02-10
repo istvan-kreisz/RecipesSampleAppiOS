@@ -7,14 +7,16 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor
-class RatingViewModel: ViewModelWithGlobalState, Identifiable {
+class RatingViewModel: ObservableObject, Identifiable, UserListener {
     @Published var recipe: Recipe
     @Published var user: User?
 
     private let recipeService: RecipeService
     private let closeRatings: () -> Void
+    var cancellable: AnyCancellable?
 
     var canAddRating: Bool {
         !recipe.ratings.contains { rating in
@@ -26,6 +28,10 @@ class RatingViewModel: ViewModelWithGlobalState, Identifiable {
         self.closeRatings = closeRatings
         self.recipe = recipe
         self.recipeService = recipeService
+        
+        cancellable = listenToUserUpdates(updateStrategy: .userUpdatedOrChanged) { [weak self] newValue in
+            self?.user = newValue
+        }
 
         Task {
             await fetchRatings()

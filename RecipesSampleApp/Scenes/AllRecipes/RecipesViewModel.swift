@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol RecipesViewModel: ViewModelWithGlobalState {
+@MainActor
+protocol RecipesViewModel: ObservableObject {
     var title: String { get }
     var recipes: [Recipe] { get }
     

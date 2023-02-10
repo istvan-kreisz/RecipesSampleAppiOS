@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeCoordinatorView: View {
-    @StateObject var user = GlobalState(user: nil)
     @ObservedObject var coordinator: HomeCoordinator
 
     var body: some View {
@@ -37,10 +36,6 @@ struct HomeCoordinatorView: View {
                     SafariView(url: $0)
                         .edgesIgnoringSafeArea(.all)
                 }
-                .onReceive(coordinator.$user) { user in
-                    self.user.user = user
-                }
-                .environmentObject(user)
             } else {
                 EmptyView()
             }

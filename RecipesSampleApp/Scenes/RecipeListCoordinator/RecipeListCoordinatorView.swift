@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: RecipesViewModel {
-    @EnvironmentObject var globalState: GlobalState
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     var body: some View {
         NavigationView {
             ZStack {
                 RecipeList(viewModel: coordinator.viewModel)
-                    .withGlobalState()
                     .navigation(item: $coordinator.detailViewModel) { viewModel in
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             phoneRecipeView(viewModel)
-                                .environmentObject(globalState)
                         } else {
                             padRecipeView(viewModel)
-                                .environmentObject(globalState)
                         }
                     }
                 VStack(alignment: .center) {
@@ -39,7 +35,6 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
             .modifier(SheetModifier(item: $coordinator.addRecipeViewModel, content: { viewModel in
                 NavigationView {
                     AddRecipeView(viewModel: viewModel)
-                        .withGlobalState()
                 }
             }))
         }
@@ -50,7 +45,6 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
         RecipeView(viewModel: viewModel, ratingModifier: SheetModifier(item: $coordinator.ratingViewModel) { viewModel in
             NavigationView {
                 RatingView(viewModel: viewModel)
-                    .withGlobalState()
             }
         })
     }
@@ -60,7 +54,6 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
         RecipeView(viewModel: viewModel,
                    ratingModifier: PopoverModifier(item: $coordinator.ratingViewModel) {
                        RatingView(viewModel: $0)
-                           .withGlobalState()
                            .frame(width: 500, height: 500)
                    })
     }

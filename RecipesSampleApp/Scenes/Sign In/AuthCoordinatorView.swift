@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AuthCoordinatorView: View {
-    @EnvironmentObject var globalState: GlobalState
     @ObservedObject var coordinator: AuthCoordinator
     
     var body: some View {

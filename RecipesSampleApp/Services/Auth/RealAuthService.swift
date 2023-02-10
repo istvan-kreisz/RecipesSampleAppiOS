@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import CryptoKit
+import Combine
 import AuthenticationServices
 
 enum AuthError: LocalizedError {
@@ -33,24 +34,22 @@ class RealAuthService: NSObject, AuthService {
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
     private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
-    var userChanged: ((User?) -> Void)?
-    
+
     private var user: User? {
         get {
-            UserDefaults.standard.retrieveCodable(for: "user")
+            UserDefaults.standard.user
         }
         set {
-            UserDefaults.standard.storeCodable(newValue, key: "user")
-            userChanged?(newValue)
+            UserDefaults.standard.user = newValue
         }
     }
     
-    var idToken: String? {
+    private var idToken: String? {
         get {
-            UserDefaults.standard.string(forKey: "idToken")
+            UserDefaults.standard.idToken
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "idToken")
+            UserDefaults.standard.idToken = newValue
         }
     }
 
@@ -64,7 +63,7 @@ class RealAuthService: NSObject, AuthService {
         if DebugSettings.shared.useEmulators {
             auth.useEmulator(withHost: "localhost", port: 9100)
         }
-        
+
         authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
             guard let user else {
                 self?.user = nil
@@ -74,7 +73,7 @@ class RealAuthService: NSObject, AuthService {
             Task { [weak self] in
                 guard let self else { return }
                 do {
-                    if userChanged  {
+                    if userChanged {
                         let newUser = try await self.getUser(with: user.uid)
                         self.user = newUser
                     }
@@ -97,11 +96,6 @@ class RealAuthService: NSObject, AuthService {
         if let authStateListenerHandle {
             Auth.auth().removeStateDidChangeListener(authStateListenerHandle)
         }
-    }
-    
-    func setup(userChanged: @escaping (User?) -> Void) {
-        self.userChanged = userChanged
-        userChanged(user)
     }
 
     private func getUser(with uuid: String) async throws -> User {
@@ -296,5 +290,62 @@ extension RealAuthService: ASAuthorizationControllerDelegate, ASAuthorizationCon
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         UIApplication.shared.keyWindow!
+    }
+}
+
+extension UserDefaults {
+    fileprivate(set) var user: User? {
+        get {
+            guard let userJSONString, let user = User(rawValue: userJSONString) else { return nil }
+            return user
+        }
+        set {
+            userJSONString = newValue?.rawValue
+        }
+    }
+
+    @objc fileprivate(set) dynamic var userJSONString: String? {
+        get {
+            string(forKey: "user")
+        }
+        set {
+            setValue(newValue, forKey: "user")
+        }
+    }
+    
+    fileprivate(set) var idToken: String? {
+        get {
+            string(forKey: "idToken")
+        }
+        set {
+            setValue(newValue, forKey: "idToken")
+        }
+    }
+
+}
+
+enum UserUpdateStrategy {
+    case userChanged
+    case userUpdatedOrChanged
+}
+
+protocol UserListener {
+    @MainActor var cancellable: AnyCancellable? { get set }
+}
+
+extension UserListener {
+    func listenToUserUpdates(updateStrategy: UserUpdateStrategy, updated: @escaping (User?) -> Void) -> AnyCancellable? {
+        UserDefaults.standard.publisher(for: \.userJSONString)
+            .map { _ in UserDefaults.standard.user }
+            .removeDuplicates(by: { first, second in
+                if updateStrategy == .userChanged {
+                    return first?.id == second?.id
+                } else {
+                    return first == second
+                }
+            })
+            .sink(receiveValue: { newValue in
+                updated(newValue)
+            })
     }
 }

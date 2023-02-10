@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Combine
 
-class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
+class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
     struct InputErrors {
         var titleMissing = false
         var ingredientsMissing = false
@@ -20,7 +21,9 @@ class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
 
     private let recipeService: RecipeService
     private let closeAddRecipe: (_ newRecipe: Recipe?) -> Void
+    var cancellable: AnyCancellable?
     let openURL: (URL) -> Void
+
 
     @Published var inputErrors = InputErrors()
     @Published var recipe: Recipe {
@@ -37,7 +40,7 @@ class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
         }
     }
 
-    @Published var user: User? {
+    var user: User? {
         didSet {
             guard let user = user else { return }
             recipe.authorId = user.id
@@ -57,6 +60,10 @@ class AddRecipeViewModel: ViewModelWithGlobalState, Identifiable {
                              ratings: [])
         self.closeAddRecipe = closeAddRecipe
         self.openURL = openURL
+        
+        cancellable = listenToUserUpdates(updateStrategy: .userChanged) { [weak self] newValue in
+            self?.user = newValue
+        }
     }
 
     func add(ingredient: String) {

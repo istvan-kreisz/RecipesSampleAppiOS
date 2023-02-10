@@ -29,7 +29,6 @@
 		5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */; };
 		5DAA80D62995234A001A7D50 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D52995234A001A7D50 /* SignUpView.swift */; };
 		5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */; };
-		5DAA80DA2995C790001A7D50 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D92995C790001A7D50 /* UserDefaults.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -62,7 +61,6 @@
 		5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B2297AFCDC0012CC8C /* RatingCell.swift */; };
 		5DC660B9297B75AE0012CC8C /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660B8297B75AE0012CC8C /* AddRecipeViewModel.swift */; };
 		5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */; };
-		5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BD297C33290012CC8C /* WithUserModifier.swift */; };
 		5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660BF297C496F0012CC8C /* View+Extensions.swift */; };
 		5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C1297C80D10012CC8C /* String+Extensions.swift */; };
 		5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C4297C869F0012CC8C /* CoreDataStack.swift */; };
@@ -81,7 +79,6 @@
 		5DECDE2C2992491B00A7BCC2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE2B2992491B00A7BCC2 /* User.swift */; };
 		5DECDE3029924A2900A7BCC2 /* DebugSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE2F29924A2900A7BCC2 /* DebugSettings.swift */; };
 		5DECDE3329924CB800A7BCC2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE3229924CB800A7BCC2 /* Logger.swift */; };
-		5DECDE35299258E000A7BCC2 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE34299258E000A7BCC2 /* GlobalState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +104,6 @@
 		5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorView.swift; sourceTree = "<group>"; };
 		5DAA80D52995234A001A7D50 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
-		5DAA80D92995C790001A7D50 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,7 +137,6 @@
 		5DC660B2297AFCDC0012CC8C /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		5DC660B8297B75AE0012CC8C /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		5DC660BB297C2BA50012CC8C /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
-		5DC660BD297C33290012CC8C /* WithUserModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithUserModifier.swift; sourceTree = "<group>"; };
 		5DC660BF297C496F0012CC8C /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660C1297C80D10012CC8C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660C4297C869F0012CC8C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -154,7 +149,6 @@
 		5DECDE2B2992491B00A7BCC2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5DECDE2F29924A2900A7BCC2 /* DebugSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettings.swift; sourceTree = "<group>"; };
 		5DECDE3229924CB800A7BCC2 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		5DECDE34299258E000A7BCC2 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,7 +250,6 @@
 			children = (
 				5DC660692979E5780012CC8C /* Recipe.swift */,
 				5DECDE2B2992491B00A7BCC2 /* User.swift */,
-				5DECDE34299258E000A7BCC2 /* GlobalState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,7 +260,6 @@
 				5DC6606E2979E5890012CC8C /* SheetModifier.swift */,
 				5DC6606F2979E5890012CC8C /* PopoverModifier.swift */,
 				5DC660702979E5890012CC8C /* View+Navigation.swift */,
-				5DC660BD297C33290012CC8C /* WithUserModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -375,7 +367,6 @@
 				5DC660BF297C496F0012CC8C /* View+Extensions.swift */,
 				5DC660C1297C80D10012CC8C /* String+Extensions.swift */,
 				5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */,
-				5DAA80D92995C790001A7D50 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,9 +534,7 @@
 			files = (
 				5DC6609A2979E59F0012CC8C /* RecipeListCoordinatorView.swift in Sources */,
 				5D5081072980227C00B6247B /* RealRecipeDBRepository.swift in Sources */,
-				5DECDE35299258E000A7BCC2 /* GlobalState.swift in Sources */,
 				5DC6606C2979E5780012CC8C /* RecipeService.swift in Sources */,
-				5DC660BE297C33290012CC8C /* WithUserModifier.swift in Sources */,
 				5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */,
 				5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */,
 				5DAA80CE29950FE5001A7D50 /* AuthCoordinator.swift in Sources */,
@@ -555,7 +544,6 @@
 				5DC6609B2979E59F0012CC8C /* RecipeListCoordinator.swift in Sources */,
 				5DC660A82979F47B0012CC8C /* RealRecipeService.swift in Sources */,
 				5DC660962979E59F0012CC8C /* RatingView.swift in Sources */,
-				5DAA80DA2995C790001A7D50 /* UserDefaults.swift in Sources */,
 				5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,
