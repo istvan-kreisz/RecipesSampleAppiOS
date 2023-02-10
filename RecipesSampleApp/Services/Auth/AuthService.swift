@@ -11,8 +11,8 @@ import FirebaseAuth
 
 @MainActor
 protocol AuthService: AnyObject {
-    var user: AnyPublisher<User?, Never> { get }
-
+    func setup(userChanged: @escaping (User?) -> Void)
+    
     func signUpWith(email: String, password: String) async throws
     func signInWith(email: String, password: String) async throws
     func signInWithApple() async throws

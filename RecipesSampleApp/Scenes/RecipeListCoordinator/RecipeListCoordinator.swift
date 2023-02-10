@@ -55,7 +55,9 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
         }
     }
 
-    func add(recipe: Recipe) {}
+    func add(recipe: Recipe) {
+        //
+    }
 
     func closeRatings() {
         self.ratingViewModel = nil

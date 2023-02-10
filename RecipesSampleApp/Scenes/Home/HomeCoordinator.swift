@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 enum HomeTab {
     case meat
@@ -28,8 +27,6 @@ class HomeCoordinator: ObservableObject {
     @Published var openedURL: URL?
 
     @Published var user: User? = nil
-    
-    var cancellables = Set<AnyCancellable>()
 
     var isAuthenticated: Bool {
         user != nil
@@ -38,7 +35,7 @@ class HomeCoordinator: ObservableObject {
     init(recipeService: RecipeService, authService: AuthService) {
         self.recipeService = recipeService
         self.authService = authService
-        
+
         self.allRecipesCoordinator = RecipeListCoordinator<AllRecipesViewModel>(title: "All Recipes", recipeService: recipeService) { [weak self] url in
             self?.open(url)
         }
@@ -47,18 +44,15 @@ class HomeCoordinator: ObservableObject {
             self?.open(url)
         }
 
-        self.authService.user
-            .sink { newUser in
-                Task { @MainActor [weak self] in
-                    guard let self = self else { return }
-                    self.user = newUser
-                    if newUser == nil {
-                        self.authCoordinator = AuthCoordinator(authService: self.authService)
-                    } else {
-                        self.authCoordinator = nil
-                    }
-                }
-            }.store(in: &cancellables)
+        self.authService.setup { [weak self] newUser in
+            guard let self = self else { return }
+            self.user = newUser
+            if newUser == nil {
+                self.authCoordinator = AuthCoordinator(authService: self.authService)
+            } else {
+                self.authCoordinator = nil
+            }
+        }
     }
 
     func open(_ url: URL) {

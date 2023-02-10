@@ -29,6 +29,7 @@
 		5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */; };
 		5DAA80D62995234A001A7D50 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D52995234A001A7D50 /* SignUpView.swift */; };
 		5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */; };
+		5DAA80DA2995C790001A7D50 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D92995C790001A7D50 /* UserDefaults.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -106,6 +107,7 @@
 		5DAA80D32995179D001A7D50 /* AuthCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinatorView.swift; sourceTree = "<group>"; };
 		5DAA80D52995234A001A7D50 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		5DAA80D92995C790001A7D50 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				5DC660BF297C496F0012CC8C /* View+Extensions.swift */,
 				5DC660C1297C80D10012CC8C /* String+Extensions.swift */,
 				5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */,
+				5DAA80D92995C790001A7D50 /* UserDefaults.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				5DC6609B2979E59F0012CC8C /* RecipeListCoordinator.swift in Sources */,
 				5DC660A82979F47B0012CC8C /* RealRecipeService.swift in Sources */,
 				5DC660962979E59F0012CC8C /* RatingView.swift in Sources */,
+				5DAA80DA2995C790001A7D50 /* UserDefaults.swift in Sources */,
 				5DC660942979E59F0012CC8C /* AllRecipesViewModel.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,

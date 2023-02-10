@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
@@ -34,8 +33,26 @@ class RealAuthService: NSObject, AuthService {
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
     private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
-    private let _user = CurrentValueSubject<User?, Never>(nil)
-    var user: AnyPublisher<User?, Never> { self._user.eraseToAnyPublisher() }
+    var userChanged: ((User?) -> Void)?
+    
+    private var user: User? {
+        get {
+            UserDefaults.standard.retrieveCodable(for: "user")
+        }
+        set {
+            UserDefaults.standard.storeCodable(newValue, key: "user")
+            userChanged?(newValue)
+        }
+    }
+    
+    var idToken: String? {
+        get {
+            UserDefaults.standard.string(forKey: "idToken")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "idToken")
+        }
+    }
 
     private let auth = Auth.auth()
 
@@ -47,34 +64,33 @@ class RealAuthService: NSObject, AuthService {
         if DebugSettings.shared.useEmulators {
             auth.useEmulator(withHost: "localhost", port: 9100)
         }
+        
         authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
             guard let user else {
-                self?._user.send(nil)
+                self?.user = nil
                 return
             }
-            if user.uid != self?._user.value?.id.uuidString {
-                Task { [weak self] in
-                    guard let self else { return }
-                    do {
-                        let userObject = try await self.getUser(with: user.uid)
-                        let token = try await user.getIDToken()
-                    } catch {
-                        
+            let userChanged = user.uid != self?.user?.id.uuidString
+            Task { [weak self] in
+                guard let self else { return }
+                do {
+                    if userChanged  {
+                        let newUser = try await self.getUser(with: user.uid)
+                        self.user = newUser
                     }
-                }
-                // fetch user
-                // get token
-            } else {
-                // get token
-                user.getIDToken { token, error in
-                    
+                    let token = try await user.getIDToken()
+                    self.idToken = token
+                } catch {
+                    try? await self.signOut()
+                    self.user = nil
+                    self.idToken = nil
                 }
             }
         }
 
-        Task {
-            await restoreState()
-        }
+//        Task {
+//            await restoreState()
+//        }
     }
 
     deinit {
@@ -82,37 +98,41 @@ class RealAuthService: NSObject, AuthService {
             Auth.auth().removeStateDidChangeListener(authStateListenerHandle)
         }
     }
+    
+    func setup(userChanged: @escaping (User?) -> Void) {
+        self.userChanged = userChanged
+        userChanged(user)
+    }
 
     private func getUser(with uuid: String) async throws -> User {
         User(id: MockRecipeService.authorId1, name: "Jupiter Jones", email: "foo@foo.com", dateAdded: Date())
     }
 
-    private func restoreState() async {
-        do {
-            if let user = auth.currentUser {
-                let user = try await getUser(with: user.uid)
-                self._user.send(user)
-            } else if GIDSignIn.sharedInstance.hasPreviousSignIn() {
-                let googleUser = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
-
-                guard let idToken = googleUser.idToken else { return }
-                let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: googleUser.accessToken.tokenString)
-                let result = try await auth.signIn(with: credential)
-                let user = try await getUser(with: result.user.uid)
-                self._user.send(user)
-            } else {
-                try await self.signOut()
-            }
-        } catch {
-            log(error.localizedDescription, logLevel: .debug, logType: .auth)
-        }
-    }
+    #warning("refactor")
+//    private func restoreState() async {
+//        do {
+//            if let user = auth.currentUser {
+//                let user = try await getUser(with: user.uid)
+//                self._user.send(user)
+//            } else if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+//                let googleUser = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
+//
+//                guard let idToken = googleUser.idToken else { return }
+//                let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: googleUser.accessToken.tokenString)
+//                let result = try await auth.signIn(with: credential)
+//                let user = try await getUser(with: result.user.uid)
+//                self._user.send(user)
+//            } else {
+//                try await self.signOut()
+//            }
+//        } catch {
+//            log(error.localizedDescription, logLevel: .debug, logType: .auth)
+//        }
+//    }
 
     func signUpWith(email: String, password: String) async throws {
         do {
-            let result = try await auth.createUser(withEmail: email, password: password)
-            let user = try await getUser(with: result.user.uid)
-            self._user.send(user)
+            _ = try await auth.createUser(withEmail: email, password: password)
         } catch {
             log(error.localizedDescription, logLevel: .error, logType: .auth)
             throw error
@@ -121,9 +141,7 @@ class RealAuthService: NSObject, AuthService {
 
     func signInWith(email: String, password: String) async throws {
         do {
-            let result = try await auth.signIn(withEmail: email, password: password)
-            let user = try await getUser(with: result.user.uid)
-            self._user.send(user)
+            _ = try await auth.signIn(withEmail: email, password: password)
         } catch {
             log(error.localizedDescription, logLevel: .error, logType: .auth)
             throw error
@@ -137,7 +155,6 @@ class RealAuthService: NSObject, AuthService {
             if signoutGoogle {
                 GIDSignIn.sharedInstance.signOut()
             }
-            _user.send(nil)
         } catch {
             log(error.localizedDescription, logLevel: .error, logType: .auth)
             throw error
@@ -158,11 +175,9 @@ extension RealAuthService {
                 throw AuthError.unknown
             }
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: viewController)
-            guard let userId = result.user.userID else {
+            if result.user.userID == nil {
                 throw AuthError.userNotFound
             }
-            let user = try await getUser(with: userId)
-            self._user.send(user)
         } catch {
             log(error.localizedDescription, logLevel: .error, logType: .auth)
             throw error
@@ -260,9 +275,7 @@ extension RealAuthService: ASAuthorizationControllerDelegate, ASAuthorizationCon
             Task { [weak self] in
                 guard let self = self else { return }
                 do {
-                    let result = try await self.auth.signIn(with: credential)
-                    let user = try await getUser(with: result.user.uid)
-                    self._user.send(user)
+                    _ = try await self.auth.signIn(with: credential)
                     self.appleSignInContinuation?.resume()
                     self.appleSignInContinuation = nil
                 } catch {
