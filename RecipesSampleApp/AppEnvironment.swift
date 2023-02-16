@@ -13,6 +13,7 @@ class AppEnvironment {
     let authService: AuthService
     let recipeDBRepository: RecipeDBRepository
     let recipeWebRepository: RecipeWebRepository
+    let networkMonitor: NetworkMonitor
     let recipeService: RecipeService
 
     private let baseURL: String = {
@@ -39,6 +40,7 @@ class AppEnvironment {
         self.authService = RealAuthService(userWebRepository: userWebRepository)
         self.recipeDBRepository = RealRecipeDBRepository(persistentStore: CoreDataStack(version: CoreDataStack.Version.actual))
         self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: baseURL)
-        self.recipeService = RealRecipeService(recipeDBRepository: recipeDBRepository, recipeWebRepository: recipeWebRepository)
+        self.networkMonitor = RealNetworkMonitor()
+        self.recipeService = RealRecipeService(recipeDBRepository: recipeDBRepository, recipeWebRepository: recipeWebRepository, networkMonitor: networkMonitor)
     }
 }

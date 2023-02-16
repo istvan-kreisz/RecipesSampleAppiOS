@@ -22,13 +22,31 @@ class RealRecipeDBRepository: RecipeDBRepository {
         let result = try await persistentStore.fetch(fetchRequest) { Recipe.Rating(from: $0) }
         return result
     }
-
+    
+    func fetchRatingIds(for recipe: Recipe) async throws -> [String] {
+        let fetchRequest = RatingObject.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RatingObject.dateAdded, ascending: false)]
+        fetchRequest.predicate = NSPredicate(format: "recipe.id == %@", recipe.id as CVarArg)
+        fetchRequest.propertiesToFetch = ["id"]
+        let result = try await persistentStore.fetch(fetchRequest) { $0.id }
+        return result
+    }
+    
     func fetchAllRecipes(searchText: String) async throws -> [Recipe] {
         let fetchRequest = RecipeObject.fetchRequest()
         fetchRequest.includesSubentities = false
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RecipeObject.dateAdded, ascending: false)]
         fetchRequest.predicate = searchTextPredicate(searchText: searchText)
         let result = try await persistentStore.fetch(fetchRequest) { Recipe(from: $0) }
+        return result
+    }
+    
+    func fetchAllRecipeIds() async throws -> [String] {
+        let fetchRequest = RecipeObject.fetchRequest()
+        fetchRequest.includesSubentities = false
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RecipeObject.dateAdded, ascending: false)]
+        fetchRequest.propertiesToFetch = ["id"]
+        let result = try await persistentStore.fetch(fetchRequest) { $0.id }
         return result
     }
 

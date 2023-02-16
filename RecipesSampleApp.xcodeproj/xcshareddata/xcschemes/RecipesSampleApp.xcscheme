@@ -80,7 +80,7 @@
          <EnvironmentVariable
             key = "clearCoreData"
             value = "true"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "logLevel"

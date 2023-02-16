@@ -14,14 +14,18 @@ struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
     var body: some View {
         List(viewModel.recipes) { (recipe: Recipe) in
             HStack {
-                AsyncImage(url: recipe.imageURL) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(10)
-                } placeholder: {
-                    ProgressView()
+                AsyncImage(url: recipe.imageURL) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(10)
+                    } else {
+                        Color.blue.opacity(0.1)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(10)
+                    }
                 }
                 Text(recipe.title)
                     .font(.headline)

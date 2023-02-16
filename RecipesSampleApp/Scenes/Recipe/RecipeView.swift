@@ -14,15 +14,19 @@ struct RecipeView<RatingModifier: ViewModifier>: View {
     var body: some View {
         List {
             if let imageURL = viewModel.recipe.imageURL {
-                AsyncImage(url: imageURL) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxHeight: UIScreen.main.bounds.height / 2)
-                        .clipped()
-                        .overlay(sourceOverlay, alignment: .bottom)
-                } placeholder: {
-                    ProgressView()
+                AsyncImage(url: imageURL) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxHeight: UIScreen.main.bounds.height / 2)
+                            .clipped()
+                            .overlay(sourceOverlay, alignment: .bottom)
+                    } else {
+                        Color.blue.opacity(0.1)
+                            .frame(maxHeight: UIScreen.main.bounds.height / 2)
+                            .clipped()
+                    }
                 }
                 .listRowInsets(.init())
             }

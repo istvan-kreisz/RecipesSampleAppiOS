@@ -34,15 +34,19 @@ struct AddRecipeView: View {
 
             Section(header: Text("Image")) {
                 if let imageURL = viewModel.recipe.imageURL {
-                    #warning("fix error state")
-                    AsyncImage(url: imageURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxHeight: UIScreen.main.bounds.height / 3)
-                            .clipped()
-                    } placeholder: {
-                        ProgressView()
+                    AsyncImage(url: imageURL) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxHeight: UIScreen.main.bounds.height / 3)
+                                .clipped()
+                        } else {
+                            Color.blue.opacity(0.1)
+                                .frame(maxHeight: UIScreen.main.bounds.height / 3)
+                                .clipped()
+
+                        }
                     }
                     .listRowInsets(.init())
                 } else {

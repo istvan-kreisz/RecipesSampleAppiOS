@@ -45,7 +45,7 @@ class RealAuthService: NSObject, AuthService {
             UserDefaults.standard.user = newValue
         }
     }
-    
+
     private var idToken: String? {
         get {
             UserDefaults.standard.idToken
@@ -67,33 +67,32 @@ class RealAuthService: NSObject, AuthService {
             auth.useEmulator(withHost: "localhost", port: 9100)
         }
 
-        authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
-            guard let user else {
-                self?.user = nil
-                return
-            }
-            let userChanged = user.uid != self?.user?.id
-            Task { [weak self] in
-                guard let self else { return }
-                do {
-                    let token = try await user.getIDToken()
-                    self.idToken = token
-                    
-                    if userChanged {
-                        let newUser = try await self.getUser(with: user.uid)
-                        self.user = newUser
+        Task { @MainActor in
+            await restoreState()
+            authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
+                guard let user else {
+                    self?.user = nil
+                    return
+                }
+                let userChanged = user.uid != self?.user?.id
+                Task { [weak self] in
+                    guard let self else { return }
+                    do {
+                        let token = try await user.getIDToken()
+                        self.idToken = token
+
+                        if userChanged {
+                            let newUser = try await self.getUser(with: user.uid)
+                            self.user = newUser
+                        }
+                    } catch {
+                        try? await self.signOut()
+                        self.user = nil
+                        self.idToken = nil
                     }
-                } catch {
-                    try? await self.signOut()
-                    self.user = nil
-                    self.idToken = nil
                 }
             }
         }
-
-//        Task {
-//            await restoreState()
-//        }
     }
 
     deinit {
@@ -106,27 +105,24 @@ class RealAuthService: NSObject, AuthService {
         try await userWebRepository.fetchUser(userId: uuid)
     }
 
-    #warning("refactor")
-//    private func restoreState() async {
-//        do {
-//            if let user = auth.currentUser {
-//                let user = try await getUser(with: user.uid)
-//                self._user.send(user)
-//            } else if GIDSignIn.sharedInstance.hasPreviousSignIn() {
-//                let googleUser = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
-//
-//                guard let idToken = googleUser.idToken else { return }
-//                let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: googleUser.accessToken.tokenString)
-//                let result = try await auth.signIn(with: credential)
-//                let user = try await getUser(with: result.user.uid)
-//                self._user.send(user)
-//            } else {
-//                try await self.signOut()
-//            }
-//        } catch {
-//            log(error.localizedDescription, logLevel: .debug, logType: .auth)
-//        }
-//    }
+    private func restoreState() async {
+        do {
+            if let currentUser = auth.currentUser {
+                self.idToken = try await currentUser.getIDToken()
+                self.user = try await self.getUser(with: currentUser.uid)
+            } else if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+                let googleUser = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
+
+                guard let idToken = googleUser.idToken else { return }
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: googleUser.accessToken.tokenString)
+                try await auth.signIn(with: credential)
+            } else {
+                try await self.signOut()
+            }
+        } catch {
+            log(error.localizedDescription, logLevel: .debug, logType: .auth)
+        }
+    }
 
     func signUpWith(email: String, password: String) async throws {
         do {
@@ -310,22 +306,21 @@ extension UserDefaults {
 
     @objc fileprivate(set) dynamic var userJSONString: String? {
         get {
-            string(forKey: "user")
+            string(forKey: Keys.user.rawValue)
         }
         set {
-            setValue(newValue, forKey: "user")
-        }
-    }
-    
-    fileprivate(set) var idToken: String? {
-        get {
-            string(forKey: "idToken")
-        }
-        set {
-            setValue(newValue, forKey: "idToken")
+            setValue(newValue, forKey: Keys.user.rawValue)
         }
     }
 
+    fileprivate(set) var idToken: String? {
+        get {
+            string(forKey: Keys.idToken.rawValue)
+        }
+        set {
+            setValue(newValue, forKey: Keys.idToken.rawValue)
+        }
+    }
 }
 
 enum UserUpdateStrategy {

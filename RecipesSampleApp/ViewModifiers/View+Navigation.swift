@@ -18,7 +18,6 @@ extension View {
                 }
             }
         )
-        
         return NavigationLink(
             destination: EmptyView(),
             isActive: isActive

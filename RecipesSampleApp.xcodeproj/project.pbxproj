@@ -67,8 +67,8 @@
 		5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C1297C80D10012CC8C /* String+Extensions.swift */; };
 		5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C4297C869F0012CC8C /* CoreDataStack.swift */; };
 		5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */; };
-		5DD54F242993C0BD006E0E32 /* UserDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */; };
-		5DD54F262993C0CD006E0E32 /* RealUserDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */; };
+		5DDB9A12299C3D8000DC6997 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDB9A11299C3D8000DC6997 /* UserDefaults+Extensions.swift */; };
+		5DDB9A15299E6DD100DC6997 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDB9A14299E6DD100DC6997 /* NetworkMonitor.swift */; };
 		5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE152991AF4900A7BCC2 /* AuthService.swift */; };
 		5DECDE1B2991B06400A7BCC2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1A2991B06400A7BCC2 /* FirebaseAnalytics */; };
 		5DECDE1D2991B06400A7BCC2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1C2991B06400A7BCC2 /* FirebaseAnalyticsSwift */; };
@@ -145,8 +145,8 @@
 		5DC660C1297C80D10012CC8C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		5DC660C4297C869F0012CC8C /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
-		5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBRepository.swift; sourceTree = "<group>"; };
-		5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealUserDBRepository.swift; sourceTree = "<group>"; };
+		5DDB9A11299C3D8000DC6997 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		5DDB9A14299E6DD100DC6997 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		5DECDE152991AF4900A7BCC2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5DECDE242991B0EB00A7BCC2 /* RealAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealAuthService.swift; sourceTree = "<group>"; };
 		5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -179,8 +179,6 @@
 				5D5081062980227C00B6247B /* RealRecipeDBRepository.swift */,
 				5D6B61272981DB3A0053AD5C /* RecipeWebRepository.swift */,
 				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
-				5DD54F232993C0BD006E0E32 /* UserDBRepository.swift */,
-				5DD54F252993C0CD006E0E32 /* RealUserDBRepository.swift */,
 				5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */,
 				5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */,
 			);
@@ -190,6 +188,7 @@
 		5D508108298022E100B6247B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5DDB9A13299E6DBC00DC6997 /* NetworkMonitor */,
 				5DECDE182991AF6300A7BCC2 /* Auth */,
 				5DECDE172991AF5D00A7BCC2 /* Recipe */,
 			);
@@ -373,6 +372,7 @@
 				5DC660BF297C496F0012CC8C /* View+Extensions.swift */,
 				5DC660C1297C80D10012CC8C /* String+Extensions.swift */,
 				5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */,
+				5DDB9A11299C3D8000DC6997 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -408,6 +408,14 @@
 				5D5080C4297F2C3000B6247B /* db_model_v1.xcdatamodeld */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		5DDB9A13299E6DBC00DC6997 /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				5DDB9A14299E6DD100DC6997 /* NetworkMonitor.swift */,
+			);
+			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 		5DECDE172991AF5D00A7BCC2 /* Recipe */ = {
@@ -564,6 +572,7 @@
 				5DC660922979E59F0012CC8C /* HomeCoordinator.swift in Sources */,
 				5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */,
 				5DC660AF297ACA7E0012CC8C /* UserRecipesViewModel.swift in Sources */,
+				5DDB9A15299E6DD100DC6997 /* NetworkMonitor.swift in Sources */,
 				5DECDE252991B0EB00A7BCC2 /* RealAuthService.swift in Sources */,
 				5D5080C6297F2C3000B6247B /* db_model_v1.xcdatamodeld in Sources */,
 				5DAA80CB2993C92B001A7D50 /* UserObject+CoreDataClass.swift in Sources */,
@@ -590,6 +599,7 @@
 				5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
+				5DDB9A12299C3D8000DC6997 /* UserDefaults+Extensions.swift in Sources */,
 				5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */,
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
@@ -599,8 +609,6 @@
 				5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */,
 				5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */,
 				5DC660972979E59F0012CC8C /* RatingViewModel.swift in Sources */,
-				5DD54F262993C0CD006E0E32 /* RealUserDBRepository.swift in Sources */,
-				5DD54F242993C0BD006E0E32 /* UserDBRepository.swift in Sources */,
 				5D50810D298084E900B6247B /* RatingObject+CoreDataClass.swift in Sources */,
 				5DECDE2A299247CF00A7BCC2 /* UIApplication+Extensions.swift in Sources */,
 			);

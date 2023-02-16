@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#warning("show errors")
 struct AuthCoordinatorView: View {
     @ObservedObject var coordinator: AuthCoordinator
     
