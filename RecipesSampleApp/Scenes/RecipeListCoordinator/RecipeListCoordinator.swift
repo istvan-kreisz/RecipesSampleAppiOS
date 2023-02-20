@@ -10,7 +10,6 @@ import SwiftUI
 @MainActor
 class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where ListViewModel: RecipesViewModel {
     @Published private(set) var viewModel: ListViewModel!
-    @Published var detailViewModel: RecipeViewModel?
     @Published var ratingViewModel: RatingViewModel?
     @Published var addRecipeViewModel: AddRecipeViewModel?
 
@@ -20,19 +19,16 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     init(title: String, recipeService: RecipeService, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
         self.openURL = openURL
-
-        self.viewModel = ListViewModel(title: title, recipeService: recipeService) { [weak self] recipe in
-            self?.open(recipe)
-        }
+        self.viewModel = ListViewModel(title: title, recipeService: recipeService)
     }
 
-    func open(_ recipe: Recipe) {
-        self.detailViewModel = .init(recipe: recipe,
-                                     openRatings: { [weak self] in
-                                         self?.openRatings(for: recipe)
-                                     }, openURL: { [weak self] in
-                                         self?.openURL($0)
-                                     })
+    func getRecipeViewModel(_ recipe: Recipe) -> RecipeViewModel {
+        return .init(recipe: recipe,
+                     openRatings: { [weak self] in
+                         self?.openRatings(for: recipe)
+                     }, openURL: { [weak self] in
+                         self?.openURL($0)
+                     })
     }
 
     func openRatings(for recipe: Recipe) {

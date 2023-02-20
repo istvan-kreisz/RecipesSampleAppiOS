@@ -12,8 +12,7 @@ protocol RecipesViewModel: ObservableObject {
     var title: String { get }
     var recipes: [Recipe] { get }
     
-    init(title: String, recipeService: RecipeService, openRecipe: @escaping (Recipe) -> Void)
-    func open(recipe: Recipe)
+    init(title: String, recipeService: RecipeService)
     func refresh(searchText: String)
 }
 

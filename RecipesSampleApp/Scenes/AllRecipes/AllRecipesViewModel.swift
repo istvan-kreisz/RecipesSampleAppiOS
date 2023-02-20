@@ -13,11 +13,9 @@ class AllRecipesViewModel: RecipesViewModel {
     @Published var recipes = [Recipe]()
 
     private let recipeService: RecipeService
-    private let openRecipe: (Recipe) -> Void
 
-    required init(title: String, recipeService: RecipeService, openRecipe: @escaping (Recipe) -> Void) {
+    required init(title: String, recipeService: RecipeService) {
         self.title = title
-        self.openRecipe = openRecipe
         self.recipeService = recipeService
         refresh(searchText: "")
     }
@@ -31,9 +29,5 @@ class AllRecipesViewModel: RecipesViewModel {
                 // todo: show error
             }
         }
-    }
-
-    func open(recipe: Recipe) {
-        self.openRecipe(recipe)
     }
 }

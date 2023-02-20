@@ -38,7 +38,6 @@
 		5DC6606C2979E5780012CC8C /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6606A2979E5780012CC8C /* RecipeService.swift */; };
 		5DC660712979E5890012CC8C /* SheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6606E2979E5890012CC8C /* SheetModifier.swift */; };
 		5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6606F2979E5890012CC8C /* PopoverModifier.swift */; };
-		5DC660732979E5890012CC8C /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660702979E5890012CC8C /* View+Navigation.swift */; };
 		5DC660782979E5920012CC8C /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660752979E5920012CC8C /* SafariView.swift */; };
 		5DC660792979E5920012CC8C /* RatingStars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660762979E5920012CC8C /* RatingStars.swift */; };
 		5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC6607D2979E59E0012CC8C /* SettingsView.swift */; };
@@ -116,7 +115,6 @@
 		5DC6606A2979E5780012CC8C /* RecipeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		5DC6606E2979E5890012CC8C /* SheetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetModifier.swift; sourceTree = "<group>"; };
 		5DC6606F2979E5890012CC8C /* PopoverModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverModifier.swift; sourceTree = "<group>"; };
-		5DC660702979E5890012CC8C /* View+Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
 		5DC660752979E5920012CC8C /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		5DC660762979E5920012CC8C /* RatingStars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingStars.swift; sourceTree = "<group>"; };
 		5DC6607D2979E59E0012CC8C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -264,7 +262,6 @@
 			children = (
 				5DC6606E2979E5890012CC8C /* SheetModifier.swift */,
 				5DC6606F2979E5890012CC8C /* PopoverModifier.swift */,
-				5DC660702979E5890012CC8C /* View+Navigation.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -604,7 +601,6 @@
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
 				5DC660A62979E7B80012CC8C /* URL+Extensions.swift in Sources */,
-				5DC660732979E5890012CC8C /* View+Navigation.swift in Sources */,
 				5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */,
 				5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */,
 				5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */,

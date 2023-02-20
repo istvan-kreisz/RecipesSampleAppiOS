@@ -20,15 +20,10 @@ class UserRecipesViewModel: RecipesViewModel, UserListener {
     }
 
     private let recipeService: RecipeService
-    private let openRecipe: (Recipe) -> Void
-
     var cancellable: AnyCancellable?
 
-    required init(title: String,
-                  recipeService: RecipeService,
-                  openRecipe: @escaping (Recipe) -> Void) {
+    required init(title: String, recipeService: RecipeService) {
         self.title = title
-        self.openRecipe = openRecipe
         self.recipeService = recipeService
 
         cancellable = listenToUserUpdates(updateStrategy: .userChanged) { [weak self] newValue in
@@ -46,9 +41,5 @@ class UserRecipesViewModel: RecipesViewModel, UserListener {
                 // todo: show error
             }
         }
-    }
-
-    func open(recipe: Recipe) {
-        self.openRecipe(recipe)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Recipe: Identifiable, Equatable, Codable {
+struct Recipe: Identifiable, Equatable, Codable, Hashable {
     var id = UUID().uuidString
     var authorId: String
     var imageURL: URL?

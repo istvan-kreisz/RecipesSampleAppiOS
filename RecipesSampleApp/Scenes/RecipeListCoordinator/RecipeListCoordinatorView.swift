@@ -11,10 +11,11 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 RecipeList(viewModel: coordinator.viewModel)
-                    .navigation(item: $coordinator.detailViewModel) { viewModel in
+                    .navigationDestination(for: Recipe.self) { recipe in
+                        let viewModel = coordinator.getRecipeViewModel(recipe)
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             phoneRecipeView(viewModel)
                         } else {
