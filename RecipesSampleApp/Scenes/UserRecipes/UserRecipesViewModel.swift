@@ -12,6 +12,7 @@ import Combine
 class UserRecipesViewModel: RecipesViewModel, UserListener {
     @Published var title: String
     @Published var recipes = [Recipe]()
+    @Published var error: Error?
 
     var user: User? {
         didSet {
@@ -33,12 +34,20 @@ class UserRecipesViewModel: RecipesViewModel, UserListener {
 
     func refresh(searchText: String) {
         guard let user = user else { return }
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             do {
                 let recipes = try await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
                 self.recipes = recipes
             } catch {
-                // todo: show error
+                self.error = error
+                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { _ in
+                    Task { @MainActor [weak self] in
+                        withAnimation {
+                            self?.error = nil
+                        }
+                    }
+                }
             }
         }
     }

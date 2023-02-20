@@ -11,6 +11,7 @@ import Foundation
 protocol RecipesViewModel: ObservableObject {
     var title: String { get }
     var recipes: [Recipe] { get }
+    var error: Error? { get }
     
     init(title: String, recipeService: RecipeService)
     func refresh(searchText: String)

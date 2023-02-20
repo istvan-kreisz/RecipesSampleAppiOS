@@ -11,6 +11,7 @@ import SwiftUI
 class AllRecipesViewModel: RecipesViewModel {
     @Published var title: String
     @Published var recipes = [Recipe]()
+    @Published var error: Error?
 
     private let recipeService: RecipeService
 
@@ -22,11 +23,18 @@ class AllRecipesViewModel: RecipesViewModel {
     
     func refresh(searchText: String) {
         Task { [weak self] in
-            guard self != nil else { return }
+            guard let self else { return }
             do {
                 recipes = try await recipeService.fetchAllRecipes(searchText: searchText)
             } catch {
-                // todo: show error
+                self.error = error
+                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { _ in
+                    Task { @MainActor [weak self] in
+                        withAnimation {
+                            self?.error = nil
+                        }
+                    }
+                }
             }
         }
     }
