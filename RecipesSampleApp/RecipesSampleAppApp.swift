@@ -11,7 +11,8 @@ import SwiftUI
 struct RecipesSampleAppApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var coordinator = HomeCoordinator(recipeService: AppEnvironment.shared.recipeService,
-                                                   authService: AppEnvironment.shared.authService)
+                                                   authService: AppEnvironment.shared.authService,
+                                                   networkMonitor: AppEnvironment.shared.networkMonitor)
 
     var body: some Scene {
         WindowGroup {

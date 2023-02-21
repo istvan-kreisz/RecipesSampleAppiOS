@@ -9,15 +9,18 @@ import SwiftUI
 
 @MainActor
 class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where ListViewModel: RecipesViewModel {
+    @Published var error: Error?
     @Published private(set) var viewModel: ListViewModel!
     @Published var ratingViewModel: RatingViewModel?
     @Published var addRecipeViewModel: AddRecipeViewModel?
 
     private let recipeService: RecipeService
+    private let networkMonitor: NetworkMonitor
     private let openURL: (URL) -> Void
 
-    init(title: String, recipeService: RecipeService, openURL: @escaping (URL) -> Void) {
+    init(title: String, recipeService: RecipeService, networkMonitor: NetworkMonitor, openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
+        self.networkMonitor = networkMonitor
         self.openURL = openURL
         self.viewModel = ListViewModel(title: title, recipeService: recipeService)
     }
@@ -40,22 +43,23 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
     }
 
     func openAddRecipe() {
-        Task { @MainActor in
-            self.addRecipeViewModel = .init(recipeService: recipeService,
-                                            closeAddRecipe: { [weak self] newRecipe in
-                                                self?.addRecipeViewModel = nil
-                                                if newRecipe != nil {
-                                                    self?.viewModel.refresh()
-                                                }
-                                            },
-                                            openURL: { [weak self] in
-                                                self?.openURL($0)
-                                            })
+        if networkMonitor.isReachable {
+            Task { @MainActor in
+                self.addRecipeViewModel = .init(recipeService: recipeService,
+                                                networkMonitor: networkMonitor,
+                                                closeAddRecipe: { [weak self] newRecipe in
+                                                    self?.addRecipeViewModel = nil
+                                                    if newRecipe != nil {
+                                                        self?.viewModel.refresh()
+                                                    }
+                                                },
+                                                openURL: { [weak self] in
+                                                    self?.openURL($0)
+                                                })
+            }
+        } else {
+            self.error = ReachabilityError.offline
         }
-    }
-
-    func add(recipe: Recipe) {
-        //
     }
 
     func closeRatings() {

@@ -51,4 +51,28 @@ extension View {
             Spacer()
         }
     }
+
+    func withErrorAlert(error: Binding<Error?>) -> some View {
+        let isAlertPresented = Binding<Bool>(get: { error.wrappedValue != nil },
+                                             set: { newValue in
+                                                 if !newValue {
+                                                     error.wrappedValue = nil
+                                                 }
+                                             })
+        return self
+            .alert("Error", isPresented: isAlertPresented, actions: {
+                Button("Okay", role: .cancel) {}
+            }, message: {
+                if let error = error.wrappedValue {
+                    if let reachabilityError = error as? ReachabilityError {
+                        switch reachabilityError {
+                        case .offline:
+                            Text("No internet connection")
+                        }
+                    } else {
+                        Text(error.localizedDescription)
+                    }
+                }
+            })
+    }
 }

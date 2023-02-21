@@ -21,12 +21,13 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
     }
 
     private let recipeService: RecipeService
+    private let networkMonitor: NetworkMonitor
     private let closeAddRecipe: (_ newRecipe: Recipe?) -> Void
     var cancellable: AnyCancellable?
     let openURL: (URL) -> Void
 
-
     @Published var inputErrors = InputErrors()
+    @Published var error: Error?
     @Published var recipe: Recipe {
         didSet {
             if !recipe.title.isEmpty, inputErrors.titleMissing {
@@ -48,8 +49,12 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
         }
     }
 
-    init(recipeService: RecipeService, closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void, openURL: @escaping (URL) -> Void) {
+    init(recipeService: RecipeService,
+         networkMonitor: NetworkMonitor,
+         closeAddRecipe: @escaping (_ newRecipe: Recipe?) -> Void,
+         openURL: @escaping (URL) -> Void) {
         self.recipeService = recipeService
+        self.networkMonitor = networkMonitor
         self.recipe = Recipe(authorId: UUID().uuidString,
                              imageURL: nil,
                              title: "",
@@ -61,7 +66,7 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
                              ratings: [])
         self.closeAddRecipe = closeAddRecipe
         self.openURL = openURL
-        
+
         cancellable = listenToUserUpdates(updateStrategy: .userChanged) { [weak self] newValue in
             self?.user = newValue
         }
@@ -86,25 +91,29 @@ class AddRecipeViewModel: Identifiable, ObservableObject, UserListener {
     }
 
     func addRecipe() {
-        if recipe.title.isEmpty {
-            inputErrors.titleMissing = true
-        }
-        if recipe.ingredients.isEmpty {
-            inputErrors.ingredientsMissing = true
-        }
-        if recipe.steps.isEmpty {
-            inputErrors.stepsMissing = true
-        }
-        guard !inputErrors.hasErrors else { return }
-
-        Task {
-            do {
-                try await recipeService.add(recipe: recipe)
-                closeAddRecipe(recipe)
-            } catch {
-                log(error, logLevel: .error)
-                closeAddRecipe(nil)
+        if networkMonitor.isReachable {
+            if recipe.title.isEmpty {
+                inputErrors.titleMissing = true
             }
+            if recipe.ingredients.isEmpty {
+                inputErrors.ingredientsMissing = true
+            }
+            if recipe.steps.isEmpty {
+                inputErrors.stepsMissing = true
+            }
+            guard !inputErrors.hasErrors else { return }
+
+            Task { [weak self] in
+                do {
+                    try await recipeService.add(recipe: recipe)
+                    closeAddRecipe(recipe)
+                } catch {
+                    log(error, logLevel: .error)
+                    self?.error = error
+                }
+            }
+        } else {
+            self.error = ReachabilityError.offline
         }
     }
 }

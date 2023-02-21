@@ -163,5 +163,6 @@ struct AddRecipeView: View {
                 Text("Add link")
             }
         }
+        .withErrorAlert(error: $viewModel.error)
     }
 }

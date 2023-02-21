@@ -38,5 +38,6 @@ struct RatingView: View {
                 Text("Add a rating")
             }
         }
+        .withErrorAlert(error: $viewModel.error)
     }
 }

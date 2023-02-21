@@ -13,7 +13,8 @@ import Combine
 class RatingViewModel: ObservableObject, Identifiable, UserListener {
     @Published var recipe: Recipe
     @Published var user: User?
-
+    @Published var error: Error?
+    
     private let recipeService: RecipeService
     private let closeRatings: () -> Void
     var cancellable: AnyCancellable?
@@ -43,7 +44,7 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener {
             let ratings = try await recipeService.fetchRatings(for: recipe)
             self.recipe.ratings = ratings
         } catch {
-            // todo: show error
+            self.error = error
         }
     }
 
@@ -52,7 +53,7 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener {
             try await recipeService.add(rating: rating, to: recipe)
             await fetchRatings()
         } catch {
-            // todo: show error
+            self.error = error
         }
     }
 

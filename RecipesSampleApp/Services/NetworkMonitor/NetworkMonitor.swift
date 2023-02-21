@@ -16,6 +16,10 @@ protocol NetworkMonitor {
     func stopMonitoring()
 }
 
+enum ReachabilityError: Error {
+    case offline
+}
+
 class RealNetworkMonitor: NetworkMonitor {
     private let monitor = NWPathMonitor()
     private let statusValueSubject = CurrentValueSubject<NWPath.Status, Never>(.requiresConnection)
