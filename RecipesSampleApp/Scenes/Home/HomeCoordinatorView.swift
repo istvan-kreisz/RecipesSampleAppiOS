@@ -31,7 +31,6 @@ struct HomeCoordinatorView: View {
                     .tabItem { Label("Settings", systemImage: "gear") }
                     .tag(HomeTab.settings)
                 }
-                // todo: use SheetModifier
                 .sheet(item: $coordinator.openedURL) {
                     SafariView(url: $0)
                         .edgesIgnoringSafeArea(.all)

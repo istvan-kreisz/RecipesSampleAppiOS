@@ -14,15 +14,7 @@ struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
     var body: some View {
         VStack {
             if let error = viewModel.error {
-                Text(error.localizedDescription)
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
-                    .padding(10)
-                    .frame(width: UIScreen.main.bounds.width - 40)
-                    .background(Color.red)
-                    .cornerRadius(10)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                ErrorBanner(errorMessage: error.localizedDescription)
             }
             List(viewModel.recipes) { (recipe: Recipe) in
                 NavigationLink(value: recipe) {

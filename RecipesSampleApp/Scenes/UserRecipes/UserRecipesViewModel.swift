@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-class UserRecipesViewModel: RecipesViewModel, UserListener {
+class UserRecipesViewModel: RecipesViewModel, UserListener, AnimatedError {
     @Published var title: String
     @Published var recipes = [Recipe]()
     @Published var error: Error?
@@ -40,14 +40,7 @@ class UserRecipesViewModel: RecipesViewModel, UserListener {
                 let recipes = try await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
                 self.recipes = recipes
             } catch {
-                self.error = error
-                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false) { _ in
-                    Task { @MainActor [weak self] in
-                        withAnimation {
-                            self?.error = nil
-                        }
-                    }
-                }
+                showDisappearingError(error: error)
             }
         }
     }

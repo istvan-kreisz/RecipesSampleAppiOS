@@ -17,76 +17,81 @@ struct SignUpView<Model>: View where Model: SignUpViewModelType {
     @FocusState private var focusedField: Field?
 
     var body: some View {
-        VStack(spacing: 10) {
-            VStack {
-                TextField("Email", text: $viewModel.emailSignUp, prompt: nil)
-                    .keyboardType(.emailAddress)
-                    .padding()
-                    .focused($focusedField, equals: .email)
-                    .textContentType(.emailAddress)
-                    .submitLabel(.next)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
-
-                SecureField("Password", text: $viewModel.passwordSignUp, prompt: nil)
-                    .padding()
-                    .focused($focusedField, equals: .password)
-                    .textContentType(.password)
-                    .submitLabel(.done)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
+        VStack {
+            if let error = viewModel.error {
+                ErrorBanner(errorMessage: error.localizedDescription)
             }
-            .onSubmit {
-                switch focusedField {
-                case .email:
-                    focusedField = .password
-                case .password:
-                    if !viewModel.signUpDisabled {
+            Spacer()
+            VStack(spacing: 10) {
+                VStack {
+                    TextField("Email", text: $viewModel.email, prompt: nil)
+                        .keyboardType(.emailAddress)
+                        .padding()
+                        .focused($focusedField, equals: .email)
+                        .textContentType(.emailAddress)
+                        .submitLabel(.next)
+                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
+
+                    SecureField("Password", text: $viewModel.password, prompt: nil)
+                        .padding()
+                        .focused($focusedField, equals: .password)
+                        .textContentType(.password)
+                        .submitLabel(.done)
+                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary, lineWidth: 1))
+                }
+                .onSubmit {
+                    switch focusedField {
+                    case .email:
+                        focusedField = .password
+                    case .password:
+                        if !viewModel.signUpDisabled {
+                            Task {
+                                await viewModel.signUp()
+                            }
+                        }
+                    case .none:
+                        break
+                    }
+                }
+                .padding(16.0)
+
+                VStack(spacing: 10) {
+                    Button {
                         Task {
                             await viewModel.signUp()
                         }
+                    } label: {
+                        Text("Sign Up")
+                            .frame(width: 200)
+                            .font(.system(size: 18.0))
                     }
-                case .none:
-                    break
-                }
-            }
-            .padding(16.0)
+                    .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.signUpDisabled)
 
-            VStack(spacing: 10) {
-                Button {
-                    Task {
-                        await viewModel.signUp()
+                    Text("Already have an account?")
+                        .font(.system(size: 12.0))
+                        .padding(.top, 5)
+                    Button {
+                        viewModel.navigateToSignIn?()
+                    } label: {
+                        Text("Sign In")
+                            .frame(width: 200)
+                            .font(.system(size: 18.0))
                     }
-                } label: {
-                    Text("Sign Up")
-                        .frame(width: 200)
-                        .font(.system(size: 18.0))
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(viewModel.signUpDisabled)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
 
-                Text("Already have an account?")
-                    .font(.system(size: 12.0))
-                    .padding(.top, 5)
-                Button {
-                    viewModel.navigateToSignIn?()
-                } label: {
-                    Text("Sign In")
-                        .frame(width: 200)
-                        .font(.system(size: 18.0))
+                    Button {
+                        viewModel.navigateToPasswordReset?()
+                    } label: {
+                        Text("Forgot password?")
+                            .font(.system(size: 12.0, weight: .semibold))
+                            .underline()
+                    }
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.orange)
-                
-                Button {
-                    viewModel.navigateToPasswordReset?()
-                } label: {
-                    Text("Forgot password?")
-                        .font(.system(size: 12.0, weight: .semibold))
-                        .underline()
-                }
+                .padding(.bottom)
             }
-            .padding(.bottom)
+            Spacer()
         }
-        .centeredVertically()
     }
 }
-

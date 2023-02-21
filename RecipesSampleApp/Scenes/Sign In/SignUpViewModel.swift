@@ -8,10 +8,10 @@
 import Foundation
 
 @MainActor
-protocol SignUpViewModelType: ObservableObject & AnyObject {
-    var signUpError: Error? { get }
-    var emailSignUp: String { get set }
-    var passwordSignUp: String { get set }
+protocol SignUpViewModelType: ObservableObject & AnyObject, AnimatedError {
+    var error: Error? { get set }
+    var email: String { get set }
+    var password: String { get set }
     var signUpDisabled: Bool { get }
     var navigateToSignIn: (() -> Void)? { get }
     var navigateToPasswordReset: (() -> Void)? { get }
@@ -25,15 +25,15 @@ protocol SignUpViewModelType: ObservableObject & AnyObject {
 class SignUpViewModel: SignUpViewModelType {
     private let authService: AuthService
 
-    @Published var signUpError: Error?
-    @Published var emailSignUp: String = ""
-    @Published var passwordSignUp: String = ""
+    @Published var error: Error?
+    @Published var email: String = ""
+    @Published var password: String = ""
     
     var navigateToSignIn: (() -> Void)?
     var navigateToPasswordReset: (() -> Void)?
     
     var signUpDisabled: Bool {
-        passwordSignUp.isEmpty || emailSignUp.isEmpty
+        password.isEmpty || email.isEmpty
     }
     
     init(authService: AuthService) {
@@ -42,17 +42,17 @@ class SignUpViewModel: SignUpViewModelType {
     
     private func signUp(signUpBlock: () async throws -> Void) async {
         do {
-            signUpError = nil
+            error = nil
             try await signUpBlock()
         } catch let error {
+            showDisappearingError(error: error)
             log(error, logLevel: .error, logType: .auth)
-            self.signUpError = error
         }
     }
 
     func signUp() async {
         await signUp {
-            _ = try await authService.signUpWith(email: emailSignUp, password: passwordSignUp)
+            _ = try await authService.signUpWith(email: email, password: password)
         }
     }
     

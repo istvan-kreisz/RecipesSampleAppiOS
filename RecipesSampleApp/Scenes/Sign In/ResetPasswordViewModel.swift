@@ -8,9 +8,9 @@
 import Foundation
 
 @MainActor
-protocol ResetPasswordViewModelType: ObservableObject & AnyObject {
-    var passwordResetError: Error? { get }
-    var emailPasswordReset: String { get set }
+protocol ResetPasswordViewModelType: ObservableObject & AnyObject, AnimatedError {
+    var error: Error? { get set }
+    var email: String { get set }
     var passwordResetDisabled: Bool { get }
     var navigateBack: (() -> Void)? { get }
     
@@ -20,13 +20,13 @@ protocol ResetPasswordViewModelType: ObservableObject & AnyObject {
 class ResetPasswordViewModel: ResetPasswordViewModelType, Identifiable {
     private let authService: AuthService
 
-    @Published var passwordResetError: Error?
-    @Published var emailPasswordReset: String = ""
+    @Published var error: Error?
+    @Published var email: String = ""
     
     var navigateBack: (() -> Void)?
     
     var passwordResetDisabled: Bool {
-        emailPasswordReset.isEmpty
+        email.isEmpty
     }
 
     init(authService: AuthService) {
@@ -35,11 +35,11 @@ class ResetPasswordViewModel: ResetPasswordViewModelType, Identifiable {
 
     func resetPassword() async {
         do {
-            passwordResetError = nil
-            _ = try await authService.resetPassword(email: emailPasswordReset)
+            error = nil
+            _ = try await authService.resetPassword(email: email)
         } catch let error {
+            showDisappearingError(error: error)
             log(error, logLevel: .error, logType: .auth)
-            self.passwordResetError = error
         }
     }
 }

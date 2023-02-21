@@ -31,6 +31,8 @@
 		5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */; };
 		5DAA80DC299694A1001A7D50 /* UserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */; };
 		5DAA80DE29969695001A7D50 /* RealUserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */; };
+		5DB5461629A482C000343397 /* AnimatedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5461529A482C000343397 /* AnimatedError.swift */; };
+		5DB5461829A4834400343397 /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5461729A4834400343397 /* ErrorBanner.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -107,6 +109,8 @@
 		5DAA80D729956A20001A7D50 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebRepository.swift; sourceTree = "<group>"; };
 		5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealUserWebRepository.swift; sourceTree = "<group>"; };
+		5DB5461529A482C000343397 /* AnimatedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedError.swift; sourceTree = "<group>"; };
+		5DB5461729A4834400343397 /* ErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBanner.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 			children = (
 				5DC660752979E5920012CC8C /* SafariView.swift */,
 				5DC660762979E5920012CC8C /* RatingStars.swift */,
+				5DB5461729A4834400343397 /* ErrorBanner.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -440,6 +445,7 @@
 				5DECDE3129924CAD00A7BCC2 /* Logger */,
 				5DECDE2E29924A1B00A7BCC2 /* Debug */,
 				5DC660A42979E7B80012CC8C /* Extensions */,
+				5DB5461529A482C000343397 /* AnimatedError.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				5DAA80DE29969695001A7D50 /* RealUserWebRepository.swift in Sources */,
 				5DC6609D2979E59F0012CC8C /* SignInView.swift in Sources */,
 				5DC660C2297C80D10012CC8C /* String+Extensions.swift in Sources */,
+				5DB5461829A4834400343397 /* ErrorBanner.swift in Sources */,
 				5DC660932979E59F0012CC8C /* HomeCoordinatorView.swift in Sources */,
 				5D50811B2980A38D00B6247B /* UIApplicationDelegate.swift in Sources */,
 				5DC660BC297C2BA50012CC8C /* AddRecipeView.swift in Sources */,
@@ -600,6 +607,7 @@
 				5DC660C0297C496F0012CC8C /* View+Extensions.swift in Sources */,
 				5DC660952979E59F0012CC8C /* RecipeList.swift in Sources */,
 				5DC6606B2979E5780012CC8C /* Recipe.swift in Sources */,
+				5DB5461629A482C000343397 /* AnimatedError.swift in Sources */,
 				5DC660A62979E7B80012CC8C /* URL+Extensions.swift in Sources */,
 				5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */,
 				5DC660912979E59F0012CC8C /* SettingsView.swift in Sources */,
