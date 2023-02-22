@@ -70,7 +70,7 @@
          <EnvironmentVariable
             key = "useEmulators"
             value = "true"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "clearUserDefaults"

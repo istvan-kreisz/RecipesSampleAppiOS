@@ -33,6 +33,8 @@
 		5DAA80DE29969695001A7D50 /* RealUserWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */; };
 		5DB5461629A482C000343397 /* AnimatedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5461529A482C000343397 /* AnimatedError.swift */; };
 		5DB5461829A4834400343397 /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5461729A4834400343397 /* ErrorBanner.swift */; };
+		5DB5461E29A48FF000343397 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB5461D29A48FF000343397 /* Nuke */; };
+		5DB5462029A48FF000343397 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB5461F29A48FF000343397 /* NukeUI */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -164,10 +166,12 @@
 			files = (
 				5DECDE1D2991B06400A7BCC2 /* FirebaseAnalyticsSwift in Frameworks */,
 				5DECDE1F2991B06400A7BCC2 /* FirebaseAuth in Frameworks */,
+				5DB5461E29A48FF000343397 /* Nuke in Frameworks */,
 				5DECDE232991B06400A7BCC2 /* FirebaseFunctions in Frameworks */,
 				5DECDE282991B20300A7BCC2 /* GoogleSignInSwift in Frameworks */,
 				5DECDE1B2991B06400A7BCC2 /* FirebaseAnalytics in Frameworks */,
 				5DECDE212991B06400A7BCC2 /* FirebaseDynamicLinks in Frameworks */,
+				5DB5462029A48FF000343397 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,8 @@
 				5DECDE202991B06400A7BCC2 /* FirebaseDynamicLinks */,
 				5DECDE222991B06400A7BCC2 /* FirebaseFunctions */,
 				5DECDE272991B20300A7BCC2 /* GoogleSignInSwift */,
+				5DB5461D29A48FF000343397 /* Nuke */,
+				5DB5461F29A48FF000343397 /* NukeUI */,
 			);
 			productName = RecipesSampleApp;
 			productReference = 5DC660522979E54E0012CC8C /* RecipesSampleApp.app */;
@@ -521,6 +527,7 @@
 			packageReferences = (
 				5DECDE192991B06400A7BCC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5DECDE262991B20300A7BCC2 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				5DB5461C29A48FF000343397 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 5DC660532979E54E0012CC8C /* Products */;
 			projectDirPath = "";
@@ -817,6 +824,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5DB5461C29A48FF000343397 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		5DECDE192991B06400A7BCC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -836,6 +851,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5DB5461D29A48FF000343397 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DB5461C29A48FF000343397 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		5DB5461F29A48FF000343397 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5DB5461C29A48FF000343397 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
 		5DECDE1A2991B06400A7BCC2 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5DECDE192991B06400A7BCC2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

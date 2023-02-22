@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct RecipeView<RatingModifier: ViewModifier>: View {
     @ObservedObject var viewModel: RecipeViewModel
@@ -14,20 +15,16 @@ struct RecipeView<RatingModifier: ViewModifier>: View {
     var body: some View {
         List {
             if let imageURL = viewModel.recipe.imageURL {
-                AsyncImage(url: imageURL) { phase in
-                    if let image = phase.image {
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxHeight: UIScreen.main.bounds.height / 2)
-                            .clipped()
-                            .overlay(sourceOverlay, alignment: .bottom)
+                LazyImage(url: imageURL) { state in
+                    if let image = state.image {
+                        image.resizingMode(.aspectFill)
                     } else {
                         Color.blue.opacity(0.1)
-                            .frame(maxHeight: UIScreen.main.bounds.height / 2)
-                            .clipped()
                     }
                 }
+                .frame(height: UIScreen.main.bounds.height / 3)
+                .clipped()
+                .overlay(sourceOverlay, alignment: .bottom)
                 .listRowInsets(.init())
             }
 

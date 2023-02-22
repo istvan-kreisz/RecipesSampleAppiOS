@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct AddRecipeView: View {
     @ObservedObject var viewModel: AddRecipeViewModel
@@ -34,20 +35,15 @@ struct AddRecipeView: View {
 
             Section(header: Text("Image")) {
                 if let imageURL = viewModel.recipe.imageURL {
-                    AsyncImage(url: imageURL) { phase in
-                        if let image = phase.image {
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(maxHeight: UIScreen.main.bounds.height / 3)
-                                .clipped()
+                    LazyImage(url: imageURL) { state in
+                        if let image = state.image {
+                            image.resizingMode(.aspectFill)
                         } else {
                             Color.blue.opacity(0.1)
-                                .frame(maxHeight: UIScreen.main.bounds.height / 3)
-                                .clipped()
-
                         }
                     }
+                    .frame(height: UIScreen.main.bounds.height / 3)
+                    .clipped()
                     .listRowInsets(.init())
                 } else {
                     Button {

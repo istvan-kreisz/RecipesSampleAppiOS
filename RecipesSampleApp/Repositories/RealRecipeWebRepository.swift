@@ -10,10 +10,12 @@ import Foundation
 class RealRecipeWebRepository: RecipeWebRepository {
     let session: URLSession
     let baseURL: String
+    let authService: AuthService?
 
-    init(session: URLSession, baseURL: String) {
+    init(session: URLSession, baseURL: String, authService: AuthService) {
         self.session = session
         self.baseURL = baseURL
+        self.authService = authService
     }
 
     func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {

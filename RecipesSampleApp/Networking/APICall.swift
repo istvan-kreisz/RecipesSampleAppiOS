@@ -14,7 +14,7 @@ protocol APICall {
     func body() throws -> Data?
 }
 
-enum APIError: Swift.Error {
+enum APIError: Error {
     case invalidURL
     case httpCode(HTTPCode)
     case unexpectedResponse

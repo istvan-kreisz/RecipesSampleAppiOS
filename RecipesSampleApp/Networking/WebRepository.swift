@@ -11,6 +11,7 @@ import UIKit
 protocol WebRepository {
     var session: URLSession { get }
     var baseURL: String { get }
+    var authService: AuthService? { get }
 }
 
 extension WebRepository {
@@ -25,6 +26,15 @@ extension WebRepository {
             return data
         } catch {
             log(error, logLevel: .error, logType: .network)
+            if let apiError = error as? APIError {
+                if case let APIError.httpCode(code) = apiError {
+                    if code == 401 {
+                        Task {
+                            try? await authService?.signOut()
+                        }
+                    }
+                }
+            }
             throw error
         }
     }

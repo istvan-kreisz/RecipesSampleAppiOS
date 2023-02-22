@@ -10,10 +10,15 @@ import Foundation
 class RealUserWebRepository: UserWebRepository {
     let session: URLSession
     let baseURL: String
+    var authService: AuthService?
 
     init(session: URLSession, baseURL: String) {
         self.session = session
         self.baseURL = baseURL
+    }
+    
+    func setup(authService: AuthService) {
+        self.authService = authService
     }
     
     func fetchUser(userId: String) async throws -> User {

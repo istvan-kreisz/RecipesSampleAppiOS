@@ -31,7 +31,7 @@ enum AuthError: LocalizedError {
 }
 
 class RealAuthService: NSObject, AuthService {
-    private let userWebRepository: UserWebRepository
+    private weak var userWebRepository: UserWebRepository?
 
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
@@ -102,7 +102,11 @@ class RealAuthService: NSObject, AuthService {
     }
 
     private func getUser(with uuid: String) async throws -> User {
-        try await userWebRepository.fetchUser(userId: uuid)
+        if let userWebRepository {
+            return try await userWebRepository.fetchUser(userId: uuid)
+        } else {
+            throw NSError(domain: "", code: 0)
+        }
     }
 
     private func restoreState() async {

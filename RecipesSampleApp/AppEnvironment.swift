@@ -11,8 +11,8 @@ import Foundation
 class AppEnvironment {
     let userWebRepository: UserWebRepository
     let authService: AuthService
-    let recipeDBRepository: RecipeDBRepository
     let recipeWebRepository: RecipeWebRepository
+    let recipeDBRepository: RecipeDBRepository
     let networkMonitor: NetworkMonitor
     let recipeService: RecipeService
 
@@ -38,8 +38,9 @@ class AppEnvironment {
     private init() {
         self.userWebRepository = RealUserWebRepository(session: configuredURLSession, baseURL: baseURL)
         self.authService = RealAuthService(userWebRepository: userWebRepository)
+        self.userWebRepository.setup(authService: authService)
+        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: baseURL, authService: authService)
         self.recipeDBRepository = RealRecipeDBRepository(persistentStore: CoreDataStack(version: CoreDataStack.Version.actual))
-        self.recipeWebRepository = RealRecipeWebRepository(session: configuredURLSession, baseURL: baseURL)
         self.networkMonitor = RealNetworkMonitor()
         self.recipeService = RealRecipeService(recipeDBRepository: recipeDBRepository, recipeWebRepository: recipeWebRepository, networkMonitor: networkMonitor)
     }

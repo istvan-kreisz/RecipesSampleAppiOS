@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
     @ObservedObject var viewModel: ViewModel
@@ -19,19 +20,16 @@ struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
             List(viewModel.recipes) { (recipe: Recipe) in
                 NavigationLink(value: recipe) {
                     HStack {
-                        AsyncImage(url: recipe.imageURL) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(10)
+                        LazyImage(url: recipe.imageURL) { state in
+                            if let image = state.image {
+                                image.resizingMode(.aspectFill)
                             } else {
                                 Color.blue.opacity(0.1)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(10)
                             }
                         }
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(10)
+ 
                         Text(recipe.title)
                             .font(.headline)
                         Spacer()

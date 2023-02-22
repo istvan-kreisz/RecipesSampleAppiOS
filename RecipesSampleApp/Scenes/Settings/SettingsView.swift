@@ -30,10 +30,10 @@ struct SettingsView: View {
     }
 
     private func openWebsite() {
-        guard let url = URL(string: "https://quickbirdstudios.com/") else {
+        guard let url = URL(string: "https://istvan-kreisz.com/") else {
             return assertionFailure()
         }
-        self.coordinator.open(url)
+        coordinator.open(url)
     }
 
     private func logout() {
