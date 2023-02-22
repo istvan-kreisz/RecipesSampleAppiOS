@@ -11,7 +11,7 @@ import CoreData
 
 @objc(RatingObject)
 public class RatingObject: NSManagedObject {
-    static func initFrom(rating: Recipe.Rating, context: NSManagedObjectContext) -> RatingObject {
+    static func initFrom(rating: Rating, context: NSManagedObjectContext) -> RatingObject {
         let ratingObject = RatingObject(entity: RatingObject.entity(), insertInto: context)
         ratingObject.id = rating.id
         ratingObject.author = rating.author

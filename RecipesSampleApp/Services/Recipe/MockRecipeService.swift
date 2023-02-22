@@ -13,20 +13,20 @@ class MockRecipeService: RecipeService {
     static let authorId2 = UUID(uuidString: "122d6b8a-a7ac-11ed-afa1-0242ac120002")!.uuidString
     static let authorId3 = UUID(uuidString: "122d71f2-a7ac-11ed-afa1-0242ac120002")!.uuidString
 
-    private let badRating: Recipe.Rating
-    private let averageRating: Recipe.Rating
-    private let goodRating: Recipe.Rating
+    private let badRating: Rating
+    private let averageRating: Rating
+    private let goodRating: Rating
 
     init() {
-        self.badRating = Recipe.Rating(author: "Jupiter Jones",
+        self.badRating = Rating(author: "Jupiter Jones",
                                        authorId: Self.authorId1,
                                        comment: "One word: Disgusting.",
                                        dateAdded: Date(timeIntervalSinceNow: -100))
-        self.averageRating = Recipe.Rating(author: "Peter Crenshaw",
+        self.averageRating = Rating(author: "Peter Crenshaw",
                                            authorId: Self.authorId2,
                                            comment: "Well, it was alright...",
                                            dateAdded: Date(timeIntervalSinceNow: -80))
-        self.goodRating = Recipe.Rating(author: "Robert Andrews",
+        self.goodRating = Rating(author: "Robert Andrews",
                                         authorId: Self.authorId3,
                                         comment: "Best. Dish. Ever.",
                                         dateAdded: Date(timeIntervalSinceNow: -60))
@@ -101,7 +101,7 @@ class MockRecipeService: RecipeService {
                 dateAdded: Date(timeIntervalSinceNow: -100),
                 ratings: [self.averageRating])]
 
-    func fetchRatings(for recipe: Recipe) async -> [Recipe.Rating] {
+    func fetchRatings(for recipe: Recipe) async -> [Rating] {
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
             return recipes[index].ratings
         } else {
@@ -125,7 +125,7 @@ class MockRecipeService: RecipeService {
         recipes.append(recipe)
     }
 
-    func add(rating: Recipe.Rating, to recipe: Recipe) {
+    func add(rating: Rating, to recipe: Recipe) {
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
             var newRecipe = recipe
             newRecipe.ratings.append(rating)

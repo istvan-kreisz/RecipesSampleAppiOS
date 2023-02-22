@@ -35,6 +35,8 @@
 		5DB5461829A4834400343397 /* ErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5461729A4834400343397 /* ErrorBanner.swift */; };
 		5DB5461E29A48FF000343397 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB5461D29A48FF000343397 /* Nuke */; };
 		5DB5462029A48FF000343397 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB5461F29A48FF000343397 /* NukeUI */; };
+		5DB5462229A6A7D700343397 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462129A6A7D700343397 /* Pagination.swift */; };
+		5DB5462429A6A8D500343397 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462329A6A8D500343397 /* Rating.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -113,6 +115,8 @@
 		5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealUserWebRepository.swift; sourceTree = "<group>"; };
 		5DB5461529A482C000343397 /* AnimatedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedError.swift; sourceTree = "<group>"; };
 		5DB5461729A4834400343397 /* ErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBanner.swift; sourceTree = "<group>"; };
+		5DB5462129A6A7D700343397 /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
+		5DB5462329A6A8D500343397 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
 				5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */,
 				5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */,
+				5DB5462129A6A7D700343397 /* Pagination.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 			children = (
 				5DC660692979E5780012CC8C /* Recipe.swift */,
 				5DECDE2B2992491B00A7BCC2 /* User.swift */,
+				5DB5462329A6A8D500343397 /* Rating.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -592,11 +598,13 @@
 				5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */,
 				5D6B612F2981DD090053AD5C /* APICall.swift in Sources */,
 				5DC660B1297ACB1E0012CC8C /* Identifiable+Extensions.swift in Sources */,
+				5DB5462429A6A8D500343397 /* Rating.swift in Sources */,
 				5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */,
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
 				5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */,
 				5DECDE2C2992491B00A7BCC2 /* User.swift in Sources */,
 				5DAA80D42995179D001A7D50 /* AuthCoordinatorView.swift in Sources */,
+				5DB5462229A6A7D700343397 /* Pagination.swift in Sources */,
 				5D6B61282981DB3A0053AD5C /* RecipeWebRepository.swift in Sources */,
 				5D50810F298084E900B6247B /* RecipeObject+CoreDataClass.swift in Sources */,
 				5D50810E298084E900B6247B /* RatingObject+CoreDataProperties.swift in Sources */,

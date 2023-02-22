@@ -27,7 +27,7 @@ class RealRecipeService: RecipeService {
         self.networkMonitor.stopMonitoring()
     }
 
-    func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
+    func fetchRatings(for recipe: Recipe) async throws -> [Rating] {
         if networkMonitor.isReachable {
             let ratings = try await recipeWebRepository.fetchRatings(for: recipe)
             await saveUnsavedRatings(ratingsFromWeb: ratings, recipe: recipe)
@@ -65,7 +65,7 @@ class RealRecipeService: RecipeService {
         }
     }
 
-    func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
+    func add(rating: Rating, to recipe: Recipe) async throws {
         if networkMonitor.isReachable {
             try await recipeWebRepository.add(rating: rating, to: recipe)
         } else {
@@ -73,7 +73,7 @@ class RealRecipeService: RecipeService {
         }
     }
 
-    private func saveUnsavedRatings(ratingsFromWeb: [Recipe.Rating], recipe: Recipe) async {
+    private func saveUnsavedRatings(ratingsFromWeb: [Rating], recipe: Recipe) async {
         guard let storedRatingIds = try? await recipeDBRepository.fetchRatingIds(for: recipe) else { return }
         let ratingsNotStored = ratingsFromWeb.filter { !storedRatingIds.contains($0.id) }
         for ratingNotStored in ratingsNotStored {

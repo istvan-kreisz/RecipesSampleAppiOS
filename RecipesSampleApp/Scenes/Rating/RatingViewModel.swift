@@ -48,7 +48,7 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener {
         }
     }
 
-    private func addRating(rating: Recipe.Rating) async {
+    private func addRating(rating: Rating) async {
         do {
             try await recipeService.add(rating: rating, to: recipe)
             await fetchRatings()
@@ -59,7 +59,7 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener {
 
     func addRating(comment: String) {
         guard let user = user else { return }
-        let newRating = Recipe.Rating(author: user.name, authorId: user.id, comment: comment, dateAdded: Date())
+        let newRating = Rating(author: user.name, authorId: user.id, comment: comment, dateAdded: Date())
         Task {
             await addRating(rating: newRating)
         }

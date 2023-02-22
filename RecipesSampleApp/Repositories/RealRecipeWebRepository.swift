@@ -8,6 +8,11 @@
 import Foundation
 
 class RealRecipeWebRepository: RecipeWebRepository {
+    private var allRecipesPagination = PaginationState<Recipe>(lastLoaded: nil, isLastPage: false)
+    private var userRecipesPagination = PaginationState<Recipe>(lastLoaded: nil, isLastPage: false)
+    private var ratingsPagination = PaginationState<Rating>(lastLoaded: nil, isLastPage: false)
+
+
     let session: URLSession
     let baseURL: String
     let authService: AuthService?
@@ -18,7 +23,7 @@ class RealRecipeWebRepository: RecipeWebRepository {
         self.authService = authService
     }
 
-    func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
+    func fetchRatings(for recipe: Recipe) async throws -> [Rating] {
         try await call(endpoint: API.fetchRatings(recipe: recipe))
     }
 
@@ -34,14 +39,14 @@ class RealRecipeWebRepository: RecipeWebRepository {
         try await call(endpoint: API.addRecipe(recipe: recipe))
     }
 
-    func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
+    func add(rating: Rating, to recipe: Recipe) async throws {
         try await call(endpoint: API.addRating(recipe: recipe, rating: rating))
     }
 }
 
 extension RealRecipeWebRepository {
     enum API {
-        case addRating(recipe: Recipe, rating: Recipe.Rating)
+        case addRating(recipe: Recipe, rating: Rating)
         case addRecipe(recipe: Recipe)
         case fetchAllRecipes(searchText: String)
         case fetchRatings(recipe: Recipe)
@@ -80,7 +85,7 @@ extension RealRecipeWebRepository.API: APICall {
         case let .addRating(recipe, rating):
             struct Payload: Encodable {
                 let recipe: Recipe
-                let rating: Recipe.Rating
+                let rating: Rating
             }
             return try data(body: Payload(recipe: recipe, rating: rating))
         case let .addRecipe(recipe):

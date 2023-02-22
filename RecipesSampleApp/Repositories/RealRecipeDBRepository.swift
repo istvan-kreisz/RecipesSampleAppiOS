@@ -15,11 +15,11 @@ class RealRecipeDBRepository: RecipeDBRepository {
         self.persistentStore = persistentStore
     }
 
-    func fetchRatings(for recipe: Recipe) async throws -> [Recipe.Rating] {
+    func fetchRatings(for recipe: Recipe) async throws -> [Rating] {
         let fetchRequest = RatingObject.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \RatingObject.dateAdded, ascending: false)]
         fetchRequest.predicate = NSPredicate(format: "recipe.id == %@", recipe.id as CVarArg)
-        let result = try await persistentStore.fetch(fetchRequest) { Recipe.Rating(from: $0) }
+        let result = try await persistentStore.fetch(fetchRequest) { Rating(from: $0) }
         return result
     }
     
@@ -68,7 +68,7 @@ class RealRecipeDBRepository: RecipeDBRepository {
         }
     }
 
-    func add(rating: Recipe.Rating, to recipe: Recipe) async throws {
+    func add(rating: Rating, to recipe: Recipe) async throws {
         let recipeObject = try await fetch(recipe: recipe, context: persistentStore.backgroundContext)
         try await persistentStore.update { context in
             let ratingObject = RatingObject.initFrom(rating: rating, context: context)
