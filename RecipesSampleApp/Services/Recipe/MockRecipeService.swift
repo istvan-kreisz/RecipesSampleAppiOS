@@ -19,17 +19,17 @@ class MockRecipeService: RecipeService {
 
     init() {
         self.badRating = Rating(author: "Jupiter Jones",
-                                       authorId: Self.authorId1,
-                                       comment: "One word: Disgusting.",
-                                       dateAdded: Date(timeIntervalSinceNow: -100))
+                                authorId: Self.authorId1,
+                                comment: "One word: Disgusting.",
+                                dateAdded: Date(timeIntervalSinceNow: -100))
         self.averageRating = Rating(author: "Peter Crenshaw",
-                                           authorId: Self.authorId2,
-                                           comment: "Well, it was alright...",
-                                           dateAdded: Date(timeIntervalSinceNow: -80))
+                                    authorId: Self.authorId2,
+                                    comment: "Well, it was alright...",
+                                    dateAdded: Date(timeIntervalSinceNow: -80))
         self.goodRating = Rating(author: "Robert Andrews",
-                                        authorId: Self.authorId3,
-                                        comment: "Best. Dish. Ever.",
-                                        dateAdded: Date(timeIntervalSinceNow: -60))
+                                 authorId: Self.authorId3,
+                                 comment: "Best. Dish. Ever.",
+                                 dateAdded: Date(timeIntervalSinceNow: -60))
     }
 
     private lazy var recipes =
@@ -101,24 +101,22 @@ class MockRecipeService: RecipeService {
                 dateAdded: Date(timeIntervalSinceNow: -100),
                 ratings: [self.averageRating])]
 
-    func fetchRatings(for recipe: Recipe) async -> [Rating] {
+    func fetchRatings(for recipe: Recipe, loadMore: Bool) async -> PaginatedResult<[Rating]> {
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
-            return recipes[index].ratings
+            return .init(data: recipes[index].ratings, isLastPage: true)
         } else {
-            return []
+            return .init(data: [], isLastPage: true)
         }
     }
 
-    func fetchAllRecipes(searchText: String) async -> [Recipe] {
-        recipes.filter { recipe in
-            recipe.isMatching(searchText)
-        }
+    func fetchAllRecipes(searchText: String, loadMore: Bool) async -> PaginatedResult<[Recipe]> {
+        let recipes = recipes.filter { $0.isMatching(searchText) }
+        return .init(data: recipes, isLastPage: true)
     }
 
-    func fetchRecipes(createdBy user: User, searchText: String) async -> [Recipe] {
-        recipes.filter { recipe in
-            recipe.authorId == user.id && recipe.isMatching(searchText)
-        }
+    func fetchRecipes(createdBy user: User, searchText: String, loadMore: Bool) async -> PaginatedResult<[Recipe]> {
+        let recipes = recipes.filter { $0.authorId == user.id && $0.isMatching(searchText) }
+        return .init(data: recipes, isLastPage: true)
     }
 
     func add(recipe: Recipe) {

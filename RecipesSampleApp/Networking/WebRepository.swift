@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol WebRepository {
+    associatedtype API
     var session: URLSession { get }
     var baseURL: String { get }
     var authService: AuthService? { get }
@@ -55,5 +56,25 @@ extension WebRepository {
         guard let image = UIImage(data: data) else { throw APIError.imageDeserialization }
 
         return image
+    }
+
+    func paginatedFetch<T>(paginationState: inout PaginationState<T>,
+                           loadMore: Bool,
+                           getLastLoadedPath: (_ lastLoadedItem: T) -> [String],
+                           getEndPoint: (_ lastLoadedPath: [String]?) -> APICall) async throws -> PaginatedResult<[T]> {
+        var lastLoadedPath: [String]? = nil
+        if loadMore {
+            if let lastLoadedItem = paginationState.lastLoaded, !paginationState.isLastPage {
+                lastLoadedPath = getLastLoadedPath(lastLoadedItem)
+            } else {
+                return .init(data: [], isLastPage: true)
+            }
+        } else {
+            paginationState.reset()
+        }
+        let result: PaginatedResult<[T]> = try await call(endpoint: getEndPoint(lastLoadedPath))
+        paginationState.lastLoaded = result.data.last
+        paginationState.isLastPage = result.isLastPage
+        return result
     }
 }

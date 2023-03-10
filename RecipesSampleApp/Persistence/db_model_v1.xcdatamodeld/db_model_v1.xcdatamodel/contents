@@ -20,10 +20,4 @@
         <attribute name="title" attributeType="String"/>
         <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RatingObject" inverseName="recipe" inverseEntity="RatingObject"/>
     </entity>
-    <entity name="UserObject" representedClassName="UserObject" syncable="YES">
-        <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="email" attributeType="String"/>
-        <attribute name="id" attributeType="String"/>
-        <attribute name="name" attributeType="String"/>
-    </entity>
 </model>

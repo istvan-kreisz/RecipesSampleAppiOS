@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D06A77029AFE5A60026F1D1 /* EndOfListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D06A76F29AFE5A60026F1D1 /* EndOfListLoader.swift */; };
 		5D5080C6297F2C3000B6247B /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5D5080C4297F2C3000B6247B /* db_model_v1.xcdatamodeld */; };
 		5D5081052980225100B6247B /* RecipeDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5081042980225100B6247B /* RecipeDBRepository.swift */; };
 		5D5081072980227C00B6247B /* RealRecipeDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5081062980227C00B6247B /* RealRecipeDBRepository.swift */; };
@@ -21,8 +22,6 @@
 		5D6B612D2981DCC10053AD5C /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612C2981DCC10053AD5C /* WebRepository.swift */; };
 		5D6B612F2981DD090053AD5C /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B612E2981DD090053AD5C /* APICall.swift */; };
 		5D6B61312981E6780053AD5C /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6B61302981E6780053AD5C /* AppEnvironment.swift */; };
-		5DAA80CB2993C92B001A7D50 /* UserObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */; };
-		5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */; };
 		5DAA80CE29950FE5001A7D50 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CD29950FE5001A7D50 /* AuthCoordinator.swift */; };
 		5DAA80D029951034001A7D50 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80CF29951034001A7D50 /* SignUpViewModel.swift */; };
 		5DAA80D2299512F9001A7D50 /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA80D1299512F9001A7D50 /* ResetPasswordViewModel.swift */; };
@@ -37,6 +36,8 @@
 		5DB5462029A48FF000343397 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB5461F29A48FF000343397 /* NukeUI */; };
 		5DB5462229A6A7D700343397 /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462129A6A7D700343397 /* Pagination.swift */; };
 		5DB5462429A6A8D500343397 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462329A6A8D500343397 /* Rating.swift */; };
+		5DB5462629A6DC9700343397 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462529A6DC9700343397 /* Spinner.swift */; };
+		5DB5462829A6EDFA00343397 /* PaginatedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB5462729A6EDFA00343397 /* PaginatedViewModel.swift */; };
 		5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */; };
 		5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC660592979E5510012CC8C /* Assets.xcassets */; };
 		5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC6605C2979E5510012CC8C /* Preview Assets.xcassets */; };
@@ -89,6 +90,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D06A76F29AFE5A60026F1D1 /* EndOfListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListLoader.swift; sourceTree = "<group>"; };
 		5D5080C5297F2C3000B6247B /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
 		5D5081042980225100B6247B /* RecipeDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDBRepository.swift; sourceTree = "<group>"; };
 		5D5081062980227C00B6247B /* RealRecipeDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealRecipeDBRepository.swift; sourceTree = "<group>"; };
@@ -103,8 +105,6 @@
 		5D6B612C2981DCC10053AD5C /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
 		5D6B612E2981DD090053AD5C /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		5D6B61302981E6780053AD5C /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserObject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5DAA80CD29950FE5001A7D50 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		5DAA80CF29951034001A7D50 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5DAA80D1299512F9001A7D50 /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -117,6 +117,8 @@
 		5DB5461729A4834400343397 /* ErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBanner.swift; sourceTree = "<group>"; };
 		5DB5462129A6A7D700343397 /* Pagination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
 		5DB5462329A6A8D500343397 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		5DB5462529A6DC9700343397 /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		5DB5462729A6EDFA00343397 /* PaginatedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedViewModel.swift; sourceTree = "<group>"; };
 		5DC660522979E54E0012CC8C /* RecipesSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSampleAppApp.swift; sourceTree = "<group>"; };
 		5DC660592979E5510012CC8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */,
 				5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */,
 				5DB5462129A6A7D700343397 /* Pagination.swift */,
+				5DB5462729A6EDFA00343397 /* PaginatedViewModel.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -286,6 +289,8 @@
 				5DC660752979E5920012CC8C /* SafariView.swift */,
 				5DC660762979E5920012CC8C /* RatingStars.swift */,
 				5DB5461729A4834400343397 /* ErrorBanner.swift */,
+				5DB5462529A6DC9700343397 /* Spinner.swift */,
+				5D06A76F29AFE5A60026F1D1 /* EndOfListLoader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,8 +420,6 @@
 				5D50810A298084E900B6247B /* RatingObject+CoreDataProperties.swift */,
 				5D50810B298084E900B6247B /* RecipeObject+CoreDataClass.swift */,
 				5D50810C298084E900B6247B /* RecipeObject+CoreDataProperties.swift */,
-				5DAA80C92993C92B001A7D50 /* UserObject+CoreDataClass.swift */,
-				5DAA80CA2993C92B001A7D50 /* UserObject+CoreDataProperties.swift */,
 				5D5080C4297F2C3000B6247B /* db_model_v1.xcdatamodeld */,
 			);
 			path = Persistence;
@@ -566,6 +569,7 @@
 				5D5081072980227C00B6247B /* RealRecipeDBRepository.swift in Sources */,
 				5DC6606C2979E5780012CC8C /* RecipeService.swift in Sources */,
 				5DC660722979E5890012CC8C /* PopoverModifier.swift in Sources */,
+				5D06A77029AFE5A60026F1D1 /* EndOfListLoader.swift in Sources */,
 				5D6B612A2981DB580053AD5C /* RealRecipeWebRepository.swift in Sources */,
 				5DAA80CE29950FE5001A7D50 /* AuthCoordinator.swift in Sources */,
 				5DAA80D029951034001A7D50 /* SignUpViewModel.swift in Sources */,
@@ -592,12 +596,13 @@
 				5DDB9A15299E6DD100DC6997 /* NetworkMonitor.swift in Sources */,
 				5DECDE252991B0EB00A7BCC2 /* RealAuthService.swift in Sources */,
 				5D5080C6297F2C3000B6247B /* db_model_v1.xcdatamodeld in Sources */,
-				5DAA80CB2993C92B001A7D50 /* UserObject+CoreDataClass.swift in Sources */,
 				5DC660782979E5920012CC8C /* SafariView.swift in Sources */,
+				5DB5462629A6DC9700343397 /* Spinner.swift in Sources */,
 				5DC660792979E5920012CC8C /* RatingStars.swift in Sources */,
 				5DAA80D829956A20001A7D50 /* ResetPasswordView.swift in Sources */,
 				5D6B612F2981DD090053AD5C /* APICall.swift in Sources */,
 				5DC660B1297ACB1E0012CC8C /* Identifiable+Extensions.swift in Sources */,
+				5DB5462829A6EDFA00343397 /* PaginatedViewModel.swift in Sources */,
 				5DB5462429A6A8D500343397 /* Rating.swift in Sources */,
 				5DC660562979E54E0012CC8C /* RecipesSampleAppApp.swift in Sources */,
 				5DC660AC297A0FC70012CC8C /* RecipesViewModel.swift in Sources */,
@@ -615,7 +620,6 @@
 				5DC660C5297C869F0012CC8C /* CoreDataStack.swift in Sources */,
 				5DECDE3029924A2900A7BCC2 /* DebugSettings.swift in Sources */,
 				5DAA80DC299694A1001A7D50 /* UserWebRepository.swift in Sources */,
-				5DAA80CC2993C92B001A7D50 /* UserObject+CoreDataProperties.swift in Sources */,
 				5DC660B3297AFCDC0012CC8C /* RatingCell.swift in Sources */,
 				5DC660AA2979F4AB0012CC8C /* MockRecipeService.swift in Sources */,
 				5DDB9A12299C3D8000DC6997 /* UserDefaults+Extensions.swift in Sources */,

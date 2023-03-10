@@ -10,11 +10,17 @@ import SwiftUI
 import Combine
 
 @MainActor
-class RatingViewModel: ObservableObject, Identifiable, UserListener {
+class RatingViewModel: ObservableObject, Identifiable, UserListener, PaginatedViewModel {
+    @Published var fetchResult = PaginatedResult<[Rating]>(data: [], isLastPage: false)
+
     @Published var recipe: Recipe
     @Published var user: User?
     @Published var error: Error?
-    
+
+    var ratings: [Rating] {
+        items
+    }
+
     private let recipeService: RecipeService
     private let closeRatings: () -> Void
     var cancellable: AnyCancellable?
@@ -29,29 +35,34 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener {
         self.closeRatings = closeRatings
         self.recipe = recipe
         self.recipeService = recipeService
-        
+
         cancellable = listenToUserUpdates(updateStrategy: .userUpdatedOrChanged) { [weak self] newValue in
             self?.user = newValue
         }
 
         Task {
-            await fetchRatings()
+            try? await refresh()
         }
     }
 
-    private func fetchRatings() async {
-        do {
-            let ratings = try await recipeService.fetchRatings(for: recipe)
-            self.recipe.ratings = ratings
-        } catch {
-            self.error = error
+    func refresh() async throws {
+        try await loadItems(reload: true) { [weak self] reload in
+            guard let self else { return .init(data: [], isLastPage: true) }
+            return try await self.recipeService.fetchRatings(for: self.recipe, loadMore: !reload)
+        }
+    }
+
+    func loadMore() async throws {
+        try await loadItems(reload: false) { [weak self] reload in
+            guard let self else { return .init(data: [], isLastPage: true) }
+            return try await self.recipeService.fetchRatings(for: self.recipe, loadMore: !reload)
         }
     }
 
     private func addRating(rating: Rating) async {
         do {
             try await recipeService.add(rating: rating, to: recipe)
-            await fetchRatings()
+            try await refresh()
         } catch {
             self.error = error
         }

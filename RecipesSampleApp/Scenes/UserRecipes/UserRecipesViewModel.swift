@@ -10,17 +10,20 @@ import Combine
 
 @MainActor
 class UserRecipesViewModel: RecipesViewModel, UserListener, AnimatedError {
+    private let recipeService: RecipeService
+
     @Published var title: String
-    @Published var recipes = [Recipe]()
+    @Published var fetchResult = PaginatedResult<[Recipe]>(data: [], isLastPage: false)
     @Published var error: Error?
 
     var user: User? {
         didSet {
-            refresh()
+            Task {
+                try await refresh()
+            }
         }
     }
 
-    private let recipeService: RecipeService
     var cancellable: AnyCancellable?
 
     required init(title: String, recipeService: RecipeService) {
@@ -32,16 +35,17 @@ class UserRecipesViewModel: RecipesViewModel, UserListener, AnimatedError {
         }
     }
 
-    func refresh(searchText: String) {
-        guard let user = user else { return }
-        Task { [weak self] in
-            guard let self else { return }
-            do {
-                let recipes = try await recipeService.fetchRecipes(createdBy: user, searchText: searchText)
-                self.recipes = recipes
-            } catch {
-                showDisappearingError(error: error)
-            }
+    func refresh(searchText: String) async throws {
+        try await loadItems(reload: true) { [weak self] reload in
+            guard let self, let user = self.user else { return .init(data: [], isLastPage: true) }
+            return try await self.recipeService.fetchRecipes(createdBy: user, searchText: searchText, loadMore: !reload)
+        }
+    }
+
+    func loadMore(searchText: String) async throws {
+        try await loadItems(reload: false) { [weak self] reload in
+            guard let self, let user = self.user else { return .init(data: [], isLastPage: true) }
+            return try await self.recipeService.fetchRecipes(createdBy: user, searchText: searchText, loadMore: !reload)
         }
     }
 }

@@ -8,17 +8,24 @@
 import Foundation
 
 @MainActor
-protocol RecipesViewModel: ObservableObject {
+protocol RecipesViewModel: ObservableObject, PaginatedViewModel where T == Recipe {
     var title: String { get }
-    var recipes: [Recipe] { get }
-    var error: Error? { get }
     
     init(title: String, recipeService: RecipeService)
-    func refresh(searchText: String)
+    func refresh(searchText: String) async throws
+    func loadMore(searchText: String) async throws
 }
 
 extension RecipesViewModel {
-    func refresh() {
-        refresh(searchText: "")
+    var recipes: [Recipe] {
+        items
+    }
+    
+    func refresh() async throws {
+        try await refresh(searchText: "")
+    }
+    
+    func loadMore() async throws {
+        try await loadMore(searchText: "")
     }
 }

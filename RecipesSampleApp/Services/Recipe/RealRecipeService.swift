@@ -11,49 +11,55 @@ class RealRecipeService: RecipeService {
     enum RecipeServiceError: Error {
         case noConnection
     }
-    
+
     let recipeDBRepository: RecipeDBRepository
-    let recipeWebRepository: RecipeWebRepository
+    let recipeWebRepository: any RecipeWebRepository
     let networkMonitor: NetworkMonitor
 
-    init(recipeDBRepository: RecipeDBRepository, recipeWebRepository: RecipeWebRepository, networkMonitor: NetworkMonitor) {
+    init(recipeDBRepository: RecipeDBRepository, recipeWebRepository: any RecipeWebRepository, networkMonitor: NetworkMonitor) {
         self.recipeDBRepository = recipeDBRepository
         self.recipeWebRepository = recipeWebRepository
         self.networkMonitor = networkMonitor
         self.networkMonitor.startMonitoring()
     }
-    
+
     deinit {
         self.networkMonitor.stopMonitoring()
     }
 
-    func fetchRatings(for recipe: Recipe) async throws -> [Rating] {
+    func fetchRatings(for recipe: Recipe, loadMore: Bool) async throws -> PaginatedResult<[Rating]> {
         if networkMonitor.isReachable {
-            let ratings = try await recipeWebRepository.fetchRatings(for: recipe)
-            await saveUnsavedRatings(ratingsFromWeb: ratings, recipe: recipe)
+            let ratings = try await recipeWebRepository.fetchRatings(for: recipe, loadMore: loadMore)
+            await saveUnsavedRatings(ratingsFromWeb: ratings.data, recipe: recipe)
             return ratings
         } else {
-            return try await recipeDBRepository.fetchRatings(for: recipe)
+            #warning("replace")
+            return .init(data: [], isLastPage: false)
+//            return try await recipeDBRepository.fetchRatings(for: recipe)
         }
     }
 
-    func fetchAllRecipes(searchText: String) async throws -> [Recipe] {
+    func fetchAllRecipes(searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
         if networkMonitor.isReachable {
-            let recipes = try await recipeWebRepository.fetchAllRecipes(searchText: searchText)
-            await saveUnsavedRecipes(recipes: recipes)
+            let recipes = try await recipeWebRepository.fetchAllRecipes(searchText: searchText, loadMore: loadMore)
+            await saveUnsavedRecipes(recipes: recipes.data)
             return recipes
         } else {
-            return try await recipeDBRepository.fetchAllRecipes(searchText: searchText)
+            #warning("replace")
+            return .init(data: [], isLastPage: false)
+//            return try await recipeDBRepository.fetchAllRecipes(searchText: searchText)
         }
     }
 
-    func fetchRecipes(createdBy user: User, searchText: String) async throws -> [Recipe] {
+    func fetchRecipes(createdBy user: User, searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
         if networkMonitor.isReachable {
-            let recipes = try await recipeWebRepository.fetchRecipes(createdBy: user, searchText: searchText)
-            await saveUnsavedRecipes(recipes: recipes)
+            let recipes = try await recipeWebRepository.fetchRecipes(createdBy: user, searchText: searchText, loadMore: loadMore)
+            await saveUnsavedRecipes(recipes: recipes.data)
             return recipes
         } else {
-            return try await recipeDBRepository.fetchRecipes(createdBy: user, searchText: searchText)
+            #warning("replace")
+            return .init(data: [], isLastPage: false)
+//            return try await recipeDBRepository.fetchRecipes(createdBy: user, searchText: searchText)
         }
     }
 

@@ -14,20 +14,6 @@ struct User: Equatable {
     let dateAdded: Date
 }
 
-extension User {
-    init?(from userObject: UserObject) {
-        guard let id = userObject.id,
-              let name = userObject.name,
-              let email = userObject.email,
-              let dateAdded = userObject.dateAdded
-        else { return nil }
-        self.id = id
-        self.name = name
-        self.email = email
-        self.dateAdded = dateAdded
-    }
-}
-
 extension User: Codable {
     enum CodingKeys: String, CodingKey {
         case id, email, name, dateAdded

@@ -11,13 +11,6 @@ struct RecipeListCoordinatorView<ListViewModel>: View where ListViewModel: Recip
     @ObservedObject var coordinator: RecipeListCoordinator<ListViewModel>
 
     var body: some View {
-        let isAlertPresented = Binding<Bool>(get: { coordinator.error != nil },
-                                             set: { newValue in
-                                                 if !newValue {
-                                                     coordinator.error = nil
-                                                 }
-                                             })
-
         NavigationStack {
             ZStack {
                 RecipeList(viewModel: coordinator.viewModel)

@@ -31,7 +31,7 @@ enum AuthError: LocalizedError {
 }
 
 class RealAuthService: NSObject, AuthService {
-    private weak var userWebRepository: UserWebRepository?
+    private weak var userWebRepository: (any UserWebRepository)?
 
     fileprivate var appleSignInContinuation: CheckedContinuation<Void, Error>? = nil
 
@@ -59,9 +59,11 @@ class RealAuthService: NSObject, AuthService {
 
     fileprivate var currentNonce: String?
 
-    init(userWebRepository: UserWebRepository) {
+    init(userWebRepository: any UserWebRepository) {
         self.userWebRepository = userWebRepository
         super.init()
+        print(idToken)
+        print(user)
 
         if DebugSettings.shared.useEmulators {
             auth.useEmulator(withHost: "localhost", port: 9100)
@@ -72,6 +74,7 @@ class RealAuthService: NSObject, AuthService {
             authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
                 guard let user else {
                     self?.user = nil
+                    self?.idToken = nil
                     return
                 }
                 let userChanged = user.uid != self?.user?.id

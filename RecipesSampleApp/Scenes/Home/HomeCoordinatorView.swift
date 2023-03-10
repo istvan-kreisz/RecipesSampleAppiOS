@@ -36,6 +36,7 @@ struct HomeCoordinatorView: View {
                         .edgesIgnoringSafeArea(.all)
                 }
             } else {
+                // Display loading screen here
                 EmptyView()
             }
         }

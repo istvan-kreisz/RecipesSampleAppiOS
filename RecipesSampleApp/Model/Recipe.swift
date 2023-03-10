@@ -27,6 +27,10 @@ struct Recipe: Identifiable, Equatable, Codable, Hashable {
     func isMatching(_ searchText: String) -> Bool {
         searchText.isEmpty ? true : title.lowercased().fuzzyMatch(searchText.lowercased())
     }
+    
+    var dbPath: [String] {
+        ["users", authorId, "recipes", id]
+    }
 }
 
 extension Recipe {

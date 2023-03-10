@@ -13,6 +13,10 @@ struct Rating: Identifiable, Equatable, Codable {
     var authorId: String
     var comment: String
     var dateAdded: Date
+    
+    func dbPath(recipe: Recipe) -> [String] {
+        ["users", authorId, "recipes", recipe.id, "ratings", id]
+    }
 }
 
 extension Rating {

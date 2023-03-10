@@ -14,12 +14,29 @@ struct RatingView: View {
     @ObservedObject var viewModel: RatingViewModel
 
     var body: some View {
-        List {
-            ForEach(viewModel.recipe.ratings) { rating in
-                RatingCell(author: rating.author, comment: rating.comment)
+        VStack {
+            if let error = viewModel.error {
+                ErrorBanner(errorMessage: error.localizedDescription)
+            }
+            List {
+                ForEach(viewModel.ratings) { rating in
+                    RatingCell(author: rating.author, comment: rating.comment)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden, edges: .all)
+                }
+                EndOfListLoader(loadingText: "Loading ratings...", isEndOfList: viewModel.isEndOfList, isEmpty: viewModel.ratings.isEmpty) {
+                    try await viewModel.loadMore()
+                }
+            }
+            .listStyle(.plain)
+            .refreshable {
+                try? await viewModel.refresh()
             }
         }
-        .font(.headline)
+        .onChange(of: viewModel.fetchResult, perform: { newValue in
+            print("-----------")
+            print(newValue)
+        })
         .navigationTitle(viewModel.recipe.title)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: Button("Close", action: {

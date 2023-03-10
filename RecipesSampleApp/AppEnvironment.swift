@@ -9,9 +9,9 @@ import Foundation
 
 @MainActor
 class AppEnvironment {
-    let userWebRepository: UserWebRepository
+    let userWebRepository: any UserWebRepository
     let authService: AuthService
-    let recipeWebRepository: RecipeWebRepository
+    let recipeWebRepository: any RecipeWebRepository
     let recipeDBRepository: RecipeDBRepository
     let networkMonitor: NetworkMonitor
     let recipeService: RecipeService

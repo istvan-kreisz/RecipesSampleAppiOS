@@ -12,7 +12,6 @@ class RealRecipeWebRepository: RecipeWebRepository {
     private var userRecipesPagination = PaginationState<Recipe>(lastLoaded: nil, isLastPage: false)
     private var ratingsPagination = PaginationState<Rating>(lastLoaded: nil, isLastPage: false)
 
-
     let session: URLSession
     let baseURL: String
     let authService: AuthService?
@@ -23,16 +22,35 @@ class RealRecipeWebRepository: RecipeWebRepository {
         self.authService = authService
     }
 
-    func fetchRatings(for recipe: Recipe) async throws -> [Rating] {
-        try await call(endpoint: API.fetchRatings(recipe: recipe))
+    func fetchRatings(for recipe: Recipe, loadMore: Bool) async throws -> PaginatedResult<[Rating]> {
+        try await paginatedFetch(paginationState: &ratingsPagination,
+                                 loadMore: loadMore,
+                                 getLastLoadedPath: { lastLoadedRating in
+                                     lastLoadedRating.dbPath(recipe: recipe)
+                                 }, getEndPoint: { lastLoadedPath in
+                                     API.fetchRatings(recipe: recipe, lastLoadedPath: lastLoadedPath)
+                                 })
     }
 
-    func fetchAllRecipes(searchText: String) async throws -> [Recipe] {
-        try await call(endpoint: API.fetchAllRecipes(searchText: searchText))
+    func fetchAllRecipes(searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
+        try await paginatedFetch(paginationState: &allRecipesPagination,
+                                 loadMore: loadMore,
+                                 getLastLoadedPath: { lastLoadedRecipe in
+                                     lastLoadedRecipe.dbPath
+                                 }, getEndPoint: { lastLoadedPath in
+                                     API.fetchAllRecipes(searchText: searchText, lastLoadedPath: lastLoadedPath)
+                                 })
     }
 
-    func fetchRecipes(createdBy user: User, searchText: String) async throws -> [Recipe] {
-        try await call(endpoint: API.fetchRecipesByUser(user: user, searchText: searchText))
+    func fetchRecipes(createdBy user: User, searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
+        try await paginatedFetch(paginationState: &userRecipesPagination,
+                                 loadMore: loadMore,
+                                 getLastLoadedPath: { lastLoadedRecipe in
+                                     lastLoadedRecipe.dbPath
+                                 },
+                                 getEndPoint: { lastLoadedPath in
+                                     API.fetchRecipesByUser(user: user, searchText: searchText, lastLoadedPath: lastLoadedPath)
+                                 })
     }
 
     func add(recipe: Recipe) async throws {
@@ -48,9 +66,9 @@ extension RealRecipeWebRepository {
     enum API {
         case addRating(recipe: Recipe, rating: Rating)
         case addRecipe(recipe: Recipe)
-        case fetchAllRecipes(searchText: String)
-        case fetchRatings(recipe: Recipe)
-        case fetchRecipesByUser(user: User, searchText: String)
+        case fetchAllRecipes(searchText: String, lastLoadedPath: [String]?)
+        case fetchRatings(recipe: Recipe, lastLoadedPath: [String]?)
+        case fetchRecipesByUser(user: User, searchText: String, lastLoadedPath: [String]?)
     }
 }
 
@@ -93,22 +111,25 @@ extension RealRecipeWebRepository.API: APICall {
                 let recipe: Recipe
             }
             return try data(body: Payload(recipe: recipe))
-        case let .fetchAllRecipes(searchText):
+        case let .fetchAllRecipes(searchText, lastLoadedPath):
             struct Payload: Encodable {
                 let searchText: String
+                let startAfter: [String]?
             }
-            return try data(body: Payload(searchText: searchText))
-        case let .fetchRatings(recipe):
+            return try data(body: Payload(searchText: searchText, startAfter: lastLoadedPath))
+        case let .fetchRatings(recipe, lastLoadedPath):
             struct Payload: Encodable {
                 let recipe: Recipe
+                let startAfter: [String]?
             }
-            return try data(body: Payload(recipe: recipe))
-        case let .fetchRecipesByUser(user, searchText):
+            return try data(body: Payload(recipe: recipe, startAfter: lastLoadedPath))
+        case let .fetchRecipesByUser(user, searchText, lastLoadedPath):
             struct Payload: Encodable {
                 let user: User
                 let searchText: String
+                let startAfter: [String]?
             }
-            return try data(body: Payload(user: user, searchText: searchText))
+            return try data(body: Payload(user: user, searchText: searchText, startAfter: lastLoadedPath))
         }
     }
 }

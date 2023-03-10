@@ -50,7 +50,9 @@ class RecipeListCoordinator<ListViewModel>: ObservableObject, Identifiable where
                                                 closeAddRecipe: { [weak self] newRecipe in
                                                     self?.addRecipeViewModel = nil
                                                     if newRecipe != nil {
-                                                        self?.viewModel.refresh()
+                                                        Task {
+                                                            try await self?.viewModel.refresh()
+                                                        }
                                                     }
                                                 },
                                                 openURL: { [weak self] in
