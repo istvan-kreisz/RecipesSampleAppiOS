@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class RealRecipeDBRepository: RecipeDBRepository {
+actor RealRecipeDBRepository: RecipeDBRepository {
     let persistentStore: PersistentStore
 
     init(persistentStore: PersistentStore) {

@@ -58,23 +58,19 @@ extension WebRepository {
         return image
     }
 
-    func paginatedFetch<T>(paginationState: inout PaginationState<T>,
+    func paginatedFetch<T>(paginationState: PaginationState<T>,
                            loadMore: Bool,
                            getLastLoadedPath: (_ lastLoadedItem: T) -> [String],
-                           getEndPoint: (_ lastLoadedPath: [String]?) -> APICall) async throws -> PaginatedResult<[T]> {
+                           getEndPoint: (_ lastLoadedPath: [String]?) -> APICall) async throws -> (result: PaginatedResult<[T]>, paginationState: PaginationState<T>) {
         var lastLoadedPath: [String]? = nil
         if loadMore {
             if let lastLoadedItem = paginationState.lastLoaded, !paginationState.isLastPage {
                 lastLoadedPath = getLastLoadedPath(lastLoadedItem)
             } else {
-                return .init(data: [], isLastPage: true)
+                return (result: .init(data: [], isLastPage: true), paginationState: paginationState.setLastPage(true))
             }
-        } else {
-            paginationState.reset()
         }
         let result: PaginatedResult<[T]> = try await call(endpoint: getEndPoint(lastLoadedPath))
-        paginationState.lastLoaded = result.data.last
-        paginationState.isLastPage = result.isLastPage
-        return result
+        return (result: result, paginationState: .init(lastLoaded: result.data.last, isLastPage: result.isLastPage))
     }
 }

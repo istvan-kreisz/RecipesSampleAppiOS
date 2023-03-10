@@ -16,7 +16,11 @@ struct PaginationState<T> {
     var lastLoaded: T?
     var isLastPage: Bool
 
-    mutating func reset() {
-        self = .init(lastLoaded: nil, isLastPage: false)
+    func reset() -> PaginationState<T> {
+        .init(lastLoaded: nil, isLastPage: false)
+    }
+    
+    func setLastPage(_ isLastPage: Bool) -> PaginationState<T> {
+        .init(lastLoaded: lastLoaded, isLastPage: isLastPage)
     }
 }

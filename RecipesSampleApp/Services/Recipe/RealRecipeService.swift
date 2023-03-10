@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RealRecipeService: RecipeService {
+actor RealRecipeService: RecipeService {
     enum RecipeServiceError: Error {
         case noConnection
     }

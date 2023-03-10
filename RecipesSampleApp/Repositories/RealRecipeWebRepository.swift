@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RealRecipeWebRepository: RecipeWebRepository {
+actor RealRecipeWebRepository: RecipeWebRepository {
     private var allRecipesPagination = PaginationState<Recipe>(lastLoaded: nil, isLastPage: false)
     private var userRecipesPagination = PaginationState<Recipe>(lastLoaded: nil, isLastPage: false)
     private var ratingsPagination = PaginationState<Rating>(lastLoaded: nil, isLastPage: false)
@@ -23,34 +23,40 @@ class RealRecipeWebRepository: RecipeWebRepository {
     }
 
     func fetchRatings(for recipe: Recipe, loadMore: Bool) async throws -> PaginatedResult<[Rating]> {
-        try await paginatedFetch(paginationState: &ratingsPagination,
-                                 loadMore: loadMore,
-                                 getLastLoadedPath: { lastLoadedRating in
-                                     lastLoadedRating.dbPath(recipe: recipe)
-                                 }, getEndPoint: { lastLoadedPath in
-                                     API.fetchRatings(recipe: recipe, lastLoadedPath: lastLoadedPath)
-                                 })
+        let (result, paginationState) = try await paginatedFetch(paginationState: ratingsPagination,
+                                                                 loadMore: loadMore,
+                                                                 getLastLoadedPath: { lastLoadedRating in
+                                                                     lastLoadedRating.dbPath(recipe: recipe)
+                                                                 }, getEndPoint: { lastLoadedPath in
+                                                                     API.fetchRatings(recipe: recipe, lastLoadedPath: lastLoadedPath)
+                                                                 })
+        self.ratingsPagination = paginationState
+        return result
     }
 
     func fetchAllRecipes(searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
-        try await paginatedFetch(paginationState: &allRecipesPagination,
-                                 loadMore: loadMore,
-                                 getLastLoadedPath: { lastLoadedRecipe in
-                                     lastLoadedRecipe.dbPath
-                                 }, getEndPoint: { lastLoadedPath in
-                                     API.fetchAllRecipes(searchText: searchText, lastLoadedPath: lastLoadedPath)
-                                 })
+        let (result, paginationState) = try await paginatedFetch(paginationState: allRecipesPagination,
+                                                                 loadMore: loadMore,
+                                                                 getLastLoadedPath: { lastLoadedRecipe in
+                                                                     lastLoadedRecipe.dbPath
+                                                                 }, getEndPoint: { lastLoadedPath in
+                                                                     API.fetchAllRecipes(searchText: searchText, lastLoadedPath: lastLoadedPath)
+                                                                 })
+        self.allRecipesPagination = paginationState
+        return result
     }
 
     func fetchRecipes(createdBy user: User, searchText: String, loadMore: Bool) async throws -> PaginatedResult<[Recipe]> {
-        try await paginatedFetch(paginationState: &userRecipesPagination,
-                                 loadMore: loadMore,
-                                 getLastLoadedPath: { lastLoadedRecipe in
-                                     lastLoadedRecipe.dbPath
-                                 },
-                                 getEndPoint: { lastLoadedPath in
-                                     API.fetchRecipesByUser(user: user, searchText: searchText, lastLoadedPath: lastLoadedPath)
-                                 })
+        let (result, paginationState) = try await paginatedFetch(paginationState: userRecipesPagination,
+                                                                 loadMore: loadMore,
+                                                                 getLastLoadedPath: { lastLoadedRecipe in
+                                                                     lastLoadedRecipe.dbPath
+                                                                 },
+                                                                 getEndPoint: { lastLoadedPath in
+                                                                     API.fetchRecipesByUser(user: user, searchText: searchText, lastLoadedPath: lastLoadedPath)
+                                                                 })
+        self.userRecipesPagination = paginationState
+        return result
     }
 
     func add(recipe: Recipe) async throws {
