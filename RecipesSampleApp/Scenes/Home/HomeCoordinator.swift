@@ -52,7 +52,7 @@ class HomeCoordinator: ObservableObject, UserListener {
             self?.open(url)
         }
 
-        cancellable = listenToUserUpdates(updateStrategy: .userUpdatedOrChanged) { [weak self] newValue in
+        cancellable = listenToUserUpdates(updateStrategy: .userUpdatedOrChanged, skipFirst: true) { [weak self] newValue in
             guard let self = self else { return }
             self.user = newValue
             if newValue == nil {

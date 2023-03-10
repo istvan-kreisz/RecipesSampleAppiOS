@@ -18,9 +18,6 @@ class AllRecipesViewModel: RecipesViewModel, PaginatedViewModel {
     required init(title: String, recipeService: RecipeService) {
         self.title = title
         self.recipeService = recipeService
-        Task {
-            try? await refresh(searchText: "")
-        }
     }
 
     func refresh(searchText: String) async throws {

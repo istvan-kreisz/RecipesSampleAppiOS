@@ -25,7 +25,11 @@ struct RatingView: View {
                         .listRowSeparator(.hidden, edges: .all)
                 }
                 EndOfListLoader(loadingText: "Loading ratings...", isEndOfList: viewModel.isEndOfList, isEmpty: viewModel.ratings.isEmpty) {
-                    try await viewModel.loadMore()
+                    if viewModel.ratings.isEmpty {
+                        try await viewModel.refresh()
+                    } else {
+                        try await viewModel.loadMore()
+                    }
                 }
             }
             .listStyle(.plain)

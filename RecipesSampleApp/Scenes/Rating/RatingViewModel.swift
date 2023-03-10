@@ -39,10 +39,6 @@ class RatingViewModel: ObservableObject, Identifiable, UserListener, PaginatedVi
         cancellable = listenToUserUpdates(updateStrategy: .userUpdatedOrChanged) { [weak self] newValue in
             self?.user = newValue
         }
-
-        Task {
-            try? await refresh()
-        }
     }
 
     func refresh() async throws {

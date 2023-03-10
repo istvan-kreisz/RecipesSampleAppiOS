@@ -16,13 +16,7 @@ class UserRecipesViewModel: RecipesViewModel, UserListener, AnimatedError {
     @Published var fetchResult = PaginatedResult<[Recipe]>(data: [], isLastPage: false)
     @Published var error: Error?
 
-    var user: User? {
-        didSet {
-            Task {
-                try await refresh()
-            }
-        }
-    }
+    var user: User?
 
     var cancellable: AnyCancellable?
 

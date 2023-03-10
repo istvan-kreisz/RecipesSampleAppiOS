@@ -37,23 +37,8 @@ class RealAuthService: NSObject, AuthService {
 
     private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
 
-    private var user: User? {
-        get {
-            UserDefaults.standard.user
-        }
-        set {
-            UserDefaults.standard.user = newValue
-        }
-    }
-
-    private var idToken: String? {
-        get {
-            UserDefaults.standard.idToken
-        }
-        set {
-            UserDefaults.standard.idToken = newValue
-        }
-    }
+    static let userSubject = CurrentValueSubject<User?, Never>(nil)
+    static let idTokenSubject = CurrentValueSubject<String?, Never>(nil)
 
     private let auth = Auth.auth()
 
@@ -62,8 +47,6 @@ class RealAuthService: NSObject, AuthService {
     init(userWebRepository: any UserWebRepository) {
         self.userWebRepository = userWebRepository
         super.init()
-        print(idToken)
-        print(user)
 
         if DebugSettings.shared.useEmulators {
             auth.useEmulator(withHost: "localhost", port: 9100)
@@ -73,25 +56,25 @@ class RealAuthService: NSObject, AuthService {
             await restoreState()
             authStateListenerHandle = auth.addStateDidChangeListener { [weak self] auth, user in
                 guard let user else {
-                    self?.user = nil
-                    self?.idToken = nil
+                    Self.userSubject.send(nil)
+                    Self.idTokenSubject.send(nil)
                     return
                 }
-                let userChanged = user.uid != self?.user?.id
+                let userChanged = user.uid != Self.userSubject.value?.id
                 Task { [weak self] in
                     guard let self else { return }
                     do {
                         let token = try await user.getIDToken()
-                        self.idToken = token
+                        Self.idTokenSubject.send(token)
 
                         if userChanged {
                             let newUser = try await self.getUser(with: user.uid)
-                            self.user = newUser
+                            Self.userSubject.send(newUser)
                         }
                     } catch {
                         try? await self.signOut()
-                        self.user = nil
-                        self.idToken = nil
+                        Self.userSubject.send(nil)
+                        Self.idTokenSubject.send(nil)
                     }
                 }
             }
@@ -115,8 +98,10 @@ class RealAuthService: NSObject, AuthService {
     private func restoreState() async {
         do {
             if let currentUser = auth.currentUser {
-                self.idToken = try await currentUser.getIDToken()
-                self.user = try await self.getUser(with: currentUser.uid)
+                let idToken = try await currentUser.getIDToken()
+                Self.idTokenSubject.send(idToken)
+                let user = try await self.getUser(with: currentUser.uid)
+                Self.userSubject.send(user)
             } else if GIDSignIn.sharedInstance.hasPreviousSignIn() {
                 let googleUser = try await GIDSignIn.sharedInstance.restorePreviousSignIn()
 
@@ -300,35 +285,35 @@ extension RealAuthService: ASAuthorizationControllerDelegate, ASAuthorizationCon
     }
 }
 
-extension UserDefaults {
-    fileprivate(set) var user: User? {
-        get {
-            guard let userJSONString, let user = User(rawValue: userJSONString) else { return nil }
-            return user
-        }
-        set {
-            userJSONString = newValue?.rawValue
-        }
-    }
-
-    @objc fileprivate(set) dynamic var userJSONString: String? {
-        get {
-            string(forKey: Keys.user.rawValue)
-        }
-        set {
-            setValue(newValue, forKey: Keys.user.rawValue)
-        }
-    }
-
-    fileprivate(set) var idToken: String? {
-        get {
-            string(forKey: Keys.idToken.rawValue)
-        }
-        set {
-            setValue(newValue, forKey: Keys.idToken.rawValue)
-        }
-    }
-}
+// extension UserDefaults {
+//    fileprivate(set) var user: User? {
+//        get {
+//            guard let userJSONString, let user = User(rawValue: userJSONString) else { return nil }
+//            return user
+//        }
+//        set {
+//            userJSONString = newValue?.rawValue
+//        }
+//    }
+//
+//    @objc fileprivate(set) dynamic var userJSONString: String? {
+//        get {
+//            string(forKey: Keys.user.rawValue)
+//        }
+//        set {
+//            setValue(newValue, forKey: Keys.user.rawValue)
+//        }
+//    }
+//
+//    fileprivate(set) var idToken: String? {
+//        get {
+//            string(forKey: Keys.idToken.rawValue)
+//        }
+//        set {
+//            setValue(newValue, forKey: Keys.idToken.rawValue)
+//        }
+//    }
+// }
 
 enum UserUpdateStrategy {
     case userChanged
@@ -340,9 +325,9 @@ protocol UserListener {
 }
 
 extension UserListener {
-    func listenToUserUpdates(updateStrategy: UserUpdateStrategy, updated: @escaping (User?) -> Void) -> AnyCancellable? {
-        UserDefaults.standard.publisher(for: \.userJSONString)
-            .map { _ in UserDefaults.standard.user }
+    func listenToUserUpdates(updateStrategy: UserUpdateStrategy, skipFirst: Bool = false, updated: @escaping (User?) -> Void) -> AnyCancellable? {
+        RealAuthService.userSubject
+            .dropFirst(skipFirst ? 1 : 0)
             .removeDuplicates(by: { first, second in
                 if updateStrategy == .userChanged {
                     return first?.id == second?.id

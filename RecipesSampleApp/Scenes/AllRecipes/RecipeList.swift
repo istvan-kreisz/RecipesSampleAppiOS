@@ -41,7 +41,11 @@ struct RecipeList<ViewModel>: View where ViewModel: RecipesViewModel {
                 }.frame(height: 70)
                 
                 EndOfListLoader(loadingText: "Loading recipes...", isEndOfList: viewModel.isEndOfList, isEmpty: viewModel.recipes.isEmpty) {
-                    try await viewModel.loadMore(searchText: searchText)
+                    if viewModel.recipes.isEmpty {
+                        try await viewModel.refresh(searchText: searchText)
+                    } else {
+                        try await viewModel.loadMore(searchText: searchText)
+                    }
                 }
                 
                 Spacer(minLength: 50)
