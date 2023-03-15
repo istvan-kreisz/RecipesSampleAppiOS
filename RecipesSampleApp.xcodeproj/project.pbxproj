@@ -75,6 +75,11 @@
 		5DC660C7297EF88C0012CC8C /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */; };
 		5DDB9A12299C3D8000DC6997 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDB9A11299C3D8000DC6997 /* UserDefaults+Extensions.swift */; };
 		5DDB9A15299E6DD100DC6997 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDB9A14299E6DD100DC6997 /* NetworkMonitor.swift */; };
+		5DE973D429C187560079D5BC /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE973D329C187560079D5BC /* Messages.framework */; };
+		5DE973D729C187560079D5BC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE973D629C187560079D5BC /* MessagesViewController.swift */; };
+		5DE973DA29C187560079D5BC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DE973D829C187560079D5BC /* MainInterface.storyboard */; };
+		5DE973DC29C187580079D5BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DE973DB29C187580079D5BC /* Assets.xcassets */; };
+		5DE973E029C187580079D5BC /* MessageExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5DE973D129C187560079D5BC /* MessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DECDE162991AF4900A7BCC2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE152991AF4900A7BCC2 /* AuthService.swift */; };
 		5DECDE1B2991B06400A7BCC2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1A2991B06400A7BCC2 /* FirebaseAnalytics */; };
 		5DECDE1D2991B06400A7BCC2 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5DECDE1C2991B06400A7BCC2 /* FirebaseAnalyticsSwift */; };
@@ -88,6 +93,30 @@
 		5DECDE3029924A2900A7BCC2 /* DebugSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE2F29924A2900A7BCC2 /* DebugSettings.swift */; };
 		5DECDE3329924CB800A7BCC2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECDE3229924CB800A7BCC2 /* Logger.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5DE973DE29C187580079D5BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DC6604A2979E54E0012CC8C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5DE973D029C187560079D5BC;
+			remoteInfo = MessageExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5DE973E129C187580079D5BC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5DE973E029C187580079D5BC /* MessageExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5D06A76F29AFE5A60026F1D1 /* EndOfListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfListLoader.swift; sourceTree = "<group>"; };
@@ -157,6 +186,12 @@
 		5DC660C6297EF88C0012CC8C /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		5DDB9A11299C3D8000DC6997 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		5DDB9A14299E6DD100DC6997 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		5DE973D129C187560079D5BC /* MessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE973D329C187560079D5BC /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		5DE973D629C187560079D5BC /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		5DE973D929C187560079D5BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		5DE973DB29C187580079D5BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5DE973DD29C187580079D5BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DECDE152991AF4900A7BCC2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5DECDE242991B0EB00A7BCC2 /* RealAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealAuthService.swift; sourceTree = "<group>"; };
 		5DECDE29299247CF00A7BCC2 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -181,6 +216,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DE973CE29C187560079D5BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DE973D429C187560079D5BC /* Messages.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -193,8 +236,6 @@
 				5D6B61292981DB580053AD5C /* RealRecipeWebRepository.swift */,
 				5DAA80DB299694A1001A7D50 /* UserWebRepository.swift */,
 				5DAA80DD29969695001A7D50 /* RealUserWebRepository.swift */,
-				5DB5462129A6A7D700343397 /* Pagination.swift */,
-				5DB5462729A6EDFA00343397 /* PaginatedViewModel.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -214,6 +255,8 @@
 			children = (
 				5D6B612C2981DCC10053AD5C /* WebRepository.swift */,
 				5D6B612E2981DD090053AD5C /* APICall.swift */,
+				5DB5462129A6A7D700343397 /* Pagination.swift */,
+				5DB5462729A6EDFA00343397 /* PaginatedViewModel.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -222,6 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				5DC660542979E54E0012CC8C /* RecipesSampleApp */,
+				5DE973D529C187560079D5BC /* MessageExtension */,
+				5DE973D229C187560079D5BC /* Frameworks */,
 				5DC660532979E54E0012CC8C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -230,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC660522979E54E0012CC8C /* RecipesSampleApp.app */,
+				5DE973D129C187560079D5BC /* MessageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,8 +289,6 @@
 				5D5081032980220200B6247B /* Repositories */,
 				5DC660C3297C868A0012CC8C /* Persistence */,
 				5DC6607B2979E59E0012CC8C /* Scenes */,
-				5DC660742979E5920012CC8C /* Views */,
-				5DC6606D2979E5890012CC8C /* ViewModifiers */,
 				5DC660682979E5780012CC8C /* Model */,
 				5DC660552979E54E0012CC8C /* RecipesSampleAppApp.swift */,
 				5D50811A2980A38D00B6247B /* UIApplicationDelegate.swift */,
@@ -433,6 +477,25 @@
 			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
+		5DE973D229C187560079D5BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DE973D329C187560079D5BC /* Messages.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DE973D529C187560079D5BC /* MessageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				5DE973D629C187560079D5BC /* MessagesViewController.swift */,
+				5DE973D829C187560079D5BC /* MainInterface.storyboard */,
+				5DE973DB29C187580079D5BC /* Assets.xcassets */,
+				5DE973DD29C187580079D5BC /* Info.plist */,
+			);
+			path = MessageExtension;
+			sourceTree = "<group>";
+		};
 		5DECDE172991AF5D00A7BCC2 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +518,8 @@
 		5DECDE2D29924A0C00A7BCC2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5DC6606D2979E5890012CC8C /* ViewModifiers */,
+				5DC660742979E5920012CC8C /* Views */,
 				5DECDE3129924CAD00A7BCC2 /* Logger */,
 				5DECDE2E29924A1B00A7BCC2 /* Debug */,
 				5DC660A42979E7B80012CC8C /* Extensions */,
@@ -489,10 +554,12 @@
 				5DC6604E2979E54E0012CC8C /* Sources */,
 				5DC6604F2979E54E0012CC8C /* Frameworks */,
 				5DC660502979E54E0012CC8C /* Resources */,
+				5DE973E129C187580079D5BC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5DE973DF29C187580079D5BC /* PBXTargetDependency */,
 			);
 			name = RecipesSampleApp;
 			packageProductDependencies = (
@@ -509,6 +576,23 @@
 			productReference = 5DC660522979E54E0012CC8C /* RecipesSampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5DE973D029C187560079D5BC /* MessageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DE973E429C187580079D5BC /* Build configuration list for PBXNativeTarget "MessageExtension" */;
+			buildPhases = (
+				5DE973CD29C187560079D5BC /* Sources */,
+				5DE973CE29C187560079D5BC /* Frameworks */,
+				5DE973CF29C187560079D5BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MessageExtension;
+			productName = MessageExtension;
+			productReference = 5DE973D129C187560079D5BC /* MessageExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -520,6 +604,9 @@
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					5DC660512979E54E0012CC8C = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5DE973D029C187560079D5BC = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -543,6 +630,7 @@
 			projectRoot = "";
 			targets = (
 				5DC660512979E54E0012CC8C /* RecipesSampleApp */,
+				5DE973D029C187560079D5BC /* MessageExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -555,6 +643,15 @@
 				5DC6605D2979E5510012CC8C /* Preview Assets.xcassets in Resources */,
 				5DC6605A2979E5510012CC8C /* Assets.xcassets in Resources */,
 				5D5081122980A19700B6247B /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DE973CF29C187560079D5BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DE973DC29C187580079D5BC /* Assets.xcassets in Resources */,
+				5DE973DA29C187560079D5BC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +734,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DE973CD29C187560079D5BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DE973D729C187560079D5BC /* MessagesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5DE973DF29C187580079D5BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5DE973D029C187560079D5BC /* MessageExtension */;
+			targetProxy = 5DE973DE29C187580079D5BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5DE973D829C187560079D5BC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5DE973D929C187560079D5BC /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5DC660632979E5510012CC8C /* Debug */ = {
@@ -757,6 +881,7 @@
 		5DC660662979E5510012CC8C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -786,6 +911,7 @@
 		5DC660672979E5510012CC8C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -812,6 +938,58 @@
 			};
 			name = Release;
 		};
+		5DE973E229C187580079D5BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TA366CU42K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MessageExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MessageExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = istvankreisz.RecipesSampleApp.MessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5DE973E329C187580079D5BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TA366CU42K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MessageExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MessageExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = istvankreisz.RecipesSampleApp.MessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -829,6 +1007,15 @@
 			buildConfigurations = (
 				5DC660662979E5510012CC8C /* Debug */,
 				5DC660672979E5510012CC8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DE973E429C187580079D5BC /* Build configuration list for PBXNativeTarget "MessageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DE973E229C187580079D5BC /* Debug */,
+				5DE973E329C187580079D5BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
